@@ -21,8 +21,5 @@ public class Conexion {
             } catch (ClassNotFoundException | SQLException ex) {
             }
             return cn;
-        }
-        
-
-    
+        }    
 }
