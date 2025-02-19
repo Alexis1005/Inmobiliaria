@@ -16,7 +16,7 @@ public class PropiedadesDAO {
     
     public ArrayList <Propiedades> ListarPropiedades(){
         ArrayList <Propiedades> lista = new ArrayList<>();
-        
+        System.out.println("hola");
         
         try {
             cn = Conexion.getConnection();
