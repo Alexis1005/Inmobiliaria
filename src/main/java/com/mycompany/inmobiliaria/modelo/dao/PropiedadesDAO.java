@@ -24,10 +24,17 @@ public class PropiedadesDAO {
         ps = cn.prepareStatement(sql);
         rs = ps.executeQuery();
         
+        try {
+            cn = Conexion.getConnection();
+        String sql = "select * from Propiedades";
+        ps = cn.prepareStatement(sql);
+        rs = ps.executeQuery();
+        
             while (rs.next()) {    
                 Propiedades obj = new Propiedades();
                 obj.setId_propiedad(rs.getInt(id_propiedad));
                 obj.set
+                        
                 
             }            
                 
