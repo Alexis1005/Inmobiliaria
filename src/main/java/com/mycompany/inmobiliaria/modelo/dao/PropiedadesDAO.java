@@ -27,11 +27,12 @@ public class PropiedadesDAO {
             while (rs.next()) {    
                 Propiedades obj = new Propiedades();
                 obj.setId_propiedad(rs.getInt(id_propiedad));
-                obj.set
+                obj.setId_tipo(rs.getInt(id_tipo));
                 
             }            
                 
             }
         
-    
+    }
+
 }
