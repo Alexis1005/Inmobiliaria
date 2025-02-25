@@ -15,19 +15,40 @@ public class PropiedadesDAO {
     private ResultSet rs = null;
 
     /*
-            ------------------------------------------
-            Método para listar las propiedades
-            ------------------------------------------
+            --------------------------------------------
+            Método dinámico para listar las propiedades 
+            --------------------------------------------
      */
-    public ArrayList<Propiedades> ListarPropiedades() {
+    public ArrayList<Propiedades> listarPropiedadesFiltradas(Integer id_tipo, String modalidad) {
         ArrayList<Propiedades> lista = new ArrayList<>();
 
         try {
             cn = Conexion.getConnection();
-            String sql = "select * from Propiedades";
+            String sql = "select * from propiedades where 1=1 ";
+            
+            if(id_tipo != null){
+                sql += "AND id_tipo = ? ";
+            }
+            if(modalidad != null){
+                sql += "AND modalidad = ? ";
+            }
+            
+            
             ps = cn.prepareStatement(sql);
+            
+            //asigna parametros a la consulta
+            
+            int indiceParametro = 1;
+            
+            if(id_tipo != null){
+                ps.setInt(indiceParametro++, id_tipo);
+            }
+            if(modalidad != null){
+                ps.setString(indiceParametro++, modalidad);
+            }
+            
             rs = ps.executeQuery();
-
+            
             while (rs.next()) {
                 Propiedades obj = new Propiedades();
                 obj.setId_propiedad(rs.getInt("id_propiedad"));
@@ -38,6 +59,8 @@ public class PropiedadesDAO {
                 obj.setDescripcion(rs.getString("descripcion"));
                 obj.setEstado(rs.getString("estado"));
                 obj.setModalidad(rs.getString("modalidad"));
+                
+                lista.add(obj);
             }
         } catch (SQLException ex) {
         } finally {
