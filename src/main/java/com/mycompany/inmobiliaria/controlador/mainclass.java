@@ -25,7 +25,7 @@ public class mainclass {
         
 
         // Obtener la lista de agentes
-        ArrayList<Agente> lista = agenteDAO.ListarTodos();
+        ArrayList<Agente> lista = agenteDAO.listar();
         
 
         // Verificar si la lista no está vacía
@@ -47,7 +47,7 @@ public class mainclass {
         PropiedadesDAO propiedadesDAO = new PropiedadesDAO();
 
         // Obtener la lista de propiedades
-        List<Propiedades> propiedades = propiedadesDAO.listarTodas();
+        List<Propiedades> propiedades = propiedadesDAO.listar();
 
         // Verificar si la lista de propiedades no está vacía
         if (propiedades != null && !propiedades.isEmpty()) {
