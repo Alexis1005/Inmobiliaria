@@ -1,79 +1,34 @@
-
 package com.mycompany.inmobiliaria.controlador;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import com.mycompany.inmobiliaria.modelo.dao.AgenteDAO;
+import com.mycompany.inmobiliaria.modelo.Agente;
+import java.util.ArrayList;
 
+public class AgenteControlador {
 
-public class AgenteControlador extends HttpServlet {
+    public static void main(String[] args) {
+        System.out.println("Iniciando la aplicación..."); // Mensaje de depuración
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AgenteControlador</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AgenteControlador at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        // Crear una instancia de AgenteDAO
+        AgenteDAO agenteDAO = new AgenteDAO();
+
+        // Obtener la lista de agentes
+        ArrayList<Agente> lista = agenteDAO.ListarTodos();
+
+        // Verificar si la lista no está vacía
+        if (lista != null && !lista.isEmpty()) {
+            System.out.println("=== Lista de Agentes ===");
+            for (Agente agente : lista) {
+                System.out.println("ID: " + agente.getId_agente());
+                System.out.println("Nombre: " + agente.getNombre());
+                System.out.println("Teléfono: " + agente.getTelefono());
+                System.out.println("Email: " + agente.getEmail());
+                System.out.println("-----------------------------");
+            }
+        } else {
+            System.out.println("No se encontraron agentes en la base de datos.");
         }
+
+        System.out.println("Aplicación finalizada."); // Mensaje de depuración
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

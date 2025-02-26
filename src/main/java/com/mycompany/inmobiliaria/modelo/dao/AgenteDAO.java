@@ -15,7 +15,7 @@ public class AgenteDAO {
     private PreparedStatement ps = null;
     private ResultSet rs = null;
     
-    public ArrayList <Agente> ListarTodos(){
+    public ArrayList <Agente> listar(){
         ArrayList <Agente> lista = new ArrayList<>();
         
         
