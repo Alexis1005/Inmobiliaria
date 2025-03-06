@@ -1,41 +1,7 @@
-<<<<<<< HEAD
-
-package com.mycompany.inmobiliaria.modelo.dao;
-
-import com.mycompany.inmobiliaria.modelo.Propiedades;
-import com.mycompany.inmobiliaria.resources.config.Conexion;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 
 
-public class PropiedadesDAO {
-    private Connection cn = null;
-    private PreparedStatement ps = null;
-    private ResultSet rs = null;
-    
-    public ArrayList <Propiedades> ListarPropiedades(){
-        ArrayList <Propiedades> lista = new ArrayList<>();
-        
-        
-        try {
-            cn = Conexion.getConnection();
-        String sql = "select * from Propiedades";
-        ps = cn.prepareStatement(sql);
-        rs = ps.executeQuery();
-        
-            while (rs.next()) {    
-                Propiedades obj = new Propiedades();
-                obj.setId_propiedad(rs.getInt(id_propiedad));
-                obj.set
-                
-            }            
-                
-            }
-        
-    
 =======
+
 package com.mycompany.inmobiliaria.modelo.dao;
 
 import com.mycompany.inmobiliaria.modelo.Propiedades;
@@ -193,5 +159,22 @@ public class PropiedadesDAO {
         return result;
     }
         
->>>>>>> alexis
-}
+
+                // Agregar la propiedad a la lista
+                listaPropiedades.add(propiedad);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            // Cerrar los recursos
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (cn != null) cn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return listaPropiedades;
+    }
