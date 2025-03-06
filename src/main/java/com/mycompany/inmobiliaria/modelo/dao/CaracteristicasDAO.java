@@ -24,7 +24,7 @@ public class CaracteristicasDAO {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                Caracteristicas obj = new Caracteristicas();
+                Caracteristicas obj = new Caracteristicas("Departamento a estrenar");
                 obj.setId_caracteristica(rs.getInt("id_caracteristica"));
                 obj.setNombre(rs.getString("nombre"));
                 lista.add(obj);
@@ -59,6 +59,8 @@ public class CaracteristicasDAO {
             ps.setString(1, caracteristicas.getNombre());
             resultado = ps.executeUpdate() > 0;
         } catch (SQLException ex) {
+            System.out.println("Error en la inserción: " + ex.getMessage());
+            ex.printStackTrace();
         } finally {
             try {
                 if (ps != null) {
@@ -97,4 +99,5 @@ public class CaracteristicasDAO {
         }
         return resultado;
     }
+
 }
