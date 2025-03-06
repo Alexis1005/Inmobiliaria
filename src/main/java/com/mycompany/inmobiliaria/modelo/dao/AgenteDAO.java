@@ -21,7 +21,7 @@ public class AgenteDAO {
         
         try {
             cn = Conexion.getConnection();
-        String sql = "select * from Agentes";
+        String sql = "select * from agentes";
         ps = cn.prepareStatement(sql);
         rs = ps.executeQuery();
         
