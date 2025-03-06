@@ -19,7 +19,7 @@ public class PropiedadesDAO {
             Método dinámico para listar las propiedades 
             --------------------------------------------
      */
-    public ArrayList<Propiedades> listarPropiedadesFiltradas(Integer id_tipo, String modalidad) {
+    public ArrayList<Propiedades> listar(Integer id_tipo, String modalidad) {
         ArrayList<Propiedades> lista = new ArrayList<>();
 
         try {
@@ -85,7 +85,7 @@ public class PropiedadesDAO {
             Método para agregar propiedad
             -----------------------------
      */
-    public int crearPropiedad(Propiedades obj) {
+    public int insertar(Propiedades obj) {
         int result = 0;
 
         try {
@@ -122,13 +122,13 @@ public class PropiedadesDAO {
             -----------------------------
      */
     
-    public int editarPropiedad (Propiedades obj){
+    public int actualizar (Propiedades obj){
     int result = 0;
 
         try {
             cn = Conexion.getConnection();
-            String sql = "UPDATE propiedades SET id_tipo=?,id_agente=?, direccion=?, precio=?, descripcion=?, estado=?, modalidad=? "
-                    + "WHERE id=?"; 
+            String sql = "UPDATE propiedades SET id_tipo=?, id_agente=?, direccion=?, precio=?, descripcion=?, estado=?, modalidad=? WHERE id_propiedad=? ";
+                    
             ps = cn.prepareStatement(sql);
             ps.setInt(1, obj.getId_tipo());
             ps.setInt(2, obj.getId_agente());
