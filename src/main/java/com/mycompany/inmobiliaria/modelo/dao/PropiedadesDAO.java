@@ -25,30 +25,28 @@ public class PropiedadesDAO {
         try {
             cn = Conexion.getConnection();
             String sql = "select * from propiedades where 1=1 ";
-            
-            if(id_tipo != null){
+
+            if (id_tipo != null) {
                 sql += "AND id_tipo = ? ";
             }
-            if(modalidad != null){
+            if (modalidad != null) {
                 sql += "AND modalidad = ? ";
             }
-            
-            
+
             ps = cn.prepareStatement(sql);
-            
+
             //asigna parametros a la consulta
-            
             int indiceParametro = 1;
-            
-            if(id_tipo != null){
+
+            if (id_tipo != null) {
                 ps.setInt(indiceParametro++, id_tipo);
             }
-            if(modalidad != null){
+            if (modalidad != null) {
                 ps.setString(indiceParametro++, modalidad);
             }
-            
+
             rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 Propiedades obj = new Propiedades();
                 obj.setId_propiedad(rs.getInt("id_propiedad"));
@@ -59,7 +57,7 @@ public class PropiedadesDAO {
                 obj.setDescripcion(rs.getString("descripcion"));
                 obj.setEstado(rs.getString("estado"));
                 obj.setModalidad(rs.getString("modalidad"));
-                
+
                 lista.add(obj);
             }
         } catch (SQLException ex) {
@@ -116,19 +114,18 @@ public class PropiedadesDAO {
         return result;
     }
 
-/*
+    /*
             -----------------------------
             Método para modificar propiedad
             -----------------------------
      */
-    
-    public int actualizar (Propiedades obj){
-    int result = 0;
+    public int actualizar(Propiedades obj) {
+        int result = 0;
 
         try {
             cn = Conexion.getConnection();
             String sql = "UPDATE propiedades SET id_tipo=?, id_agente=?, direccion=?, precio=?, descripcion=?, estado=?, modalidad=? WHERE id_propiedad=? ";
-                    
+
             ps = cn.prepareStatement(sql);
             ps.setInt(1, obj.getId_tipo());
             ps.setInt(2, obj.getId_agente());
@@ -137,8 +134,8 @@ public class PropiedadesDAO {
             ps.setString(5, obj.getDescripcion());
             ps.setString(6, obj.getEstado());
             ps.setString(7, obj.getModalidad());
-            ps.setInt(8,obj.getId_propiedad());
-            
+            ps.setInt(8, obj.getId_propiedad());
+
             result = ps.executeUpdate();
         } catch (SQLException e) {
         } finally {
@@ -154,5 +151,5 @@ public class PropiedadesDAO {
         }
         return result;
     }
-        
+
 }
