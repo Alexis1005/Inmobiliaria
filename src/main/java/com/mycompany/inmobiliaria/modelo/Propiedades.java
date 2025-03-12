@@ -1,15 +1,14 @@
-
 package com.mycompany.inmobiliaria.modelo;
 
-
 public class Propiedades {
+
     int id_propiedad;
     int id_tipo;
     int id_agente;
     String direccion;
     Double precio;
     String descripcion;
-   String estado;
+    String estado;
     String modalidad;
 
     public int getId_propiedad() {
@@ -75,5 +74,5 @@ public class Propiedades {
     public void setModalidad(String modalidad) {
         this.modalidad = modalidad;
     }
-    
+
 }
