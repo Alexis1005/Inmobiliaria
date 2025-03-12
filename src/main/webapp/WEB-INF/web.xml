@@ -4,9 +4,17 @@
         <servlet-name>AgenteControlador</servlet-name>
         <servlet-class>com.mycompany.inmobiliaria.controlador.AgenteControlador</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PropiedadesCaracteristicasControlador</servlet-name>
+        <servlet-class>com.mycompany.inmobiliaria.controlador.PropiedadesCaracteristicasControlador</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AgenteControlador</servlet-name>
         <url-pattern>/AgenteControlador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PropiedadesCaracteristicasControlador</servlet-name>
+        <url-pattern>/PropiedadesCaracteristicasControlador</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
