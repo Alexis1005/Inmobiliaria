@@ -24,10 +24,31 @@ public class PropiedadesDAO {
 
         try {
             cn = Conexion.getConnection();
+
             String sql = "select * from propiedades where 1=1 ";
 
             if (id_tipo != null) {
                 sql += "AND id_tipo = ? ";
+
+        String sql = "select * from Propiedades";
+        ps = cn.prepareStatement(sql);
+        rs = ps.executeQuery();
+        
+        try {
+            cn = Conexion.getConnection();
+        String sql = "select * from Propiedades";
+        ps = cn.prepareStatement(sql);
+        rs = ps.executeQuery();
+        
+            while (rs.next()) {    
+                Propiedades obj = new Propiedades();
+                obj.setId_propiedad(rs.getInt(id_propiedad));
+                obj.set
+                        
+                
+            }            
+                
+
             }
             if (modalidad != null) {
                 sql += "AND modalidad = ? ";
