@@ -1,5 +1,3 @@
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -8,6 +6,11 @@
         <title>Inicio</title>
     </head>
     <body>
-        
+        <%
+        response.sendRedirect("CaracteristicasController?accion=listar");
+            
+        %>
+
+
     </body>
 </html>
