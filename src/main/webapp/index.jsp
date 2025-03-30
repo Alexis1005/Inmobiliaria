@@ -8,6 +8,8 @@
         <title>Inicio</title>
     </head>
     <body>
-        
+        <%
+        response.sendRedirect("propiedadesController?accion=listar");
+        %>
     </body>
 </html>

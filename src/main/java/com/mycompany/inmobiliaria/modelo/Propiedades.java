@@ -10,6 +10,15 @@ public class Propiedades {
     String descripcion;
     String estado;
     String modalidad;
+    String descripcion_general;
+
+    public void setDescripcion_general(String descripcion_general) {
+        this.descripcion_general = descripcion_general;
+    }
+
+    public String getDescripcion_general() {
+        return descripcion_general;
+    }
 
     public int getId_propiedad() {
         return id_propiedad;
