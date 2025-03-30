@@ -13,20 +13,22 @@ public class CaracteristicasDAO {
     private Connection cn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
-    // sdfsdsdf
+
+    
     public ArrayList<Caracteristicas> listar() {
         ArrayList<Caracteristicas> lista = new ArrayList<>();
 
         try {
             cn = Conexion.getConnection();
-            String sql = "Select * from Caracteristicas";
+            String sql = "Select * from caracteristicas";
             ps = cn.prepareStatement(sql);
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                Caracteristicas obj = new Caracteristicas("Departamento a estrenar");
+                Caracteristicas obj = new Caracteristicas();
                 obj.setId_caracteristica(rs.getInt("id_caracteristica"));
                 obj.setNombre(rs.getString("nombre"));
+                obj.setDetalle(rs.getString("detalle"));
                 lista.add(obj);
             }
 
@@ -54,9 +56,10 @@ public class CaracteristicasDAO {
 
         try {
             cn = Conexion.getConnection();
-            String sql = "INSERT INTO Caracteristicas (nombre) VALUES (?)";
+            String sql = "INSERT INTO caracteristicas (nombre, detalle) VALUES (?, ?)";
             ps = cn.prepareStatement(sql);
             ps.setString(1, caracteristicas.getNombre());
+            ps.setString(2, caracteristicas.getDetalle());
             resultado = ps.executeUpdate() > 0;
         } catch (SQLException ex) {
             System.out.println("Error en la inserción: " + ex.getMessage());
@@ -80,10 +83,11 @@ public class CaracteristicasDAO {
 
         try {
             cn = Conexion.getConnection();
-            String sql = "UPDATE Caracteristicas SET nombre = ? WHERE id_caracteristica = ?";
+            String sql = "UPDATE caracteristicas SET nombre = ?, detalle = ? WHERE id_caracteristica = ?";
             ps = cn.prepareStatement(sql);
             ps.setString(1, caracteristicas.getNombre());
-            ps.setInt(2, caracteristicas.getId_caracteristica());
+            ps.setString(2, caracteristicas.getDetalle());
+            ps.setInt(3, caracteristicas.getId_caracteristica());
             resultado = ps.executeUpdate() > 0;
         } catch (SQLException ex) {
         } finally {
@@ -98,6 +102,125 @@ public class CaracteristicasDAO {
             }
         }
         return resultado;
+    }
+
+    public int registrar(Caracteristicas obj) {
+        int result = 0;
+
+        try {
+            cn = Conexion.getConnection();
+            String sql = "INSERT INTO caracteristicas (nombre, detalle) VALUES (?, ?)";
+            ps = cn.prepareStatement(sql);
+            ps.setString(1, obj.getNombre());
+            ps.setString(2, obj.getDetalle());
+
+            result = ps.executeUpdate();
+            
+        } catch (Exception ex) {
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+
+        return result;
+    }
+    
+    public int editar(Caracteristicas obj) {
+        int result = 0;
+
+        try {
+            cn = Conexion.getConnection();
+            String sql = "UPDATE caracteristicas SET nombre = ?, detalle = ? WHERE id_caracteristica = ?";
+            ps = cn.prepareStatement(sql);
+            ps.setString(1, obj.getNombre());
+            ps.setString(2, obj.getDetalle());
+            ps.setInt(3, obj.getId_caracteristica());
+
+            result = ps.executeUpdate();
+        } catch (Exception ex) {
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+
+        return result;
+    }
+    
+        
+    public int eliminar(int id_caracteristica) {
+        int result = 0;
+
+        try {
+            cn = Conexion.getConnection();
+            String sql = "delete from caracteristicas where id_caracteristica = ?";
+            ps = cn.prepareStatement(sql);
+            ps.setInt(1, id_caracteristica);
+
+            result = ps.executeUpdate();
+        } catch (Exception ex) {
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+
+        return result;
+    }
+
+    public Caracteristicas buscarPorId(int id) {
+        Caracteristicas obj = null;
+
+        try {
+            cn = Conexion.getConnection();
+            String sql = "Select * from caracteristicas where id_caracteristica = ?";
+            ps = cn.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                obj = new Caracteristicas();
+                obj.setId_caracteristica(rs.getInt("id_caracteristica"));
+                obj.setNombre(rs.getString("nombre"));
+                obj.setDetalle(rs.getString("detalle"));
+            }
+
+        } catch (SQLException ex) {
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+        return obj;
+
     }
 
 }

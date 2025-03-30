@@ -10,10 +10,9 @@
         <servlet-class>com.mycompany.inmobiliaria.controlador.PropiedadesCaracteristicasControlador</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>PropiedadesController</servlet-name>
-        <servlet-class>com.mycompany.inmobiliaria.controladores.PropiedadesController</servlet-class>
+        <servlet-name>CaracteristicasController</servlet-name>
+        <servlet-class>com.mycompany.inmobiliaria.controladores.CaracteristicasController</servlet-class>
     </servlet>
-    
     <servlet-mapping>
         <servlet-name>AgenteControlador</servlet-name>
         <url-pattern>/AgenteControlador</url-pattern>
@@ -23,10 +22,9 @@
         <url-pattern>/PropiedadesCaracteristicasControlador</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>PropiedadesController</servlet-name>
-        <url-pattern>/propiedadesController</url-pattern>
+        <servlet-name>CaracteristicasController</servlet-name>
+        <url-pattern>/CaracteristicasController</url-pattern>
     </servlet-mapping>
-    
     <session-config>
         <session-timeout>
             30

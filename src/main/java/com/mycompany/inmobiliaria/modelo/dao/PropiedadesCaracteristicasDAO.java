@@ -24,11 +24,10 @@ public class PropiedadesCaracteristicasDAO {
 
     // Método para crear una nueva relación propiedad-característica
     public void crear(PropiedadesCaracteristicas pc) throws SQLException {
-        String sql = "INSERT INTO PropiedadesCaracteristicas (id_propiedad, id_caracteristica, valor) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO PropiedadesCaracteristicas (id_propiedad, id_caracteristica) VALUES (?, ?)";
         try (PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setInt(1, pc.getId_propiedad());
             ps.setInt(2, pc.getId_caracteristica());
-            ps.setString(3, pc.getValor());
             ps.executeUpdate();
         }
     }
