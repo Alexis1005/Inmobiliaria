@@ -14,7 +14,6 @@ public class CaracteristicasDAO {
     private PreparedStatement ps = null;
     private ResultSet rs = null;
 
-    
     public ArrayList<Caracteristicas> listar() {
         ArrayList<Caracteristicas> lista = new ArrayList<>();
 
@@ -51,21 +50,29 @@ public class CaracteristicasDAO {
 
     }
 
-    public boolean insertar(Caracteristicas caracteristicas) {
-        boolean resultado = false;
-
+    public int insertar(Caracteristicas caracteristica) {
+        int idGenerado = -1;  // Valor por defecto si no se genera ID
         try {
             cn = Conexion.getConnection();
-            String sql = "INSERT INTO caracteristicas (nombre, detalle) VALUES (?, ?)";
-            ps = cn.prepareStatement(sql);
-            ps.setString(1, caracteristicas.getNombre());
-            ps.setString(2, caracteristicas.getDetalle());
-            resultado = ps.executeUpdate() > 0;
+            String sql = "INSERT INTO Caracteristicas (nombre, detalle) VALUES (?, ?)";
+            ps = cn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setString(1, caracteristica.getNombre());
+            ps.setString(2, caracteristica.getDetalle());
+            int rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0) {
+                rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+                    idGenerado = rs.getInt(1);  // Obtiene el ID generado
+                }
+            }
         } catch (SQLException ex) {
-            System.out.println("Error en la inserción: " + ex.getMessage());
-            ex.printStackTrace();
+            System.err.println("Error al insertar característica: " + ex.getMessage());
         } finally {
             try {
+                if (rs != null) {
+                    rs.close();
+                }
                 if (ps != null) {
                     ps.close();
                 }
@@ -73,9 +80,10 @@ public class CaracteristicasDAO {
                     cn.close();
                 }
             } catch (SQLException ex) {
+                System.err.println("Error al cerrar recursos: " + ex.getMessage());
             }
         }
-        return resultado;
+        return idGenerado;
     }
 
     public boolean actualizar(Caracteristicas caracteristicas) {
@@ -115,7 +123,7 @@ public class CaracteristicasDAO {
             ps.setString(2, obj.getDetalle());
 
             result = ps.executeUpdate();
-            
+
         } catch (Exception ex) {
         } finally {
             try {
@@ -131,7 +139,7 @@ public class CaracteristicasDAO {
 
         return result;
     }
-    
+
     public int editar(Caracteristicas obj) {
         int result = 0;
 
@@ -159,8 +167,7 @@ public class CaracteristicasDAO {
 
         return result;
     }
-    
-        
+
     public int eliminar(int id_caracteristica) {
         int result = 0;
 
