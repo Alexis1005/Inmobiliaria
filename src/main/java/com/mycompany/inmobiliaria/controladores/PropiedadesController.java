@@ -14,9 +14,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -27,9 +30,10 @@ public class PropiedadesController extends HttpServlet {
     private final PropiedadesDAO propiedadDAO = new PropiedadesDAO();
     private final TiposPropiedadDAO tiposPropiedadDAO = new TiposPropiedadDAO();
     private final CaracteristicasDAO caracteristicasDAO = new CaracteristicasDAO();
+    private final PropiedadesCaracteristicasDAO propiedadesCaracteristicaDAO = new PropiedadesCaracteristicasDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
 
         String accion = request.getParameter("accion");
@@ -62,7 +66,7 @@ public class PropiedadesController extends HttpServlet {
     }
 
     private void cargarListas(HttpServletRequest request) {
-        // Cargar tipos de propiedades
+        // Cargar tipos de propiedades desde la base de datos
         ArrayList<TiposPropiedad> tiposPropiedades = tiposPropiedadDAO.ListarTiposPropiedades();
         System.out.println("Tipos de propiedades cargados: " + tiposPropiedades.size());
 
@@ -74,7 +78,7 @@ public class PropiedadesController extends HttpServlet {
         ArrayList<String> modalidades = new ArrayList<>(Arrays.asList("Venta", "Alquiler", "Arrendamiento"));
         System.out.println("Modalidades cargadas: " + modalidades.size());
 
-        // Agregar al request
+        // Agregar al request para que estén disponibles en el JSP
         request.setAttribute("tiposPropiedades", tiposPropiedades);
         request.setAttribute("estados", estados);
         request.setAttribute("modalidades", modalidades);
@@ -91,7 +95,7 @@ public class PropiedadesController extends HttpServlet {
     protected void mostrarFormulario(HttpServletRequest request, HttpServletResponse response, List<Caracteristicas> caracteristicasTemp)
             throws ServletException, IOException {
         request.setAttribute("caracteristicas", caracteristicasTemp);
-        cargarListas(request);
+        cargarListas(request);  // Cargar listas para los selects
         System.out.println("Redirigiendo a adminAgregar.jsp...");
         request.getRequestDispatcher("/vistas/adminAgregar.jsp").forward(request, response);
     }
@@ -100,13 +104,15 @@ public class PropiedadesController extends HttpServlet {
             throws ServletException, IOException {
         String nombre = request.getParameter("nombre");
         String detalle = request.getParameter("detalle");
-        Caracteristicas caracteristica = new Caracteristicas(nombre, detalle);
-        caracteristicasTemp.add(caracteristica);
+        if (nombre != null && !nombre.isEmpty()) {
+            Caracteristicas caracteristica = new Caracteristicas(nombre, detalle);
+            caracteristicasTemp.add(caracteristica);
+        }
         response.sendRedirect("propiedadesController?accion=mostrarFormulario");
     }
 
     protected void insertar(HttpServletRequest request, HttpServletResponse response, List<Caracteristicas> caracteristicasTemp)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
 
@@ -139,20 +145,15 @@ public class PropiedadesController extends HttpServlet {
             }
 
             // Insertar características y relacionarlas con la propiedad
-            PropiedadesCaracteristicasDAO propiedadesCaracteristicaDAO = new PropiedadesCaracteristicasDAO();
-
             for (Caracteristicas c : caracteristicasTemp) {
-                boolean id_caracteristica = caracteristicasDAO.insertar(c); // Insertar y obtener ID
-                if (!id_caracteristica) {
+                int id_caracteristica = caracteristicasDAO.insertar(c);  // Asumiendo que insertar devuelve int
+                if (id_caracteristica <= 0) {
                     throw new ServletException("Error al insertar la característica.");
                 }
 
                 // Crear relación propiedad-característica
                 PropiedadesCaracteristicas pc = new PropiedadesCaracteristicas(id_propiedad, id_caracteristica);
-                pc.setId_propiedad(id_propiedad);
-                pc.setId_caracteristica(id_caracteristica);
-
-                propiedadesCaracteristicaDAO.crear(pc); // Insertar relación
+                propiedadesCaracteristicaDAO.crear(pc);  // Insertar relación
             }
 
             // Limpiar la lista temporal
@@ -175,7 +176,6 @@ public class PropiedadesController extends HttpServlet {
         }
     }
 
-    // Ejemplo: Método para ver detalles de una propiedad
     protected void verDetalle(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int idPropiedad = Integer.parseInt(request.getParameter("id"));
@@ -192,12 +192,20 @@ public class PropiedadesController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(PropiedadesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(PropiedadesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

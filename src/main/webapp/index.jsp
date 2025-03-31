@@ -7,15 +7,7 @@
     </head>
     <body>
         <%
-<<<<<<< HEAD
-        response.sendRedirect("propiedadesController?accion=listar");
+        response.sendRedirect("PropiedadesController?accion=insertar");
         %>
-=======
-        response.sendRedirect("CaracteristicasController?accion=listar");
-            
-        %>
-
-
->>>>>>> andres
     </body>
 </html>

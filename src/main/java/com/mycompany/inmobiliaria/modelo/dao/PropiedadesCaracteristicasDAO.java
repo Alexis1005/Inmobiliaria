@@ -1,6 +1,4 @@
-
 package com.mycompany.inmobiliaria.modelo.dao;
-
 
 import com.mycompany.inmobiliaria.modelo.PropiedadesCaracteristicas;
 import java.sql.Connection;
@@ -19,8 +17,13 @@ public class PropiedadesCaracteristicasDAO {
     }
 
     public PropiedadesCaracteristicasDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        System.out.println("Creando metodo");
     }
+
+    public void metodoNoImplementado() {
+    System.out.println("Método en construcción");
+}
+
 
     // Método para crear una nueva relación propiedad-característica
     public void crear(PropiedadesCaracteristicas pc) throws SQLException {
@@ -41,24 +44,11 @@ public class PropiedadesCaracteristicasDAO {
             while (rs.next()) {
                 PropiedadesCaracteristicas pc = new PropiedadesCaracteristicas(
                     rs.getInt("id_propiedad"),
-                    rs.getInt("id_caracteristica"),
-                    rs.getString("valor")
-                );
+                    rs.getInt("id_caracteristica"));
                 lista.add(pc);
             }
         }
         return lista;
-    }
-
-    // Método para actualizar una relación propiedad-característica
-    public void actualizar(PropiedadesCaracteristicas pc) throws SQLException {
-        String sql = "UPDATE PropiedadesCaracteristicas SET valor = ? WHERE id_propiedad = ? AND id_caracteristica = ?";
-        try (PreparedStatement ps = cn.prepareStatement(sql)) {
-            ps.setString(1, pc.getValor());
-            ps.setInt(2, pc.getId_propiedad());
-            ps.setInt(3, pc.getId_caracteristica());
-            ps.executeUpdate();
-        }
     }
 
     // Método para eliminar una relación propiedad-característica
@@ -81,9 +71,7 @@ public class PropiedadesCaracteristicasDAO {
                 if (rs.next()) {
                     return new PropiedadesCaracteristicas(
                         rs.getInt("id_propiedad"),
-                        rs.getInt("id_caracteristica"),
-                        rs.getString("valor")
-                    );
+                        rs.getInt("id_caracteristica"));
                 }
             }
         }
