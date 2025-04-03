@@ -8,7 +8,6 @@
     <body>
         <%
         response.sendRedirect("CaracteristicasController?accion=listar");
-            
         %>
 
 

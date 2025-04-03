@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CaracteristicasDAO {
 
@@ -14,7 +15,6 @@ public class CaracteristicasDAO {
     private PreparedStatement ps = null;
     private ResultSet rs = null;
 
-    
     public ArrayList<Caracteristicas> listar() {
         ArrayList<Caracteristicas> lista = new ArrayList<>();
 
@@ -115,7 +115,7 @@ public class CaracteristicasDAO {
             ps.setString(2, obj.getDetalle());
 
             result = ps.executeUpdate();
-            
+
         } catch (Exception ex) {
         } finally {
             try {
@@ -131,7 +131,7 @@ public class CaracteristicasDAO {
 
         return result;
     }
-    
+
     public int editar(Caracteristicas obj) {
         int result = 0;
 
@@ -159,8 +159,7 @@ public class CaracteristicasDAO {
 
         return result;
     }
-    
-        
+
     public int eliminar(int id_caracteristica) {
         int result = 0;
 
@@ -220,7 +219,37 @@ public class CaracteristicasDAO {
             }
         }
         return obj;
+        
+    }    
+    
 
+    public List<String> listarNombres() {
+        List<String> nombres = new ArrayList<>();
+        String sql = "SELECT DISTINCT nombre FROM caracteristicas";
+        try (Connection con = Conexion.getConnection(); PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                nombres.add(rs.getString("nombre"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return nombres;
+    }
+
+    public List<String> listarDetalles() {
+        List<String> detalles = new ArrayList<>();
+        String sql = "SELECT DISTINCT detalle FROM caracteristicas";
+        try (Connection con = Conexion.getConnection(); PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                detalles.add(rs.getString("detalle"));
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return detalles;
     }
 
 }
+
+

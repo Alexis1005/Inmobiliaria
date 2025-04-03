@@ -49,12 +49,12 @@ public class CaracteristicasController extends HttpServlet {
     private void eliminar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id_caracteristica"));
-        
+
         int result = caractDAO.eliminar(id);
-        
-        if(result > 0) {
+
+        if (result > 0) {
             request.getSession().setAttribute("success", "Caracteristica con id " + id + " eliminado");
-        }else{
+        } else {
             request.getSession().setAttribute("error", "No se pudo eliminar la caracteristica");
         }
         response.sendRedirect("CaracteristicasController?accion=listar");
@@ -63,9 +63,30 @@ public class CaracteristicasController extends HttpServlet {
     private void guardar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Caracteristicas obj = new Caracteristicas();
-        obj.setId_caracteristica(Integer.parseInt(request.getParameter("id_caracteristica")));
-        obj.setNombre(request.getParameter("nombre"));
-        obj.setDetalle(request.getParameter("detalle"));
+
+        String idStr = request.getParameter("id_caracteristica");
+        if (idStr != null && !idStr.isEmpty()) {
+            obj.setId_caracteristica(Integer.parseInt(idStr));
+        }
+
+        // Obtener valores desde el formulario
+        String nombre = request.getParameter("nombre");
+        String nombreManual = request.getParameter("nombre_manual");
+
+        // se usa en vez del select, si el usuario ingreso un valor manual
+        if (nombreManual != null && !nombreManual.trim().isEmpty()) {
+            nombre = nombreManual;
+        }
+
+        String detalle = request.getParameter("detalle");
+        String detalleManual = request.getParameter("detalle_manual");
+
+        if (detalleManual != null && !detalleManual.trim().isEmpty()) {
+            detalle = detalleManual;
+        }
+
+        obj.setNombre(nombre);
+        obj.setDetalle(detalle);
 
         int result;
 
@@ -94,6 +115,8 @@ public class CaracteristicasController extends HttpServlet {
 
         if (obj != null) {
             request.setAttribute("caracteristica", obj);
+            request.setAttribute("listaCaracteristicas", caractDAO.listarNombres());
+            request.setAttribute("listaDetalles", caractDAO.listarDetalles());
             request.getRequestDispatcher(pagNuevo).forward(request, response);
         } else {
             request.getSession().setAttribute("error", "No se encontró la característica con el ID " + id);
@@ -105,6 +128,9 @@ public class CaracteristicasController extends HttpServlet {
             throws ServletException, IOException {
 
         request.setAttribute("caracteristica", new Caracteristicas());
+        request.setAttribute("listaCaracteristicas", caractDAO.listarNombres());
+        request.setAttribute("listaDetalles", caractDAO.listarDetalles());
+
         request.getRequestDispatcher(pagNuevo).forward(request, response);
     }
 
