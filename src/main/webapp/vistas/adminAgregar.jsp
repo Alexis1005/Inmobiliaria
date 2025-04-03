@@ -83,7 +83,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="row justify-content-center align-items-center">
+                <div class="row justify-content-start">
                     <div class="col-md-6 mb-3">
                         <label for="precio" class="fs-4">Precio</label>
                         <input type="number" step="0.01" id="precio" class="form-control" name="precio" required>

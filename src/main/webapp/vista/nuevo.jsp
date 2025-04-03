@@ -2,9 +2,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- Se asume que el JSP principal ya carga los CSS (Bootstrap, FontAwesome, etc.) -->
-<div class="container mt-3">
-    <div class="card">
-        <div class="card-body">
+<div class="row justify-content-center">
+    <div class="col-md-12 my-4">
+        <div class="card p-3">
             <h3>${caracteristica.id_caracteristica == null || caracteristica.id_caracteristica == 0 ? "Nueva" : "Editar"} Característica
             </h3>
             <hr />
@@ -25,9 +25,6 @@
                     <button class="btn btn-primary btn-sm">
                         <i class="fa fa-save"></i> Guardar 
                     </button>
-                    <a href="CaracteristicasController?accion=listar" class="btn btn-dark btn-sm">
-                        <i class="fa fa-arrow-left"></i> Volver atrás
-                    </a>
                 </div>
             </form>
         </div>
