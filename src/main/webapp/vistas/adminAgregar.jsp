@@ -27,7 +27,6 @@
                     ${mensaje}
                 </div>
             </c:if>
-
             <form action="/inmobiliaria/propiedadesController" method="post">
                 <input type="hidden" name="accion" value="insertar">
                 <input type="hidden" name="id_agente" value="1">
@@ -90,18 +89,17 @@
                     </div>
                 </div>
                  
-                <!-- Agregando caracteristicas -->
+                <!-- Se incluyen el formulario de características (nuevo.jsp) y el listado (listar.jsp) -->
                 
-                <jsp:include page="/vista/nuevo.jsp"/>
-                
-                <!-- Listando caracteristicas -->
-                <jsp:include page="/vista/listar.jsp"/>
-                
-
                 <div class="row justify-content-center">
                     <button type="submit" class="btn btn-success mt-3 mb-3" style="width: 80%;">Agregar propiedad</button>
                 </div>
             </form>
+                <jsp:include page="/vista/nuevo.jsp"/>
+                 <!-- Contenedor para la lista de características -->
+            <div id="listaCaracteristicasContainer">
+                <jsp:include page="/vista/listar.jsp" />
+            </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

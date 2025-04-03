@@ -108,10 +108,22 @@ public class PropiedadesController extends HttpServlet {
             Caracteristicas caracteristica = new Caracteristicas(nombre, detalle);
             caracteristicasTemp.add(caracteristica);
         }
-        response.sendRedirect("propiedadesController?accion=mostrarFormulario");
+
+        // Verificar si la solicitud es AJAX
+        if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+            // Se establece la lista actualizada en el request
+            request.setAttribute("caracteristicas", caracteristicasTemp);
+            // Enviar únicamente el fragmento de la lista (listar.jsp)
+            request.getRequestDispatcher("/vista/listar.jsp").forward(request, response);
+        } else {
+            // Comportamiento tradicional: redirigir a mostrarFormulario
+            response.sendRedirect("propiedadesController?accion=mostrarFormulario");
+        }
     }
 
-    protected void insertar(HttpServletRequest request, HttpServletResponse response, List<Caracteristicas> caracteristicasTemp)
+
+
+protected void insertar(HttpServletRequest request, HttpServletResponse response, List<Caracteristicas> caracteristicasTemp)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
@@ -185,27 +197,33 @@ public class PropiedadesController extends HttpServlet {
     }
 
     @Override
-    public String getServletInfo() {
+public String getServletInfo() {
         return "Controlador de Propiedades";
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(PropiedadesController.class.getName()).log(Level.SEVERE, null, ex);
+
+} catch (SQLException ex) {
+            Logger.getLogger(PropiedadesController.class  
+
+.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(PropiedadesController.class.getName()).log(Level.SEVERE, null, ex);
+
+} catch (SQLException ex) {
+            Logger.getLogger(PropiedadesController.class  
+
+.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

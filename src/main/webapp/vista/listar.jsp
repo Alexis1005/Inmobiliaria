@@ -1,47 +1,67 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!-- Nota: Al estar incluido en panelAdmin.jsp, no es necesario definir nuevamente el DOCTYPE, head o body -->
+
+<!-- Nota: Este archivo se utiliza como fragmento, por lo que no incluye <html>, <head> ni <body> -->
 <div class="card p-4">
-        <h3>Características adicionales</h3>
-        <hr />
-        
-        
-        <!-- Se incluye el componente para mensajes (éxito o error) si lo tienes -->
-        <jsp:include page="../components/Mensaje.jsp" />
-        
-        <!-- Tabla de listado de características -->
-        <table class="table table-bordered table-striped mt-2">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Detalle</th>
-                    <th>Acción</th>
+    <h3>Características agregadas</h3>
+    <hr />
+
+    <!-- Se incluye el componente para mensajes (éxito o error) -->
+    <jsp:include page="../components/Mensaje.jsp" />
+
+    <table class="table table-bordered table-striped mt-2">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Detalle</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody id="listaCaracteristicas">
+            <c:forEach items="${caracteristicas}" var="item">
+                <tr id="fila-${item.id}">
+                    <td>${item.id}</td>
+                    <td>${item.nombre}</td>
+                    <td>${item.detalle}</td>
+                    <td>
+                        <!-- Botón para eliminar -->
+                        <button type="button" class="btn btn-danger btn-sm" onclick="eliminarCaracteristica(${item.id})">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${caracteristicas}" var="item">
-                    <tr>
-                        <td>${item.id_caracteristica}</td>
-                        <td>${item.nombre}</td>
-                        <td>${item.detalle}</td>
-                        <td>
-                            <a href="CaracteristicasController?accion=editar&id_caracteristica=${item.id_caracteristica}" 
-                               class="btn btn-info btn-sm">
-                                <i class="fa fa-edit"></i>
-                            </a>
-                            <a href="CaracteristicasController?accion=eliminar&id_caracteristica=${item.id_caracteristica}" 
-                               onclick="return confirm('¿Eliminar característica?');" class="btn btn-danger btn-sm">
-                                <i class="fa fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
-                </c:forEach>
-                <c:if test="${caracteristicas == null || caracteristicas.size() == 0}">
-                    <tr>
-                        <td colspan="4" class="text-center">No hay registros</td>
-                    </tr>
-                </c:if>
-            </tbody>
-        </table>
+            </c:forEach>
+            <c:if test="${empty caracteristicas}">
+                <tr id="sinRegistros">
+                    <td colspan="4" class="text-center">No hay registros</td>
+                </tr>
+            </c:if>
+        </tbody>
+    </table>
 </div>
+
+<script>
+    function eliminarCaracteristica(id) {
+        if (confirm('¿Eliminar característica?')) {
+            fetch(`CaracteristicasController?accion=eliminar&id_caracteristica=${id}`, {
+                method: 'GET'
+            })
+            .then(response => response.text())
+            .then(data => {
+                let fila = document.getElementById(`fila-${id}`);
+                if (fila) fila.remove();
+
+                // Si ya no hay filas, agregar mensaje "No hay registros"
+                let tabla = document.getElementById("listaCaracteristicas");
+                if (tabla.children.length === 0) {
+                    let filaVacia = document.createElement("tr");
+                    filaVacia.id = "sinRegistros";
+                    filaVacia.innerHTML = '<td colspan="4" class="text-center">No hay registros</td>';
+                    tabla.appendChild(filaVacia);
+                }
+            })
+            .catch(error => console.error('Error al eliminar:', error));
+        }
+    }
+</script>
