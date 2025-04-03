@@ -62,7 +62,8 @@
 
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                function toggleInput(selectElement, inputElement) { // si se selecciona una opcion se oculta el input y se borra el contenido
+                function toggleInput(selectElement, inputElement) { 
+                    // si se selecciona una opcion se oculta el input y se borra el contenido
                     selectElement.addEventListener("change", function () {
                         if (this.value === "") {
                             inputElement.style.display = "block";
