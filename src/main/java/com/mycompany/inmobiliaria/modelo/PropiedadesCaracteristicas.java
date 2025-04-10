@@ -1,64 +1,58 @@
-
 package com.mycompany.inmobiliaria.modelo;
 
-/**
- * Representa una relación muchos a muchos entre propiedades y características.
- * Esta clase actúa como una tabla intermedia en una base de datos.
- */
 public class PropiedadesCaracteristicas {
     private int id_propiedad;
     private int id_caracteristica;
-    private String valor;
+    private String detalle;
 
-    /**
-     * Constructor para inicializar una relación entre propiedad y característica.
-     *
-     * @param id_propiedad      El identificador único de la propiedad.
-     * @param id_caracteristica El identificador único de la característica.
-     * @param valor             una descripcion de las caractristicas generales de la propiedad.
-     */
-    public PropiedadesCaracteristicas(int id_propiedad, int id_caracteristica, String valor) {
-        this.id_propiedad = id_propiedad;
-        this.id_caracteristica = id_caracteristica;
-        this.valor = valor;
+    // Constructor vacío
+    public PropiedadesCaracteristicas() {
     }
 
+    // Constructor con parámetros
+    public PropiedadesCaracteristicas(int idPropiedad, int idCaracteristica) {
+        this.id_propiedad = idPropiedad;
+        this.id_caracteristica = idCaracteristica;
+    }
+
+    // Constructor con parámetros incluyendo detalle
+    public PropiedadesCaracteristicas(int idPropiedad, int idCaracteristica, String detalle) {
+        this.id_propiedad = idPropiedad;
+        this.id_caracteristica = idCaracteristica;
+        this.detalle = detalle;
+    }
+
+    // Getters y setters
     public int getId_propiedad() {
         return id_propiedad;
     }
 
-    public void setId_propiedad(int id_propiedad) {
-        
-        this.id_propiedad = id_propiedad;
+    public void setId_propiedad(int idPropiedad) {
+        this.id_propiedad = idPropiedad;
     }
 
     public int getId_caracteristica() {
         return id_caracteristica;
     }
 
-    public void setId_caracteristica(int id_caracteristica) {
-        
-        this.id_caracteristica = id_caracteristica;
+    public void setId_caracteristica(int idCaracteristica) {
+        this.id_caracteristica = idCaracteristica;
     }
 
-    public String getValor() {
-        return valor;
+    public String getDetalle() {
+        return detalle;
     }
 
-    public void setValor(String valor) {
-        
-        this.valor = valor;
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
     }
 
     @Override
     public String toString() {
         return "PropiedadesCaracteristicas{" +
-                "id_propiedad=" + id_propiedad +
-                ", id_caracteristica=" + id_caracteristica +
-                ", valor='" + valor + '\'' +
-                '}';
+               "id_propiedad=" + id_propiedad +
+               ", id_paracteristica=" + id_caracteristica +
+               ", detalle='" + detalle + '\'' +
+               '}';
     }
 }
-    
-    
-

@@ -1,15 +1,62 @@
 package com.mycompany.inmobiliaria.modelo;
 
-public class Propiedades {
+import java.util.List;
 
-    int id_propiedad;
-    int id_tipo;
-    int id_agente;
-    String direccion;
-    Double precio;
-    String descripcion;
-    String estado;
-    String modalidad;
+public class Propiedades {
+    private int id_propiedad;
+    private int id_tipo;
+    private int id_agente;
+    private String direccion;
+    private double precio;
+    private String descripcion;
+    private String estado;
+    private String modalidad;
+    private String caracteristicasGenerales;
+
+    
+
+    // Relación con FotosPropiedad (solo la primera imagen por simplicidad)
+    private String imagen; // Ruta de la imagen principal
+
+    // Relación con Caracteristicas (lista de características)
+    private List<String> caracteristicas; // Nombres o valores de características
+
+    // Constructor
+    public Propiedades(int id_propiedad, int id_tipo, int id_agente, String direccion, double precio, 
+                       String descripcion, String estado, String modalidad, String imagen, List<String> caracteristicas) {
+        this.id_propiedad = id_propiedad;
+        this.id_tipo = id_tipo;
+        this.id_agente = id_agente;
+        this.direccion = direccion;
+        this.precio = precio;
+        this.descripcion = descripcion;
+        this.estado = estado;
+        this.modalidad = modalidad;
+        this.imagen = imagen;
+        this.caracteristicas = caracteristicas;
+        this.caracteristicasGenerales = caracteristicasGenerales;
+    }
+    // Constructor vacío
+    public Propiedades() {
+        // Opcionalmente inicializa valores por defecto
+        this.id_propiedad = -1;
+        this.imagen = null;
+        this.caracteristicas = null;
+    }
+    // Constructor para crear una nueva propiedad (usado en SubirPropiedadServlet)
+    public Propiedades(int id_tipo, int id_agente, String direccion, double precio, String descripcion, String estado, String modalidad) {
+        this.id_tipo = id_tipo;
+        this.id_agente = id_agente;
+        this.direccion = direccion;
+        this.precio = precio;
+        this.descripcion = descripcion;
+        this.estado = estado;
+        this.modalidad = modalidad;
+        this.id_propiedad = -1; // Valor temporal, se asignará al insertar
+        this.imagen = null;     // Se asignará después al subir imágenes
+        this.caracteristicas = null; // Se asignarán después al procesar características
+        this.caracteristicasGenerales = caracteristicasGenerales;
+    }
 
     public int getId_propiedad() {
         return id_propiedad;
@@ -74,5 +121,16 @@ public class Propiedades {
     public void setModalidad(String modalidad) {
         this.modalidad = modalidad;
     }
+    public String getCaracteristicasGenerales() {
+        return caracteristicasGenerales;
+    }
 
+    public void setCaracteristicasGenerales(String caracteristicasGenerales) {
+        this.caracteristicasGenerales = caracteristicasGenerales;
+    }
+public String getImagen() { return imagen; } // Getter para la imagen
+    public List<String> getCaracteristicas() { return caracteristicas; }
+    
+    public void setImagen(String imagen) { this.imagen = imagen; }
+    public void setCaracteristicas(List<String> caracteristicas) { this.caracteristicas = caracteristicas; }
 }
