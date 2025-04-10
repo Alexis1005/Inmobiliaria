@@ -1,0 +1,113 @@
+nav.navbar {
+  position: relative;
+}
+
+.navbar-toggler {
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar-toggler:hover {
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.05);
+  transform: scale(1.05);
+}
+
+.navbar-toggler:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0);
+}
+
+/* Cambiar el color del ícono cuando el botón está expandido */
+.navbar-toggler[aria-expanded="true"] i {
+  color: rgb(119, 221, 109) !important;
+  transition: color 0.3s ease;
+}
+.bordecito {
+  transition: border-bottom 0.3s ease;
+}
+
+.bordecito:hover{
+  border-bottom: 1px solid #75bf7a;
+}
+
+
+.btn {
+    background-color: rgb(75, 218, 75);
+    color: white;
+}
+
+
+
+
+
+.img {
+    width: 100%;
+    height: 280px; /* Ajusta el alto deseado */
+    object-fit: cover; /* Mantiene la proporción */
+}
+
+.card-body {
+    text-align: center;
+}
+
+.detalles-propiedad {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+    gap: 10px;
+    margin: 10px 0;
+    font-size: 14px;
+    text-align: center;
+}
+
+.detalles-propiedad div {
+    
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.card {
+    background-color: #ff7300;
+    color: white;
+    font-weight: bold;
+    padding: 8px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+
+   /* Ajusta todas las imágenes del carrusel al mismo tamaño */
+   .img-carousel {
+    height: 100vh;
+    object-fit: cover;
+  }
+
+ @media (max-width: 768px) {
+    .busqueda {
+        position: relative !important; /* Cambia a posición normal en móviles */
+        top: auto;
+        transform: none;
+        width: 90%;
+        margin-top: 60px; /* Separa del logo */
+    }
+    .busqueda form .d-flex {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    
+}
+
+  .busqueda form .me-2 {
+    width: 100%;
+  }
+
+  .busqueda form .btn {
+    width: 100%;
+  }
+  
+
+

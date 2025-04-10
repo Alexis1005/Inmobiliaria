@@ -3,12 +3,19 @@
 <!DOCTYPE html>
 <html>
     <head>
+<<<<<<< HEAD
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+=======
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Panel Administrador - Agregar Propiedad</title>
+>>>>>>> ruben
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="/CSS/card.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<<<<<<< HEAD
         <title>Panel Administrador - Agregar Propiedad</title>
     </head>
     <body>
@@ -22,11 +29,26 @@
         </nav>
         <div class="container">
             <!-- Mostrar mensaje de error si existe -->
+=======
+    </head>
+    <body>
+        <nav class="nav nav-pills nav-fill bg-success">
+            <a class="nav-link fs-4 m-2 border border-2 border-light rounded text-white"
+               href="/inmobiliaria/propiedadesController?accion=mostrarFormulario">Agregar propiedad</a>
+            <a class="nav-link fs-4 m-2 border border-2 border-light rounded text-white"
+               href="adminVer.jsp">Ver propiedades</a>
+            <a class="nav-link fs-4 m-2 border border-2 border-light rounded text-white"
+               href="adminEditar.jsp">Editar propiedades</a>
+        </nav>
+
+        <div class="container">
+>>>>>>> ruben
             <c:if test="${not empty mensaje}">
                 <div class="alert alert-danger mt-3" role="alert">
                     ${mensaje}
                 </div>
             </c:if>
+<<<<<<< HEAD
             <form action="/inmobiliaria/propiedadesController" method="post">
                 <input type="hidden" name="accion" value="insertar">
                 <input type="hidden" name="id_agente" value="1">
@@ -35,6 +57,16 @@
                 <div class="text-center p-3 border border-light rounded col-md-6 m-auto">
                     <h4>Seleccione las imágenes</h4>
                     <input type="file" class="form-control mt-2" id="uploadImage" name="imagenes" accept="image/*" multiple>
+=======
+
+            <form action="/inmobiliaria/propiedadesController" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="accion" value="insertar">
+                <input type="hidden" name="id_agente" value="1">
+
+                <div class="text-center p-3 border border-light rounded col-md-6 m-auto">
+                    <h4>Seleccione las imágenes</h4>
+                    <input type="file" class="form-control mt-2" id="uploadImage" name="imagenes[]" accept="image/*" multiple>
+>>>>>>> ruben
                 </div>
 
                 <div class="row justify-content-center align-items-center">
@@ -57,6 +89,10 @@
                         </select>
                     </div>
                 </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> ruben
                 <div class="row justify-content-center align-items-center">
                     <div class="col-md-6 mb-3">
                         <label for="titulo" class="fs-4">Título</label>
@@ -67,6 +103,10 @@
                         <input type="text" id="ubicacion" class="form-control" name="direccion" placeholder="Ciudad, Provincia" required>
                     </div>
                 </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> ruben
                 <div class="row justify-content-center align-items-center">
                     <div class="col-md-6 mb-3">
                         <label for="descripcion_general" class="fs-4">Descripción General</label>
@@ -82,19 +122,28 @@
                         </select>
                     </div>
                 </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> ruben
                 <div class="row justify-content-start">
                     <div class="col-md-6 mb-3">
                         <label for="precio" class="fs-4">Precio</label>
                         <input type="number" step="0.01" id="precio" class="form-control" name="precio" required>
                     </div>
                 </div>
+<<<<<<< HEAD
                  
                 <!-- Se incluyen el formulario de características (nuevo.jsp) y el listado (listar.jsp) -->
                 
+=======
+
+>>>>>>> ruben
                 <div class="row justify-content-center">
                     <button type="submit" class="btn btn-success mt-3 mb-3" style="width: 80%;">Agregar propiedad</button>
                 </div>
             </form>
+<<<<<<< HEAD
                 <jsp:include page="/vista/nuevo.jsp"/>
                  <!-- Contenedor para la lista de características -->
             <div id="listaCaracteristicasContainer">
@@ -104,5 +153,45 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
                 crossorigin="anonymous"></script>
+=======
+        </div>
+
+         <h2>Agregar Características</h2>
+        <jsp:include page="/vista/nuevo.jsp"/>
+
+        <%@ page import="java.util.List" %>
+        <%@ page import="java.util.ArrayList" %>
+        <%@ page import="com.mycompany.inmobiliaria.modelo.Caracteristicas" %>
+
+        <%
+            List<Caracteristicas> caracteristicas = (List<Caracteristicas>) request.getAttribute("caracteristicas");
+            if (caracteristicas == null) {
+                caracteristicas = new ArrayList<>();
+            }
+        %>
+
+        <h3>Características Temporales</h3>
+        <table class="table table-bordered">
+            <tr>
+                <th>Nombre</th>
+                <th>Detalle</th>
+            </tr>
+            <%
+                for (Caracteristicas c : caracteristicas) {
+            %>
+            <tr>
+                <td><%= c.getNombre() %></td>
+                <td><%= c.getDetalle() %></td>
+            </tr>
+            <%
+                }
+            %>
+        </table>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+>>>>>>> ruben
     </body>
 </html>
