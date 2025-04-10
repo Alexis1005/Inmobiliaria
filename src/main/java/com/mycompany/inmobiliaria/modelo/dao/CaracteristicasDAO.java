@@ -1,6 +1,7 @@
 package com.mycompany.inmobiliaria.modelo.dao;
 
 import com.mycompany.inmobiliaria.modelo.Caracteristica;
+
 import com.mycompany.inmobiliaria.resources.config.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

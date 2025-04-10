@@ -1,6 +1,7 @@
 D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\dao\CaracteristicasDAO.java
 D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controlador\CaracteristicasServlet.java
 D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controlador\EditarPropiedadServlet.java
+D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controladores\Propiedades.java
 D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\FotosPropiedad.java
 D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controlador\PrincipalServlet.java
 D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\Agente.java
@@ -13,6 +14,7 @@ D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\c
 D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\dao\PropiedadesCaracteristicasDAO.java
 D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\Caracteristica.java
 D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\dao\FotosPropiedadDAO.java
+D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\Caracteristicas.java
 D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\TiposPropiedad.java
 D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controlador\SubirPropiedadServlet.java
 D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\PropiedadesCaracteristicas.java
