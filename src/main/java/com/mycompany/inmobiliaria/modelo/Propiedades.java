@@ -2,24 +2,6 @@ package com.mycompany.inmobiliaria.modelo;
 
 import java.util.List;
 
-<<<<<<< HEAD
-    int id_propiedad;
-    int id_tipo;
-    int id_agente;
-    String direccion;
-    Double precio;
-    String descripcion;
-    String estado;
-    String modalidad;
-    String descripcion_general;
-
-    public void setDescripcion_general(String descripcion_general) {
-        this.descripcion_general = descripcion_general;
-    }
-
-    public String getDescripcion_general() {
-        return descripcion_general;
-=======
 public class Propiedades {
     private int id_propiedad;
     private int id_tipo;
@@ -74,7 +56,6 @@ public class Propiedades {
         this.imagen = null;     // Se asignará después al subir imágenes
         this.caracteristicas = null; // Se asignarán después al procesar características
         this.caracteristicasGenerales = caracteristicasGenerales;
->>>>>>> ruben
     }
 
     public int getId_propiedad() {
