@@ -1,4 +1,6 @@
+
 package com.mycompany.inmobiliaria.modelo.dao;
+
 
 import com.mycompany.inmobiliaria.modelo.PropiedadesCaracteristicas;
 import com.mycompany.inmobiliaria.resources.config.Conexion;
@@ -20,9 +22,6 @@ public class PropiedadesCaracteristicasDAO {
     }
 
     public PropiedadesCaracteristicasDAO() {
-<<<<<<< HEAD
-        System.out.println("Creando metodo");
-=======
     // Constructor vacío, ya que la conexión se maneja en el método insertar
 }
     public boolean agregar(PropiedadesCaracteristicas pc) throws SQLException {
@@ -34,23 +33,9 @@ public class PropiedadesCaracteristicasDAO {
             ps.setString(3, pc.getDetalle());
             return ps.executeUpdate() > 0;
         }
->>>>>>> ruben
     }
 
-    public void metodoNoImplementado() {
-    System.out.println("Método en construcción");
-}
-
-
     // Método para crear una nueva relación propiedad-característica
-<<<<<<< HEAD
-    public void crear(PropiedadesCaracteristicas pc) throws SQLException {
-        String sql = "INSERT INTO PropiedadesCaracteristicas (id_propiedad, id_caracteristica) VALUES (?, ?)";
-        try (PreparedStatement ps = cn.prepareStatement(sql)) {
-            ps.setInt(1, pc.getId_propiedad());
-            ps.setInt(2, pc.getId_caracteristica());
-            ps.executeUpdate();
-=======
     public void insertar(PropiedadesCaracteristicas pc) throws SQLException {
         String sql = "INSERT INTO propiedadescaracteristicas (id_propiedad, id_caracteristica) VALUES (?, ?)";
         try (Connection conn = Conexion.getConnection();
@@ -60,7 +45,6 @@ public class PropiedadesCaracteristicasDAO {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new SQLException("Error al insertar propiedad-característica: " + e.getMessage(), e);
->>>>>>> ruben
         }
     }
 
@@ -73,23 +57,16 @@ public class PropiedadesCaracteristicasDAO {
             while (rs.next()) {
                 PropiedadesCaracteristicas pc = new PropiedadesCaracteristicas(
                     rs.getInt("id_propiedad"),
-<<<<<<< HEAD
-                    rs.getInt("id_caracteristica"));
-=======
                     rs.getInt("id_caracteristica")
                    );
->>>>>>> ruben
                 lista.add(pc);
             }
         }
         return lista;
     }
 
-<<<<<<< HEAD
-=======
     
 
->>>>>>> ruben
     // Método para eliminar una relación propiedad-característica
     public void eliminar(int id_propiedad, int id_caracteristica) throws SQLException {
         String sql = "DELETE FROM propiedadescaracteristicas WHERE id_propiedad = ? AND id_caracteristica = ?";
@@ -111,11 +88,8 @@ public class PropiedadesCaracteristicasDAO {
                     return new PropiedadesCaracteristicas(
                         rs.getInt("id_propiedad"),
                         rs.getInt("id_caracteristica"));
-<<<<<<< HEAD
-=======
                         
                  
->>>>>>> ruben
                 }
             }
         }
