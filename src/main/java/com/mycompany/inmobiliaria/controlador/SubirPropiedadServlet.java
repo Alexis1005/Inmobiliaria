@@ -36,10 +36,10 @@ public class SubirPropiedadServlet extends HttpServlet {
 
     private static final Logger logger = Logger.getLogger(SubirPropiedadServlet.class.getName());
     private static final String UPLOAD_DIR = "C:\\Users\\PC\\Documents\\NetBeansProjects\\inmobiliaria\\img_propiedades_externas";
-    private PropiedadesDAO propiedadesDAO = new PropiedadesDAO();
-    private FotosPropiedadDAO fotosDAO = new FotosPropiedadDAO();
-    private TiposPropiedadDAO tiposPropiedadDAO = new TiposPropiedadDAO();
-    private AgenteDAO agentesDAO = new AgenteDAO();
+    private final PropiedadesDAO propiedadesDAO = new PropiedadesDAO();
+    private final FotosPropiedadDAO fotosDAO = new FotosPropiedadDAO();
+    private final TiposPropiedadDAO tiposPropiedadDAO = new TiposPropiedadDAO();
+    private final AgenteDAO agentesDAO = new AgenteDAO();
 
     @Override
     public void init() throws ServletException {
@@ -77,7 +77,7 @@ public class SubirPropiedadServlet extends HttpServlet {
 
             // Insertar la propiedad en la base de datos y obtener el ID generado
             int idPropiedad = propiedadesDAO.insertar(propiedad);
-            logger.info("Propiedad insertada con ID: " + idPropiedad);
+            logger.log(Level.INFO, "Propiedad insertada con ID: {0}", idPropiedad);
 
             // Manejar las imágenes subidas
             List<String> imagenesRutas = new ArrayList<>();
@@ -94,16 +94,16 @@ public class SubirPropiedadServlet extends HttpServlet {
                     if (fileName != null && !fileName.isEmpty() && part.getSize() > 0) {
                         String filePath = UPLOAD_DIR + File.separator + fileName;
                         part.write(filePath);
-                        logger.info("Archivo guardado en: " + filePath);
+                        logger.log(Level.INFO, "Archivo guardado en: {0}", filePath);
 
                         String projectFilePath = projectImagePath + File.separator + fileName;
                         Files.copy(Paths.get(filePath), Paths.get(projectFilePath));
-                        logger.info("Archivo copiado al proyecto: " + projectFilePath);
+                        logger.log(Level.INFO, "Archivo copiado al proyecto: {0}", projectFilePath);
 
                         String relativePath = "imagenes/" + fileName;
                         imagenesRutas.add(relativePath);
                     } else {
-                        logger.warning("Parte ignorada: " + (fileName == null ? "Nombre nulo" : "Archivo vacío"));
+                        logger.log(Level.WARNING, "Parte ignorada: {0}", fileName == null ? "Nombre nulo" : "Archivo vacío");
                     }
                 }
             }
@@ -126,23 +126,23 @@ public class SubirPropiedadServlet extends HttpServlet {
             logger.info("Parámetros recibidos:");
             while (parameterNames.hasMoreElements()) {
                 String paramName = parameterNames.nextElement();
-                logger.info("Parámetro: " + paramName + " = " + request.getParameter(paramName));
+                logger.log(Level.INFO, "Par\u00e1metro: {0} = {1}", new Object[]{paramName, request.getParameter(paramName)});
                 if (paramName.startsWith("detalle_")) {
                     String idCaracteristicaStr = paramName.substring("detalle_".length());
                     int idCaracteristica = Integer.parseInt(idCaracteristicaStr);
                     String detalle = request.getParameter(paramName);
-                    logger.info("Procesando característica: idCaracteristica=" + idCaracteristica + ", detalle=" + detalle);
+                    logger.log(Level.INFO, "Procesando caracter\u00edstica: idCaracteristica={0}, detalle={1}", new Object[]{idCaracteristica, detalle});
                     if (detalle != null && !detalle.trim().isEmpty()) {
                         PropiedadesCaracteristicas pc = new PropiedadesCaracteristicas(idPropiedad, idCaracteristica, detalle);
                         pcDAO.agregar(pc);
-                        logger.info("Característica guardada: " + pc);
+                        logger.log(Level.INFO, "Caracter\u00edstica guardada: {0}", pc);
                     }
                 }
             }
 
             // Redirigir solo una vez al finalizar con éxito
             response.sendRedirect(request.getContextPath() + "/propiedades");
-        } catch (Exception e) {
+        } catch (ServletException | IOException | NumberFormatException | SQLException e) {
             logger.log(Level.SEVERE, "Error al subir propiedad: " + e.getMessage(), e);
             // Establecer mensaje de error y reenviar a una página de error
             request.setAttribute("errorMessage", "Error al subir propiedad: " + e.getMessage());
