@@ -73,7 +73,7 @@
 
                 <!-- Logo (Izquierda en escritorio, centrado en móviles) -->
                 <a class="navbar-brand position-relative">
-                    <img src="${pageContext.request.contextPath}/imagenes/logo.png" class="logo_nav img-fluid" width="width" height="height" alt="alt"/> 
+                    <img src="${pageContext.request.contextPath}/imagenes/logo.png" class="logo_nav img-fluid" alt="alt"/> 
                 </a>
 
                 <!-- Buscador (Centrado en Desktop, Abajo en Móvil) -->
@@ -203,9 +203,5 @@
             }
         });
     </script>
-
-
-
-</script>
 </body>
 </html>

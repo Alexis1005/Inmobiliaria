@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 public class SubirPropiedadServlet extends HttpServlet {
 
     private static final Logger logger = Logger.getLogger(SubirPropiedadServlet.class.getName());
-    private static final String UPLOAD_DIR = "D:\\Usuarios\\Ruben\\Desktop\\inmobiliaria BACK - copia\\Inmobiliaria\\img_propiedades_externas";
+    private static final String UPLOAD_DIR = "C:\\Users\\PC\\Documents\\NetBeansProjects\\inmobiliaria\\img_propiedades_externas";
     private PropiedadesDAO propiedadesDAO = new PropiedadesDAO();
     private FotosPropiedadDAO fotosDAO = new FotosPropiedadDAO();
     private TiposPropiedadDAO tiposPropiedadDAO = new TiposPropiedadDAO();
