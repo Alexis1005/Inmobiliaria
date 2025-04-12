@@ -11,10 +11,9 @@
     <body>
         <div class="container mt-5">
             <h2>Subir Nueva Propiedad</h2>
-            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editarModal" 
-                    onclick="cargarDatosPropiedad('${propiedad.id_propiedad}', '${propiedad.direccion}', '${propiedad.precio}', '${propiedad.estado}', '${propiedad.caracteristicasGenerales}', '${propiedad.imagen}')">
-                Editar
-            </button>
+            <button type="button" class="btn btn-warning" onclick="window.location.href='${pageContext.request.contextPath}/editarPropiedad'">
+    Editar Propiedades
+</button>
             <form action="${pageContext.request.contextPath}/subirPropiedad" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="descripcion" class="form-label">Descripción</label>
@@ -70,13 +69,14 @@
                     <div id="caracteristicasContainer">
                         <!-- Aquí se cargarán las características dinámicamente -->
                     </div>
+                    <button type="button" class="btn btn-secondary mt-2" data-bs-toggle="modal" data-bs-target="#agregarCaracteristicaModal">
+                        Agregar Característica
+                    </button>
                     <div class="mb-3">
                         <label for="caracteristicasGenerales" class="form-label">Características Generales</label>
                         <textarea class="form-control" id="caracteristicasGenerales" name="caracteristicasGenerales" rows="5"></textarea>
                     </div>
-                    <button type="button" class="btn btn-secondary mt-2" data-bs-toggle="modal" data-bs-target="#agregarCaracteristicaModal">
-                        Agregar Característica
-                    </button>
+
                 </div>
                 <div class="mb-3">
                     <label for="imagenes" class="form-label">Imágenes</label>
@@ -163,7 +163,7 @@
         <!-- Scripts -->
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
         <script>
                             // Cargar características cuando cambie el tipo de propiedad
                             document.getElementById('idTipo').addEventListener('change', function () {

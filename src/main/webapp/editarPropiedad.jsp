@@ -5,47 +5,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Propiedad - Moreno Inmobiliaria</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Editar Propiedades</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container mt-5">
-        <h2>Editar Propiedad</h2>
-        <form action="${pageContext.request.contextPath}/editarPropiedad" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="id" value="${propiedad.id_propiedad}">
-            <div class="mb-3">
-                <label for="direccion" class="form-label">Dirección</label>
-                <input type="text" class="form-control" id="direccion" name="direccion" value="${propiedad.direccion}" required>
-            </div>
-            <div class="mb-3">
-                <label for="precio" class="form-label">Precio</label>
-                <input type="number" step="0.01" class="form-control" id="precio" name="precio" value="${propiedad.precio}" required>
-            </div>
-            <div class="mb-3">
-                <label for="estado" class="form-label">Estado</label>
-                <select class="form-select" id="estado" name="estado" required>
-                    <option value="Disponible" ${propiedad.estado == 'Disponible' ? 'selected' : ''}>Disponible</option>
-                    <option value="Alquilado" ${propiedad.estado == 'Alquilado' ? 'selected' : ''}>Alquilado</option>
-                    <option value="Vendido" ${propiedad.estado == 'Vendido' ? 'selected' : ''}>Vendido</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="caracteristicasGenerales" class="form-label">Características Generales</label>
-                <textarea class="form-control" id="caracteristicasGenerales" name="caracteristicasGenerales" rows="5">${propiedad.caracteristicasGenerales}</textarea>
-            </div>
-            <div class="mb-3">
-                <label for="imagen" class="form-label">Imagen (dejar en blanco para mantener la actual)</label>
-                <input type="file" class="form-control" id="imagen" name="imagen">
-                <c:if test="${not empty propiedad.imagen}">
-                    <p>Imagen actual: ${propiedad.imagen}</p>
-                    <img src="${pageContext.request.contextPath}/imagenes/${propiedad.imagen}" alt="Imagen actual" style="max-width: 200px;">
-                </c:if>
-            </div>
-            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-            <a href="${pageContext.request.contextPath}/principal" class="btn btn-secondary">Cancelar</a>
-        </form>
+        <h2>Lista de Propiedades</h2>
+        <table id="propiedadesTable" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Dirección</th>
+                    <th>Precio</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="propiedad" items="${propiedades}">
+                    <tr>
+                        <td>${propiedad.id_propiedad}</td>
+                        <td>${propiedad.direccion}</td>
+                        <td>${propiedad.precio}</td>
+                        <td>${propiedad.estado}</td>
+                        <td>
+                            <button type="button" class="btn btn-warning" onclick="editarPropiedad('${propiedad.id_propiedad}')">
+                                Editar
+                            </button>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#propiedadesTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/Spanish.json"
+                }
+            });
+        });
+
+        function editarPropiedad(id) {
+            window.location.href = '${pageContext.request.contextPath}/editarPropiedad?id=' + id;
+        }
+    </script>
 </body>
 </html>
