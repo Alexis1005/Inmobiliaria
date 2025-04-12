@@ -158,6 +158,7 @@
                     <select class="form-select" id="modalidad" name="modalidad" required>
                         <option value="Venta">Venta</option>
                         <option value="Alquiler">Alquiler</option>
+                        <option value="Alquiler">Arrendamiento</option>
                     </select>
                 </div>
                 <!-- Tipo de Propiedad -->
@@ -281,8 +282,6 @@
 
 
         <!-- Scripts -->
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <script>
                             // Cargar características cuando cambie el tipo de propiedad

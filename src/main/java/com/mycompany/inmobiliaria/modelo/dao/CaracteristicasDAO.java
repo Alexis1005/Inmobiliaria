@@ -23,7 +23,7 @@ public class CaracteristicasDAO {
                 obj.setId_caracteristica(rs.getInt("id_caracteristica"));
                 obj.setNombre(rs.getString("nombre"));
                 obj.setDetalle(rs.getString("detalles"));
-                obj.setTipoPropiedadId(rs.getInt("tipo_propiedad_id"));
+                obj.setTipoPropiedadId(rs.getInt("id_tipo"));
                 lista.add(obj);
             }
         } catch (SQLException ex) {
@@ -34,7 +34,7 @@ public class CaracteristicasDAO {
 
     public List<Caracteristica> listarPorTipo(int tipoId) throws SQLException {
         List<Caracteristica> lista = new ArrayList<>();
-        String sql = "SELECT * FROM caracteristicas WHERE tipo_propiedad_id = ?";
+        String sql = "SELECT * FROM caracteristicas WHERE id_tipo = ?";
         try (Connection cn = Conexion.getConnection();
              PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setInt(1, tipoId);
@@ -44,7 +44,7 @@ public class CaracteristicasDAO {
                     obj.setId_caracteristica(rs.getInt("id_caracteristica"));
                     obj.setNombre(rs.getString("nombre"));
                     obj.setDetalle(rs.getString("detalles"));
-                    obj.setTipoPropiedadId(rs.getInt("tipo_propiedad_id"));
+                    obj.setTipoPropiedadId(rs.getInt("id_tipo"));
                     lista.add(obj);
                 }
             }
@@ -55,7 +55,7 @@ public class CaracteristicasDAO {
     }
 
     public boolean agregar(Caracteristica caracteristica) throws SQLException {
-        String sql = "INSERT INTO caracteristicas (nombre, detalles, tipo_propiedad_id) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO caracteristicas (nombre, detalles, id_tipo) VALUES (?, ?, ?)";
         try (Connection cn = Conexion.getConnection();
              PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setString(1, caracteristica.getNombre());
@@ -69,7 +69,7 @@ public class CaracteristicasDAO {
     }
 
     public boolean actualizar(Caracteristica caracteristica) throws SQLException {
-        String sql = "UPDATE caracteristicas SET nombre = ?, detalles = ?, tipo_propiedad_id = ? WHERE id_caracteristica = ?";
+        String sql = "UPDATE caracteristicas SET nombre = ?, detalles = ?, id_tipo = ? WHERE id_caracteristica = ?";
         try (Connection cn = Conexion.getConnection();
              PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setString(1, caracteristica.getNombre());
@@ -84,7 +84,7 @@ public class CaracteristicasDAO {
     }
 
     public int registrar(Caracteristica obj) throws SQLException {
-        String sql = "INSERT INTO caracteristicas (nombre, detalles, tipo_propiedad_id) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO caracteristicas (nombre, detalles, id_tipo) VALUES (?, ?, ?)";
         try (Connection cn = Conexion.getConnection();
              PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setString(1, obj.getNombre());
@@ -97,7 +97,7 @@ public class CaracteristicasDAO {
     }
 
     public int editar(Caracteristica obj) throws SQLException {
-        String sql = "UPDATE caracteristicas SET nombre = ?, detalles = ?, tipo_propiedad_id = ? WHERE id_caracteristica = ?";
+        String sql = "UPDATE caracteristicas SET nombre = ?, detalles = ?, id_tipo = ? WHERE id_caracteristica = ?";
         try (Connection cn = Conexion.getConnection();
              PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setString(1, obj.getNombre());
@@ -133,7 +133,7 @@ public class CaracteristicasDAO {
                     obj.setId_caracteristica(rs.getInt("id_caracteristica"));
                     obj.setNombre(rs.getString("nombre"));
                     obj.setDetalle(rs.getString("detalles"));
-                    obj.setTipoPropiedadId(rs.getInt("tipo_propiedad_id"));
+                    obj.setTipoPropiedadId(rs.getInt("id_tipo"));
                 }
             }
         } catch (SQLException ex) {
