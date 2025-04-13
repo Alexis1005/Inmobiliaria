@@ -1,44 +1,52 @@
+/* Estilos para la navbar */
 nav.navbar {
-  position: relative;
+    position: relative;
 }
 
 .navbar-toggler {
-  transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
 }
 
 .navbar-toggler:hover {
-  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.05);
-  transform: scale(1.05);
+    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.05);
+    transform: scale(1.05);
 }
 
 .navbar-toggler:focus {
-  outline: none;
-  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0);
+    outline: none;
+    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0);
 }
 
-/* Cambiar el color del ícono cuando el botón está expandido */
 .navbar-toggler[aria-expanded="true"] i {
-  color: rgb(119, 221, 109) !important;
-  transition: color 0.3s ease;
+    color: rgb(119, 221, 109) !important;
+    transition: color 0.3s ease;
 }
+
+/* Estilos para bordecito */
 .bordecito {
-  transition: border-bottom 0.3s ease;
+    transition: border-bottom 0.3s ease;
 }
 
-.bordecito:hover{
-  border-bottom: 1px solid #75bf7a;
+.bordecito:hover {
+    border-bottom: 1px solid #75bf7a;
 }
 
-
+/* Estilos para botones */
 .btn {
     background-color: rgb(75, 218, 75);
     color: white;
+    width: 100%; /* Movido desde .busqueda form .btn para consolidar */
 }
 
+/* Estilos para cards */
+.card-body {
+    text-align: center;
+}
 
+/* Estilos para detalles de propiedad */
 .detalles-propiedad {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     margin: 10px 0;
     font-size: 14px;
@@ -46,7 +54,6 @@ nav.navbar {
 }
 
 .detalles-propiedad div {
-    
     padding: 5px 10px;
     border-radius: 5px;
     display: flex;
@@ -55,35 +62,30 @@ nav.navbar {
     gap: 5px;
 }
 
-
-   /* Ajusta todas las imágenes del carrusel al mismo tamaño */
-   .img-carousel {
+/* Estilos para el carrusel */
+.img-carousel {
     height: 100vh;
     object-fit: cover;
-  }
+}
 
- @media (max-width: 768px) {
+/* Estilos para el formulario de búsqueda */
+.busqueda form .me-2 {
+    width: 100%;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
     .busqueda {
-        position: relative !important; /* Cambia a posición normal en móviles */
+        position: relative !important;
         top: auto;
         transform: none;
         width: 90%;
-        margin-top: 60px; /* Separa del logo */
+        margin-top: 60px;
     }
+
     .busqueda form .d-flex {
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
     }
-    
 }
-
-  .busqueda form .me-2 {
-    width: 100%;
-  }
-
-  .busqueda form .btn {
-    width: 100%;
-  }
-
-
