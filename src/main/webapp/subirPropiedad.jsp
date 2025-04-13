@@ -117,24 +117,23 @@
             <a class="nav-link fs-4 m-2 border border-2 border-light rounded text-white"
                href="adminVer.jsp">Ver propiedades</a>
             <a class="nav-link fs-4 m-2 border border-2 border-light rounded text-white"
-               href="adminEditar.jsp">Editar propiedades</a>
+               href="editarPropiedad.jsp">Editar propiedades</a>
         </nav>
 
 
         <div class="container">
             <h2 class="text-center mt-4 text-success" >Agregando propiedad</h2>
             <hr class="bg-success mb-4">   
-
-            <!--
+            
             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editarModal" 
                     onclick="cargarDatosPropiedad('${propiedad.id_propiedad}', '${propiedad.direccion}', '${propiedad.precio}', '${propiedad.estado}', '${propiedad.caracteristicasGenerales}', '${propiedad.imagen}')">
                 Editar
             </button> 
-            -->
+            
             <form action="${pageContext.request.contextPath}/subirPropiedad" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="descripcion" class="form-label fw-bold">Título de la propiedad</label>
-                    <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+                    <input type="text" class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="direccion" class="form-label fw-bold">Dirección</label>
