@@ -68,17 +68,6 @@ nav.navbar {
     gap: 5px;
 }
 
-.card {
-    background-color: #ff7300;
-    color: white;
-    font-weight: bold;
-    padding: 8px;
-    border-radius: 5px;
-    display: inline-block;
-    margin-top: 10px;
-}
-
-
    /* Ajusta todas las imágenes del carrusel al mismo tamaño */
    .img-carousel {
     height: 100vh;
