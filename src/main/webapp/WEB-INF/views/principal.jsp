@@ -12,37 +12,6 @@
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sliderinterno.css">
-        <style>
-            .property-card {
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-.property-card img {
-    width: 100%;
-    height: 280px; /* Ajusta el alto deseado */
-    object-fit: cover; /* Mantiene la proporción */
-}
-.detalles-propiedad div {
-    
-    padding: 5px 10px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-}
-            .card-img-top {
-                height: 200px;
-                object-fit: cover;
-            }
-            .price {
-                font-size: 1.2em;
-                font-weight: bold;
-                color: #28a745;
-            }
-
-        </style>
     </head>
 
     <body>
@@ -146,62 +115,82 @@
                     <p class="mb-0">Propiedades disponibles</p>
                 </div>
                 <div class="row mt-4">
-
                     <c:forEach var="propiedad" items="${propiedades}">
                         <div class="col-lg-4 col-md-6 col-sm-12 py-3">
-                            <div class="card property-card">
-
-                                <c:if test="${not empty propiedad.imagen}">
-                                    <img  src="${pageContext.request.contextPath}/${propiedad.imagen}" alt="Imagen de la propiedad" />
-                                </c:if>
-
-                                <!-- Resto de la tarjeta -->
-                                <div class="card-body">
-                                    <div class="detalles-propiedad">
-                                        <h5 class="card-title">${propiedad.direccion}</h5>
-                                        <p class="price"><strong>Precio:</strong> ${propiedad.precio}</p>
-                                        <p class="card-text"><strong>Estado:</strong> ${propiedad.estado}</p>
-                                        <a href="${pageContext.request.contextPath}/detallePropiedad?id=${propiedad.id_propiedad}" class="btn btn-primary">Ver Detalles</a>
+                                <div class=" card card-body rounded mt-3">
+                                    <c:if test="${not empty propiedad.imagen}">
+                                        <img src="${pageContext.request.contextPath}/${propiedad.imagen}" class="card-img-top" "alt="Imagen de la propiedad" />
+                                    </c:if>
+                                    <h5 class="card-title fw-semibold text-dark">${propiedad.descripcion}</h5>
+                                    <p class="card-text text-muted">${propiedad.direccion}</p>
+                                    <hr class="my-2">
+                                    <div class="row my-3">
+                                        <div class="col-6 mb-3">
+                                            <div class="d-flex flex-column align-items-center">
+                                                <i class="fas fa-home fa-lg mb-2" style="color: #ff7300"></i>
+                                                <span class="small text-muted">3 Ambientes</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="d-flex flex-column align-items-center">
+                                                <i class="fas fa-expand-arrows-alt fa-lg mb-2" style="color: #ff7300"></i>
+                                                <span class="small text-muted">60 m²</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 mt-2">
+                                            <div class="d-flex flex-column align-items-center">
+                                                <i class="fas fa-bath fa-lg mb-2" style="color: #ff7300"></i>
+                                                <span class="small text-muted">3 Baños</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 mt-2">
+                                            <div class="d-flex flex-column align-items-center">
+                                                <i class="fas fa-bed fa-lg mb-2" style="color: #ff7300"></i>
+                                                <span class="small text-muted">3 Dormitorios</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column align-items-end mt-3">
+                                        <p class="card-text align-self-end"><strong>Precio:</strong> ${propiedad.precio}</p>
+                                        <a href="${pageContext.request.contextPath}/detallePropiedad?id=${propiedad.id_propiedad}" class="btn" style="background-color: #ff7300">Ver Detalles</a>
                                     </div>
                                 </div>
-                            </div>
                         </div>
+                        <!-- --- ---------------------------------------------------------->
                     </c:forEach>
                 </div>
-
             </div>
+        </section>
 
-    </section>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+                crossorigin="anonymous">
+        </script>
+        <script>
+            // Desplazamiento al hacer clic en la flecha
+            document.querySelector('.scroll-down').addEventListener('click', function () {
+                window.scrollBy({top: window.innerHeight, behavior: 'smooth'});
+            });
+            // Redirección de WhatsApp
+            document.querySelector('.whatsapp-icon').addEventListener('click', function () {
+                window.open('https://wa.me/123456789', '_blank');
+            });
+            // Script para el formulario de filtrado
+            document.addEventListener('DOMContentLoaded', function () {
+                const modalidad = document.getElementById('modalidad');
+                const tipoPropiedad = document.getElementById('tipoPropiedad');
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-            crossorigin="anonymous">
-    </script>
-    <script>
-        // Desplazamiento al hacer clic en la flecha
-        document.querySelector('.scroll-down').addEventListener('click', function () {
-            window.scrollBy({top: window.innerHeight, behavior: 'smooth'});
-        });
-        // Redirección de WhatsApp
-        document.querySelector('.whatsapp-icon').addEventListener('click', function () {
-            window.open('https://wa.me/123456789', '_blank');
-        });
-        // Script para el formulario de filtrado
-        document.addEventListener('DOMContentLoaded', function () {
-            const modalidad = document.getElementById('modalidad');
-            const tipoPropiedad = document.getElementById('tipoPropiedad');
-
-            if (modalidad) {
-                modalidad.addEventListener('change', function () {
-                    console.log('Modalidad cambiada:', this.value);
-                });
-            }
-            if (tipoPropiedad) {
-                tipoPropiedad.addEventListener('change', function () {
-                    console.log('Tipo de propiedad cambiado:', this.value);
-                });
-            }
-        });
-    </script>
-</body>
+                if (modalidad) {
+                    modalidad.addEventListener('change', function () {
+                        console.log('Modalidad cambiada:', this.value);
+                    });
+                }
+                if (tipoPropiedad) {
+                    tipoPropiedad.addEventListener('change', function () {
+                        console.log('Tipo de propiedad cambiado:', this.value);
+                    });
+                }
+            });
+        </script>
+    </body>
 </html>
