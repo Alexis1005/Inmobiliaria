@@ -50,27 +50,27 @@
                 <div class="busqueda position-absolute top-0 start-50 translate-middle-x mt-3 d-flex
                      flex-column align-items-center w-100" style="z-index: 10;">
                     <h1 class="animated-title mb-2" style="color: #eff4f4">Encuentra tu lugar ideal</h2>
-                    <form id="filtroForm" action="${pageContext.request.contextPath}/filtrarPropiedades" method="get" target="_blank">
-                        <div class="d-flex flex-wrap justify-content-center align-items-center mt-2">
-                            <div class="me-2">
-                                <select id="modalidad" name="modalidad" class="form-select navegacion">
-                                    <option value="" disabled selected>MODALIDAD</option>
-                                    <option value="venta">Venta</option>
-                                    <option value="alquiler">Alquiler</option>
-                                    <option value="alquiler">Arrendamiento</option>
-                                </select>
+                        <form id="filtroForm" action="${pageContext.request.contextPath}/filtrarPropiedades" method="get" target="_blank">
+                            <div class="d-flex flex-wrap justify-content-center align-items-center mt-2">
+                                <div class="me-2">
+                                    <select id="modalidad" name="modalidad" class="form-select navegacion">
+                                        <option value="" disabled selected>MODALIDAD</option>
+                                        <option value="venta">Venta</option>
+                                        <option value="alquiler">Alquiler</option>
+                                        <option value="alquiler">Arrendamiento</option>
+                                    </select>
+                                </div>
+                                <div class="me-2">
+                                    <select id="idTipo" name="idTipo" class="form-select navegacion">
+                                        <option value="" disabled selected>TIPO DE PROPIEDAD</option>
+                                        <c:forEach var="tipo" items="${tiposPropiedad}">
+                                            <option value="${tipo.id_tipo}">${tipo.nombre}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-success">Buscar</button>
                             </div>
-                            <div class="me-2">
-                                <select id="idTipo" name="idTipo" class="form-select navegacion">
-                                    <option value="" disabled selected>TIPO DE PROPIEDAD</option>
-                                    <c:forEach var="tipo" items="${tiposPropiedad}">
-                                    <option value="${tipo.id_tipo}">${tipo.nombre}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-success">Buscar</button>
-                        </div>
-                    </form>
+                        </form>
                 </div>
 
                 <!-- Menú desplegable (Derecha en escritorio, arriba en móviles) -->
