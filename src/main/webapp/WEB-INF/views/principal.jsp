@@ -10,8 +10,9 @@
         <!-- Bootstrap CSS con el hash corregido -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sliderinterno.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sliderinterno.css">
+
     </head>
 
     <body>
@@ -42,28 +43,29 @@
 
                 <!-- Logo (Izquierda en escritorio, centrado en móviles) -->
                 <a class="navbar-brand position-relative">
-                    <img src="${pageContext.request.contextPath}/imagenes/logo.png" class="logo_nav img-fluid" alt="alt"/> 
+                    <img src="${pageContext.request.contextPath}/imagenes/logo.png" class="logo_nav img-fluid"  style="height: 11rem" alt="alt"/> 
                 </a>
 
                 <!-- Buscador (Centrado en Desktop, Abajo en Móvil) -->
                 <div class="busqueda position-absolute top-0 start-50 translate-middle-x mt-3 d-flex
                      flex-column align-items-center w-100" style="z-index: 10;">
-                    <p class="text-center fs-5 text-white">Encuentra tu lugar ideal</p>
+                    <h1 class="animated-title mb-2" style="color: #eff4f4">Encuentra tu lugar ideal</h2>
                     <form id="filtroForm" action="${pageContext.request.contextPath}/filtrarPropiedades" method="get" target="_blank">
-                        <div class="d-flex flex-wrap justify-content-center align-items-center">
+                        <div class="d-flex flex-wrap justify-content-center align-items-center mt-2">
                             <div class="me-2">
-                                <select id="modalidad" name="modalidad" class="form-select">
+                                <select id="modalidad" name="modalidad" class="form-select navegacion">
                                     <option value="" disabled selected>MODALIDAD</option>
                                     <option value="venta">Venta</option>
                                     <option value="alquiler">Alquiler</option>
+                                    <option value="alquiler">Arrendamiento</option>
                                 </select>
                             </div>
                             <div class="me-2">
-                                <select id="tipoPropiedad" name="tipoPropiedad" class="form-select">
+                                <select id="idTipo" name="idTipo" class="form-select navegacion">
                                     <option value="" disabled selected>TIPO DE PROPIEDAD</option>
-                                    <option value="Casa">Casa</option>
-                                    <option value="Departamento">Departamento</option>
-                                    <option value="Terreno">Terreno</option>
+                                    <c:forEach var="tipo" items="${tiposPropiedad}">
+                                    <option value="${tipo.id_tipo}">${tipo.nombre}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-success">Buscar</button>
@@ -109,58 +111,62 @@
             <i class="fab fa-whatsapp fa-2x bg-success text-light p-3 rounded-circle shadow"></i>
         </div>
 
-        <section>
-            <div class="container">
-                <div class="text-center bg-success text-white py-3 fs-4">
-                    <p class="mb-0">Propiedades disponibles</p>
-                </div>
-                <div class="row mt-4">
-                    <c:forEach var="propiedad" items="${propiedades}">
-                        <div class="col-lg-4 col-md-6 col-sm-12 py-3">
-                                <div class=" card card-body rounded mt-3">
-                                    <c:if test="${not empty propiedad.imagen}">
-                                        <img src="${pageContext.request.contextPath}/${propiedad.imagen}" class="card-img-top" "alt="Imagen de la propiedad" />
-                                    </c:if>
-                                    <h5 class="card-title fw-semibold text-dark">${propiedad.descripcion}</h5>
-                                    <p class="card-text text-muted">${propiedad.direccion}</p>
-                                    <hr class="my-2">
-                                    <div class="row my-3">
-                                        <div class="col-6 mb-3">
-                                            <div class="d-flex flex-column align-items-center">
-                                                <i class="fas fa-home fa-lg mb-2" style="color: #ff7300"></i>
-                                                <span class="small text-muted">3 Ambientes</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="d-flex flex-column align-items-center">
-                                                <i class="fas fa-expand-arrows-alt fa-lg mb-2" style="color: #ff7300"></i>
-                                                <span class="small text-muted">60 m²</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 mt-2">
-                                            <div class="d-flex flex-column align-items-center">
-                                                <i class="fas fa-bath fa-lg mb-2" style="color: #ff7300"></i>
-                                                <span class="small text-muted">3 Baños</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 mt-2">
-                                            <div class="d-flex flex-column align-items-center">
-                                                <i class="fas fa-bed fa-lg mb-2" style="color: #ff7300"></i>
-                                                <span class="small text-muted">3 Dormitorios</span>
-                                            </div>
+
+
+
+        <div class="container">
+            <div class="text-center bg-success text-white py-3 fs-4">
+                <p class="mb-0">Propiedades disponibles</p>
+            </div>
+            <div class="row row-cols-1 row-cols-md-3 g-4 my-4">
+                <c:forEach var="propiedad" items="${propiedades}">
+                    <div class="col">
+                        <div class="card tarjeta shadow">
+                            <c:if test="${not empty propiedad.imagen}">
+                                <img src="${pageContext.request.contextPath}/${propiedad.imagen}" class="card-img-top" style="height: 200px; object-fit: cover" alt="Imagen de la propiedad" />
+                            </c:if>
+                            <div class="card-body">
+                                <h5 class="card-title text-start fw-semibold text-dark">${propiedad.descripcion}</h5>
+                                <p class="card-text text-start text-muted">${propiedad.direccion}</p>
+                                <hr class="my-2"style="color: #ff7300">
+                                <div class="row my-3">
+                                    <div class="col-6 mb-3">
+                                        <div class="d-flex flex-column align-items-center my-3">
+                                            <i class="fas fa-home fa-lg mb-2" style="color: #ff7300"></i>
+                                            <span class="small text-muted">3 Ambientes</span>
                                         </div>
                                     </div>
-                                    <div class="d-flex flex-column align-items-end mt-3">
-                                        <p class="card-text align-self-end"><strong>Precio:</strong> ${propiedad.precio}</p>
-                                        <a href="${pageContext.request.contextPath}/detallePropiedad?id=${propiedad.id_propiedad}" class="btn" style="background-color: #ff7300">Ver Detalles</a>
+                                    <div class="col-6 mb-3">
+                                        <div class="d-flex flex-column align-items-center my-3">
+                                            <i class="fas fa-expand-arrows-alt fa-lg mb-2" style="color: #ff7300"></i>
+                                            <span class="small text-muted">60 m²</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="d-flex flex-column align-items-center">
+                                            <i class="fas fa-bath fa-lg mb-2" style="color: #ff7300"></i>
+                                            <span class="small text-muted">3 Baños</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="d-flex flex-column align-items-center">
+                                            <i class="fas fa-bed fa-lg mb-2" style="color: #ff7300"></i>
+                                            <span class="small text-muted">3 Dormitorios</span>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="d-flex flex-column align-items-end mt-1">
+                                    <p class="card-text" style="color: #ff7300"><strong>${propiedad.precio}</strong></p>
+                                    <button class="btn btn-custom text-light fw-bold" onclick="window.location.href = '${pageContext.request.contextPath}/detallePropiedad?id=${propiedad.id_propiedad}'" style="background-color: #ff7300">
+                                        Ver Detalles <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <!-- --- ---------------------------------------------------------->
-                    </c:forEach>
-                </div>
+                    </div>
+                </c:forEach>
             </div>
-        </section>
+        </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
