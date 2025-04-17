@@ -1,122 +1,151 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Propiedades en Cards</title>
-        <!-- Bootstrap CSS -->
+        <meta charset="UTF-8">
+        <title>Propiedades</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="/CSS/card.css">
-
         <style>
             .property-card {
                 border-radius: 10px;
-                overflow: hidden;
-                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            }
-            .property-card img {
-                width: 100%;
-                height: 280px; /* Ajusta el alto deseado */
-                object-fit: cover; /* Mantiene la proporción */
-            }
-            .detalles-propiedad div {
-
-                padding: 5px 10px;
-                border-radius: 5px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 5px;
-            }
-            .card-img-top {
-                height: 200px;
-                object-fit: cover;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+                padding: 10px;
+                min-height: 400px;
             }
             .price {
-                font-size: 1.2em;
+                color: green;
                 font-weight: bold;
-                color: #28a745;
             }
-
         </style>
     </head>
-
-    <body>
-        <nav class="nav nav-pills nav-fill bg-success">
-            <a class="nav-link fs-4 m-2 border border-2 border-light rounded" style="color: whitesmoke;" aria-current="page"
-               href="adminAgregar.jsp">Agregar propiedad</a>
-            <a class="nav-link fs-4 m-2 border border-2 border-light rounded" style="color: whitesmoke;"
-               href="adminVer.jsp">Ver propiedades</a>
-            <a class="nav-link fs-4 m-2 border border-2 border-light rounded" style="color: whitesmoke;"
-               href="adminEditar.jsp">Editar propiedades</a>
-        </nav>
+    <body class="bg-light">
 
         <div class="container mt-4">
-            <div class="card shadow">
-                <div class="card-body">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label fw-bold">Tipo de propiedad</label>
-                            <select class="form-select">
-                                <option selected disabled>Seleccione...</option>
-                                <option value="casa">Casa</option>
-                                <option value="depto">Departamento</option>
-                                <option value="campo">Campo</option>
-                                <option value="terreno">Terreno</option>
-                                <option value="galpon">Galpón</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label class="form-label fw-bold">Estado</label>
-                            <select class="form-select">
-                                <option selected disabled>Seleccione...</option>
-                                <option value="venta">Venta</option>
-                                <option value="alquiler">Alquiler</option>
-                                <option value="alquiler">Arrendamiento</option>
-                                <option value="vendido">Vendido</option>
-                                <option value="alquilado">Alquilado</option>
-                            </select>
-                        </div>
+            
+            <form class="mb-4" action="editarPropiedad" method="get">
+                <div class="row g-2">
+                    <div class="col-md-5">
+                        <select class="form-select" name="tipo">
+                            <option value="">Tipo de propiedad...</option>
+                            <option value="casa">Casa</option>
+                            <option value="departamento">Departamento</option>
+                        </select>
                     </div>
-
-                    <div class="mt-4 text-end">
-                        <button class="btn btn-success px-4">Buscar</button>
-                        <button class="btn btn-outline-secondary px-4">Limpiar</button>
+                    <div class="col-md-5">
+                        <select class="form-select" name="estado">
+                            <option value="">Estado...</option>
+                            <option value="disponible">Disponible</option>
+                            <option value="vendido">Vendido</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-success">Buscar</button>
+                        <a href="editarPropiedad" class="btn btn-secondary">Limpiar</a>
                     </div>
                 </div>
-            </div>
+            </form>
 
-            <!-- Cards de propiedades -->
-            <div class="row g-3">
-                     <c:forEach var="propiedad" items="${propiedades}">
-                        <div class="col-lg-4 col-md-6 col-sm-12 py-3">
-                            <div class="card property-card">
+            <!-- Cards -->
+            <div class="row">
+                <c:forEach var="prop" items="${listaPropiedades}">
+                    <div class="col-md-4">
+                        <div class="card mb-4 property-card">
+                            <img  src="${pageContext.request.contextPath}/${prop.imagen}" alt="Imagen de la propiedad" />
+                            <div class="card-body">
+                                <h5 class="card-title">${prop.direccion}</h5>
+                                <p class="card-text">${prop.descripcion}</p>
+                                <p class="card-text price">$${prop.precio}</p>
+                                <p class="card-text"><strong>Modalidad:</strong> ${prop.modalidad}</p>
+                                <p class="card-text"><strong>Estado:</strong> ${prop.estado}</p>
 
-                                <c:if test="${not empty propiedad.imagen}">
-                                    <img  src="${pageContext.request.contextPath}/${propiedad.imagen}" alt="Imagen de la propiedad" />
-                                </c:if>
-
-                                <!-- Resto de la tarjeta -->
-                                <div class="card-body">
-                                    <div class="detalles-propiedad">
-                                        <h5 class="card-title">${propiedad.direccion}</h5>
-                                        <p class="price"><strong>Precio:</strong> ${propiedad.precio}</p>
-                                        <p class="card-text"><strong>Estado:</strong> ${propiedad.estado}</p>
-                                        <a href="${pageContext.request.contextPath}/detallePropiedad?id=${propiedad.id_propiedad}" class="btn btn-primary">Ver Detalles</a>
-                                    </div>
-                                </div>
+                                <button class="btn btn-primary editar-btn"
+                                        data-id="${prop.id_propiedad}"
+                                        data-direccion="${fn:escapeXml(prop.direccion)}"
+                                        data-descripcion="${fn:escapeXml(prop.descripcion)}"
+                                        data-precio="${prop.precio}"
+                                        data-modalidad="${prop.modalidad}"
+                                        data-estado="${prop.estado}">
+                                    Editar
+                                </button>
                             </div>
                         </div>
-                    </c:forEach>
+                    </div>
+                </c:forEach>
+
             </div>
         </div>
 
-        <!-- Fila para las cards -->
-        <!-- Bootstrap JS (opcional) -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+        <!-- Modal de edición -->
+        <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <form class="modal-content" method="post" action="editarPropiedad" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editarModalLabel">Editar Propiedad</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="editar-id">
+                        <div class="mb-3">
+                            <label for="editar-direccion" class="form-label">Dirección</label>
+                            <input type="text" class="form-control" name="direccion" id="editar-direccion">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editar-descripcion" class="form-label">Descripción</label>
+                            <textarea class="form-control" name="descripcion" id="editar-descripcion"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editar-precio" class="form-label">Precio</label>
+                            <input type="number" class="form-control" name="precio" id="editar-precio">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editar-modalidad" class="form-label">Modalidad</label>
+                            <select class="form-select" name="modalidad" id="editar-modalidad">
+                                <option value="venta">Venta</option>
+                                <option value="alquilar">Alquilar</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editar-estado" class="form-label">Estado</label>
+                            <select class="form-select" name="estado" id="editar-estado">
+                                <option value="disponible">Disponible</option>
+                                <option value="vendido">Vendido</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editar-imagen" class="form-label">Imagen</label>
+                            <input type="file" class="form-control" name="imagen" id="editar-imagen">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
+        <!-- Bootstrap JS y Script para llenar el modal -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            const editarModal = new bootstrap.Modal(document.getElementById('editarModal'));
+
+            document.querySelectorAll('.editar-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.getElementById('editar-id').value = btn.dataset.id;
+                    document.getElementById('editar-direccion').value = btn.dataset.direccion;
+                    document.getElementById('editar-descripcion').value = btn.dataset.descripcion;
+                    document.getElementById('editar-precio').value = btn.dataset.precio;
+                    document.getElementById('editar-modalidad').value = btn.dataset.modalidad;
+                    document.getElementById('editar-estado').value = btn.dataset.estado;
+
+                    
+                    editarModal.show();
+                });
+            });
+        </script>
+
+    </body>
 </html>
