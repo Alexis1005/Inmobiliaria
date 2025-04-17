@@ -96,12 +96,29 @@ nav.navbar {
 }
 
 .bordecito {
-    transition: border-bottom 0.3s ease;
+    position: relative;
+    display: inline-block;
+    color: #fff; /* o el color que quieras */
+    text-decoration: none;
 }
 
-.bordecito:hover{
-    border-bottom: 1px solid #75bf7a;
+.bordecito::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    height: 2px;
+    width: 0;
+    background-color: #fff; /* o el color que quieras */
+    transition: width 0.3s ease;
+    transform: translateX(-50%);
 }
+
+.bordecito:hover::after {
+    width: 70%; /* o el porcentaje/píxeles que quieras */
+}
+
+
 
 .img {
     width: 100%;
