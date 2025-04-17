@@ -56,7 +56,7 @@
                         <div class="d-flex flex-column flex-md-row align-items-center gap-1 selectores">
                             <!-- Modalidad -->
                             <div class="d-flex align-items-center justify-content-center" style="min-width: 200px">
-                                <select id="modalidad" name="modalidad" class="form-select navegacion">
+                                <select id="modalidad" name="modalidad" class="form-select navegacion w-100">
                                     <option value="" disabled selected>MODALIDAD</option>
                                     <option value="venta">Venta</option>
                                     <option value="alquiler">Alquiler</option>
@@ -65,7 +65,7 @@
                             </div>
                             <!-- Tipo de propiedad -->
                             <div class="d-flex align-items-center justify-content-center" style="min-width: 200px;">
-                                <select id="idTipo" name="idTipo" class="form-select navegacion">
+                                <select id="idTipo" name="idTipo" class="form-select navegacion w-100">
                                     <option value="" disabled selected>TIPO DE PROPIEDAD</option>
                                     <c:forEach var="tipo" items="${tiposPropiedad}">
                                         <option value="${tipo.id_tipo}">${tipo.nombre}</option>
@@ -110,7 +110,7 @@
         </div>
 
         <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 100;">
-            <div class="whatsapp-icon p-2 shadow" style="background-color: #25D366;">
+            <div class="social-icons whatsapp-icon p-2 shadow" style="background-color: #25D366;">
                 <i class="fab fa-whatsapp text-light fa-3x"></i>
             </div>
         </div>

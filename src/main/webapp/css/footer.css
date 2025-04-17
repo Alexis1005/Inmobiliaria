@@ -9,10 +9,13 @@
     padding-bottom: 40px; /* Añadido para asegurar que haya espacio al final */
 }
 
+.contenedorGeneral{
+    max-height: 160px ;
+}
 /* Estilos para el aviso legal */
 .aviso-legal {
     position: relative;
-    top: 100px; /* Se movió más abajo en pantallas grandes */
+    top: 30px; /* Se movió más abajo en pantallas grandes */
     max-width: 100%;
     width: 100%;
     text-align: justify;
@@ -36,7 +39,7 @@
     display: flex;
     justify-content: center;
     gap: 25px; /* espacio entre iconos */
-    margin-bottom: 20px;
+
     position: absolute;
     top: 30px; /* ubicacion fija */
     left: 50%;
@@ -51,7 +54,7 @@
 
 /* Estilos para el logo */
 .footer-logo {
-    max-width: 225px; /* tamaño maximo */
+    max-width: 220px; /* tamaño maximo */
     height: auto;
     margin-top: -20px; /* Ajustado para subir el logo un poco más */
     filter: drop-shadow(10px 10px 6px rgba(0, 0, 0, 0.61)); /* sombra para dar relieve */
