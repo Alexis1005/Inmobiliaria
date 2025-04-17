@@ -1,43 +1,107 @@
+
 nav.navbar {
-  position: relative;
+    position: relative;
+}
+.scroll-down{
+    position: absolute;
+    margin: auto;
+    right: 50%;
+    height: 60px;
+    width: 60px;
+    z-index: 100;
+    bottom: 2.5%;
+    padding: 1%;
+    border: 4px solid white;
+    opacity: 0.8;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.scroll-down:hover{
+    opacity: 1;
 }
 
+.titulo, .subtitulo{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 2px;
+    text-shadow: 5px 5px 3px rgba(0,0,0,0.4); /* Opcional: efecto sutil */
+}
 .navbar-toggler {
-  transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
 }
 
 .navbar-toggler:hover {
-  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.05);
-  transform: scale(1.05);
+    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.05);
+    transform: scale(1.05);
 }
 
-.navbar-toggler:focus {
-  outline: none;
-  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0);
+.btn-custom {
+    background-color: rgb(119, 221, 109) !important;
+    transition: all 0.3s ease;
+}
+
+/* Efecto hover */
+.btn-custom:hover {
+    background-color: #4CAF50 !important; /* Verde más oscuro */
+    transform: translateY(-2px); /* Efecto de levitación opcional */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra opcional */
+}
+
+.detalle{
+    transition: all 0.3s ease-in;
+}
+.detalle:hover{
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+
+.whatsapp-icon {
+    opacity: 0.8;
+    transition: all 0.3s;
+    border-radius: 50%;
+}
+.whatsapp-icon:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(37, 211, 102, 0.7);
+    opacity: 1;
+    cursor: pointer;
+}
+
+.tarjeta{
+    transition: 0.3s transform ease-in-out;
+}
+
+.tarjeta:hover{
+    transform: scale(1.05);
 }
 
 /* Cambiar el color del ícono cuando el botón está expandido */
-.navbar-toggler[aria-expanded="true"] i {
-  color: rgb(119, 221, 109) !important;
-  transition: color 0.3s ease;
+.navbar-toggler:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0);
 }
+.navbar-toggler[aria-expanded="true"] i {
+    color: rgb(119, 221, 109) !important;
+    transition: color 0.3s ease;
+}
+
+.navbar-collapse{
+    background-color: rgba(76, 175, 80, 0.7);
+    height: auto;
+    width: 250px;
+    border-radius: 0.25rem;
+    z-index: 10000;
+}
+
 .bordecito {
-  transition: border-bottom 0.3s ease;
+    transition: border-bottom 0.3s ease;
 }
 
 .bordecito:hover{
-  border-bottom: 1px solid #75bf7a;
+    border-bottom: 1px solid #75bf7a;
 }
-
-
-.btn {
-    background-color: rgb(75, 218, 75);
-    color: white;
-}
-
-
-
-
 
 .img {
     width: 100%;
@@ -59,7 +123,7 @@ nav.navbar {
 }
 
 .detalles-propiedad div {
-    
+
     padding: 5px 10px;
     border-radius: 5px;
     display: flex;
@@ -68,46 +132,46 @@ nav.navbar {
     gap: 5px;
 }
 
-.card {
-    background-color: #ff7300;
-    color: white;
-    font-weight: bold;
-    padding: 8px;
-    border-radius: 5px;
-    display: inline-block;
-    margin-top: 10px;
-}
-
-
-   /* Ajusta todas las imágenes del carrusel al mismo tamaño */
-   .img-carousel {
+/* Ajusta todas las imágenes del carrusel al mismo tamaño */
+.img-carousel {
     height: 100vh;
     object-fit: cover;
-  }
-
- @media (max-width: 768px) {
-    .busqueda {
-        position: relative !important; /* Cambia a posición normal en móviles */
-        top: auto;
-        transform: none;
-        width: 90%;
-        margin-top: 60px; /* Separa del logo */
-    }
-    .busqueda form .d-flex {
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-    
 }
 
-  .busqueda form .me-2 {
-    width: 100%;
-  }
+.navegacion {
+    width: 11rem; /* Ocupa todo el ancho del contenedor */
+    font-size: 14px;
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    padding: 8px 30px 8px 15px;/* Mantiene el padding para mejor apariencia */
+}
 
-  .busqueda form .btn {
+@media (max-width: 768px) {
+    .navegacion {
+        font-size: 16px; /* Aumentar tamaño en móviles */
+    }
+    .busqueda {
+        top: 100%;
+        position: relative;
+        left: auto;
+        transform: none;
+        margin: 0 auto;
+        padding: 0 15px;
+    }
+    .busqueda form .d-flex {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+}
+
+.busqueda form .me-2 {
     width: 100%;
-  }
-  
+}
+
+.busqueda form .btn {
+    width: 100%;
+}
 
 
