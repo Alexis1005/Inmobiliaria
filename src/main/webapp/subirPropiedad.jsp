@@ -14,122 +14,19 @@
         <title>Panel Administrador - Agregar Propiedad</title>
     </head>
 
-    <!-- 
-    <nav class="nav nav-pills nav-fill bg-success">
-            <a class="nav-link fs-4 m-2 border border-2 border-light rounded text-white"
-               href="/inmobiliaria/propiedadesController?accion=mostrarFormulario">Agregar propiedad</a>
-            <a class="nav-link fs-4 m-2 border border-2 border-light rounded text-white"
-               href="adminVer.jsp">Ver propiedades</a>
-            <a class="nav-link fs-4 m-2 border border-2 border-light rounded text-white"
-               href="adminEditar.jsp">Editar propiedades</a>
-        </nav>
-
-        <div class="container">
-    <c:if test="${not empty mensaje}">
-        <div class="alert alert-danger mt-3" role="alert">
-        ${mensaje}
-    </div>
-    </c:if>
-    <form action="/inmobiliaria/propiedadesController" method="post">
-        <a href="adminAgregar.jsp"></a>
-
-        <div class="text-center p-3 border border-light rounded col-md-6 m-auto">
-            <h4>Seleccione las imágenes</h4>
-            <input type="file" class="form-control mt-2" id="uploadImage" name="imagenes" accept="image/*" multiple>
-        </div>    
-
-        <form action="/inmobiliaria/propiedadesController" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="accion" value="insertar">
-            <input type="hidden" name="id_agente" value="1">
-
-            <div class="text-center p-3 border border-light rounded col-md-6 m-auto">
-                <h4>Seleccione las imágenes</h4>
-                <input type="file" class="form-control mt-2" id="uploadImage" name="imagenes[]" accept="image/*" multiple>
-            </div>
-
-            <div class="row justify-content-center align-items-center">
-                <div class="col-md-6 mb-3">
-                    <label class="fs-4" for="tipo">Tipo de propiedad</label>
-                    <select class="form-select" id="tipo" name="id_tipo" required>
-                        <option selected disabled>Seleccione el tipo</option>
-    <c:forEach items="${tiposPropiedades}" var="tipo">
-        <option value="${tipo.id_tipo}">${tipo.nombre}</option>
-    </c:forEach>
-</select>
-</div>
-<div class="col-md-6 mb-3">
-<label class="fs-4" for="modalidad">Modalidad</label>
-<select class="form-select" id="modalidad" name="modalidad" required>
-    <option selected disabled>Seleccione la modalidad</option>
-    <c:forEach items="${modalidades}" var="modalidad">
-        <option value="${modalidad}">${modalidad}</option>
-    </c:forEach>
-</select>
-</div>
-</div>
-<div class="row justify-content-center align-items-center">
-<div class="col-md-6 mb-3">
-<label for="titulo" class="fs-4">Título</label>
-<input type="text" class="form-control" id="titulo" name="descripcion" placeholder="Título de la propiedad" required>
-</div>
-<div class="col-md-6 mb-3">
-<label for="ubicacion" class="fs-4">Ubicación</label>
-<input type="text" id="ubicacion" class="form-control" name="direccion" placeholder="Ciudad, Provincia" required>
-</div>
-</div>
-<div class="row justify-content-center align-items-center">
-<div class="col-md-6 mb-3">
-<label for="descripcion_general" class="fs-4">Descripción General</label>
-<textarea class="form-control" id="descripcion_general" name="descripcion_general" placeholder="Agregue toda la información necesaria"></textarea>
-</div>
-<div class="col-md-6 mb-3">
-<label for="estado" class="fs-4">Estado de la propiedad</label>
-<select class="form-select" id="estado" name="estado" required>
-    <option selected disabled>Seleccione el estado</option>
-    <c:forEach items="${estados}" var="estado">
-        <option value="${estado}">${estado}</option>
-    </c:forEach>
-</select>
-</div>
-</div>
-<div class="row justify-content-start">
-<div class="col-md-6 mb-3">
-<label for="precio" class="fs-4">Precio</label>
-<input type="number" step="0.01" id="precio" class="form-control" name="precio" required>
-</div>
-</div>
-<div class="row justify-content-center">
-<button type="submit" class="btn btn-success mt-3 mb-3" style="width: 80%;">Agregar propiedad</button>
-</div>
-</form>
-</div>
-
-    -->
-
-
-
-
-
     <body>
         <nav class="nav nav-pills nav-fill bg-success">
             <a class="nav-link fs-4 m-2 border border-2 border-light rounded text-white"
-               href="/inmobiliaria/propiedadesController?accion=mostrarFormulario">Agregar propiedad</a>
-            <a class="nav-link fs-4 m-2 border border-2 border-light rounded text-white"
                href="adminVer.jsp">Ver propiedades</a>
             <a class="nav-link fs-4 m-2 border border-2 border-light rounded text-white"
-               href="editarPropiedad.jsp">Editar propiedades</a>
+               href="editarPropiedad">Editar propiedades</a>
         </nav>
 
 
         <div class="container">
             <h2 class="text-center mt-4 text-success" >Agregando propiedad</h2>
             <hr class="bg-success mb-4">   
-            
-            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editarModal" 
-                    onclick="cargarDatosPropiedad('${propiedad.id_propiedad}', '${propiedad.direccion}', '${propiedad.precio}', '${propiedad.estado}', '${propiedad.caracteristicasGenerales}', '${propiedad.imagen}')">
-                Editar
-            </button> 
-            
+                        
             <form action="${pageContext.request.contextPath}/subirPropiedad" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="descripcion" class="form-label fw-bold">Título de la propiedad</label>
