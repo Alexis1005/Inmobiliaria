@@ -1,0 +1,147 @@
+/* Estilos generales para el footer */
+.footer {
+    background-color: #138a0f !important; /* color verde fuerte */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: auto;
+    padding-bottom: 40px; /* Añadido para asegurar que haya espacio al final */
+}
+
+/* Estilos para el aviso legal */
+.aviso-legal {
+    position: relative;
+    top: 100px; /* Se movió más abajo en pantallas grandes */
+    max-width: 100%;
+    width: 100%;
+    text-align: justify;
+    white-space: normal; /* evita desbordes*/
+    line-height: 1.5; /* espacio entre lineas del aviso legal */
+    display: block;
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+
+/* Estilos para la información de contacto */
+.contact-info {
+    text-align: left; /* Alineación a la izquierda */
+    padding-right: 30px;
+    margin-bottom: 10px; /* Reducido el margen inferior */
+    top: 5px; /* Ajustado para mover la info de contacto un poco más abajo */
+}
+
+/* Estilos para los íconos de redes sociales */
+.footer .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 25px; /* espacio entre iconos */
+    margin-bottom: 20px;
+    position: absolute;
+    top: 30px; /* ubicacion fija */
+    left: 50%;
+    transform: translateX(-50%); /* lo centra horizontalmente */
+    width: 100%;
+}
+
+/* Reducir tamaño de los íconos */
+.footer .social-icons a {
+    transition: color 0.4s ease; /* leve animacion */
+}
+
+/* Estilos para el logo */
+.footer-logo {
+    max-width: 225px; /* tamaño maximo */
+    height: auto;
+    margin-top: -20px; /* Ajustado para subir el logo un poco más */
+    filter: drop-shadow(10px 10px 6px rgba(0, 0, 0, 0.61)); /* sombra para dar relieve */
+}
+
+/* Estilos para el enlace de abajo */
+.hover-link {
+    transition: color 0.4s ease;
+}
+
+.hover-link:hover {
+    color: rgba(8, 14, 32, 0.479) !important; /* Azul al pasar el puntero */
+}
+
+/* Responsive: Ajuste para pantallas pequeñas */
+@media (max-width: 768px) {
+    .footer .row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    /* el Logo aparece primero */
+    .footer-logo {
+        order: 1;
+        margin: 50px 0 5px 0;
+    }
+
+    
+
+    /* Información de contacto: se sube y se centra */
+    .contact-info {
+        order: 2; /* se posiciona antes del viso legal */
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 0;
+        position: relative;
+        top: -90px; /* mueve la info más arriba */
+    }
+
+    /* Aviso legal: se baja */
+    .aviso-legal {
+        order: 3; /* se posiciona al final */
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 10px;
+        position: relative;
+        top: 90px; /* se mueve más abajo */
+    }
+
+    /* Ajusta el espaciado del texto del aviso legal */
+    .aviso-legal p {
+        line-height: 1;
+        text-align: center;
+    }
+
+    .footer .social-icons {
+        top: 25px;
+        gap: 25px;
+    }
+}
+
+/* Responsive: Ajuste para pantallas grandes */
+.contact-info {
+    text-align: left;
+    padding-right: 12px;
+    margin-bottom: 0;
+    position: relative;
+    bottom: 20px; /* sube la info de contacto antes de la barra */
+    right: 0;
+    width: 100%;
+}
+
+
+
+.footer .social-icons {
+    top: 30px; /* sube los íconos */
+    gap: 25px;
+}
+
+/* Espaciado de la línea divisoria */
+hr {
+    margin-bottom: 10px; /* Reduce el espacio entre la línea y el contenido */
+}

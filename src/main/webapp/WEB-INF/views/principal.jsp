@@ -11,11 +11,14 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">       
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sliderinterno.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sobreNosotros.css">
 
     </head>
 
-    <body>
+    
 
         <!-- Contenedor principal con el carrusel -->
         <div class="carousel-container position-relative">
@@ -48,7 +51,7 @@
 
                 <!-- Buscador (Centrado en pantalla) -->
                 <div class="busqueda position-absolute start-50 translate-middle-x d-flex flex-column align-items-center w-100 p-0">
-                    <h1 class="titulo mb-4 text-center">Encuentra tu lugar ideal</h1>
+                    <h1 class="tituloUno mb-4 text-center">Encuentra tu lugar ideal</h1>
                     <form id="filtroForm" class="d-flex justify-content-center w-100" action="${pageContext.request.contextPath}/filtrarPropiedades" method="get" target="_blank">
                         <div class="d-flex flex-column flex-md-row align-items-center gap-1 selectores">
                             <!-- Modalidad -->
@@ -112,7 +115,7 @@
             </div>
         </div>
 
-        <div class="container-fluid p-0">
+        <div class="container-fluid p-0 mb-4">
             <div class="text-center bg-success text-white py-4 fs-4 mb-3">
                 <h2 class="subtitulo">Propiedades disponibles</h2>
             </div>
@@ -165,36 +168,37 @@
                 </c:forEach>
             </div>
         </div>
+        <jsp:include page="footer.jsp"/>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
-        crossorigin="anonymous"></script>
-    </script>
-    <script>
-                                        // Desplazamiento al hacer clic en la flecha
-                                        document.querySelector('.scroll-down').addEventListener('click', function () {
-                                            window.scrollBy({top: window.innerHeight, behavior: 'smooth'});
-                                        });
-                                        // Selecciona el contenedor en lugar del icono
-                                        document.querySelector('.whatsapp-icon').addEventListener('click', function () {
-                                            window.open('https://wa.me/5493515555555', '_blank');
-                                        });
-                                        // Script para el formulario de filtrado
-                                        document.addEventListener('DOMContentLoaded', function () {
-                                            const modalidad = document.getElementById('modalidad');
-                                            const tipoPropiedad = document.getElementById('tipoPropiedad');
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+                    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+            crossorigin="anonymous"></script>
+        </script>
+        <script>
+                                            // Desplazamiento al hacer clic en la flecha
+                                            document.querySelector('.scroll-down').addEventListener('click', function () {
+                                                window.scrollBy({top: window.innerHeight, behavior: 'smooth'});
+                                            });
+                                            // Selecciona el contenedor en lugar del icono
+                                            document.querySelector('.whatsapp-icon').addEventListener('click', function () {
+                                                window.open('https://wa.me/5493515555555', '_blank');
+                                            });
+                                            // Script para el formulario de filtrado
+                                            document.addEventListener('DOMContentLoaded', function () {
+                                                const modalidad = document.getElementById('modalidad');
+                                                const tipoPropiedad = document.getElementById('tipoPropiedad');
 
-                                            if (modalidad) {
-                                                modalidad.addEventListener('change', function () {
-                                                    console.log('Modalidad cambiada:', this.value);
-                                                });
-                                            }
-                                            if (tipoPropiedad) {
-                                                tipoPropiedad.addEventListener('change', function () {
-                                                    console.log('Tipo de propiedad cambiado:', this.value);
-                                                });
-                                            }
-                                        });
-    </script>
-</body>
+                                                if (modalidad) {
+                                                    modalidad.addEventListener('change', function () {
+                                                        console.log('Modalidad cambiada:', this.value);
+                                                    });
+                                                }
+                                                if (tipoPropiedad) {
+                                                    tipoPropiedad.addEventListener('change', function () {
+                                                        console.log('Tipo de propiedad cambiado:', this.value);
+                                                    });
+                                                }
+                                            });
+        </script>
+    
 </html>
