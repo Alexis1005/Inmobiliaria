@@ -8,8 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Moreno Inmobiliaria</title>
         <!-- Bootstrap CSS con el hash corregido -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">       
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sliderinterno.css">
@@ -51,9 +50,9 @@
                 <div class="busqueda position-absolute start-50 translate-middle-x d-flex flex-column align-items-center w-100 p-0">
                     <h1 class="titulo mb-4 text-center">Encuentra tu lugar ideal</h1>
                     <form id="filtroForm" class="d-flex justify-content-center w-100" action="${pageContext.request.contextPath}/filtrarPropiedades" method="get" target="_blank">
-                        <div class="d-flex flex-column flex-md-row align-items-center gap-3 selectores">
+                        <div class="d-flex flex-column flex-md-row align-items-center gap-1 selectores">
                             <!-- Modalidad -->
-                            <div style="min-width: 200px;">
+                            <div class="d-flex align-items-center justify-content-center" style="min-width: 200px">
                                 <select id="modalidad" name="modalidad" class="form-select navegacion">
                                     <option value="" disabled selected>MODALIDAD</option>
                                     <option value="venta">Venta</option>
@@ -62,7 +61,7 @@
                                 </select>
                             </div>
                             <!-- Tipo de propiedad -->
-                            <div style="min-width: 200px;">
+                            <div class="d-flex align-items-center justify-content-center" style="min-width: 200px;">
                                 <select id="idTipo" name="idTipo" class="form-select navegacion">
                                     <option value="" disabled selected>TIPO DE PROPIEDAD</option>
                                     <c:forEach var="tipo" items="${tiposPropiedad}">
@@ -72,7 +71,7 @@
                             </div>
                             <!-- Botón -->
                             <div>
-                                <button type="submit" class="btn btn-success navegacion px-4">Buscar</button>
+                                <button type="submit" class="btn btn-success detalle navegacion px-4">Buscar</button>
                             </div>
                         </div>
                     </form>
@@ -85,8 +84,7 @@
                         <i class="fa-solid fa-bars fa-2x hambur" style="color: whitesmoke;"></i>
                     </button>
 
-                    <div class="collapse navbar-collapse position-absolute top-100 end-0 p-3 menu-content" id="navbarNav"
-                         style="background-color: rgb(100, 96, 96); height: auto; width: 250px; border-radius: 0.25rem; z-index: 10000;">
+                    <div class="collapse navbar-collapse position-absolute top-100 end-0 p-3 menu-content" id="navbarNav">
                         <ul class="navbar-nav text-center mx-3">
                             <li class="nav-item my-3 bordecito">
                                 <a class="nav-link text-white fs-4 fw-bold" href="#">Inicio</a>
@@ -109,8 +107,8 @@
         </div>
 
         <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 100;">
-            <div class="whatsapp-icon bg-success text-light p-0 rounded-circle shadow">
-                <i class="fab fa-whatsapp fa-4x"></i>
+            <div class="whatsapp-icon p-2 shadow" style="background-color: #25D366;">
+                <i class="fab fa-whatsapp text-light fa-3x"></i>
             </div>
         </div>
 
@@ -168,35 +166,35 @@
             </div>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-                crossorigin="anonymous">
-        </script>
-        <script>
-            // Desplazamiento al hacer clic en la flecha
-            document.querySelector('.scroll-down').addEventListener('click', function () {
-                window.scrollBy({top: window.innerHeight, behavior: 'smooth'});
-            });
-            // Selecciona el contenedor en lugar del icono
-            document.querySelector('.whatsapp-icon').addEventListener('click', function () {
-                window.open('https://wa.me/5493515555555', '_blank');
-            });
-            // Script para el formulario de filtrado
-            document.addEventListener('DOMContentLoaded', function () {
-                const modalidad = document.getElementById('modalidad');
-                const tipoPropiedad = document.getElementById('tipoPropiedad');
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+        crossorigin="anonymous"></script>
+    </script>
+    <script>
+                                        // Desplazamiento al hacer clic en la flecha
+                                        document.querySelector('.scroll-down').addEventListener('click', function () {
+                                            window.scrollBy({top: window.innerHeight, behavior: 'smooth'});
+                                        });
+                                        // Selecciona el contenedor en lugar del icono
+                                        document.querySelector('.whatsapp-icon').addEventListener('click', function () {
+                                            window.open('https://wa.me/5493515555555', '_blank');
+                                        });
+                                        // Script para el formulario de filtrado
+                                        document.addEventListener('DOMContentLoaded', function () {
+                                            const modalidad = document.getElementById('modalidad');
+                                            const tipoPropiedad = document.getElementById('tipoPropiedad');
 
-                if (modalidad) {
-                    modalidad.addEventListener('change', function () {
-                        console.log('Modalidad cambiada:', this.value);
-                    });
-                }
-                if (tipoPropiedad) {
-                    tipoPropiedad.addEventListener('change', function () {
-                        console.log('Tipo de propiedad cambiado:', this.value);
-                    });
-                }
-            });
-        </script>
-    </body>
+                                            if (modalidad) {
+                                                modalidad.addEventListener('change', function () {
+                                                    console.log('Modalidad cambiada:', this.value);
+                                                });
+                                            }
+                                            if (tipoPropiedad) {
+                                                tipoPropiedad.addEventListener('change', function () {
+                                                    console.log('Tipo de propiedad cambiado:', this.value);
+                                                });
+                                            }
+                                        });
+    </script>
+</body>
 </html>
