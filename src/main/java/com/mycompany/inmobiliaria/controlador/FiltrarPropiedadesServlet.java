@@ -1,6 +1,7 @@
 package com.mycompany.inmobiliaria.controlador;
 
 
+import com.mycompany.inmobiliaria.modelo.Propiedades;
 import com.mycompany.inmobiliaria.resources.config.Conexion;
 import java.io.IOException;
 import java.sql.Connection;
@@ -30,15 +31,15 @@ public class FiltrarPropiedadesServlet extends HttpServlet {
         System.out.println("Tipo de Propiedad recibida: " + tipoPropiedad);
 
         // Obtener propiedades filtradas
-        List<Propiedad> propiedadesFiltradas = obtenerPropiedadesFiltradas(modalidad, tipoPropiedad);
+        List<Propiedades> propiedadesFiltradas = obtenerPropiedadesFiltradas(modalidad, tipoPropiedad);
 
         // Pasar resultados a la JSP
         request.setAttribute("propiedadesFiltradas", propiedadesFiltradas);
         request.getRequestDispatcher("/propiedadesFiltradas.jsp").forward(request, response);
     }
 
-    private List<Propiedad> obtenerPropiedadesFiltradas(String modalidad, String tipoPropiedad) {
-        List<Propiedad> propiedades = new ArrayList<>();
+    private List<Propiedades> obtenerPropiedadesFiltradas(String modalidad, String tipoPropiedad) {
+        List<Propiedades> propiedades = new ArrayList<>();
         StringBuilder sql = new StringBuilder(
             "SELECT p.id_propiedad, p.direccion, p.precio, p.estado, p.imagen " +
             "FROM Propiedades p " +
@@ -76,8 +77,8 @@ public class FiltrarPropiedadesServlet extends HttpServlet {
             // Ejecutar la consulta
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Propiedad propiedad = new Propiedad();
-                propiedad.setIdPropiedad(rs.getInt("id_propiedad"));
+                Propiedades propiedad = new Propiedades();
+                propiedad.setId_propiedad(rs.getInt("id_propiedad"));
                 propiedad.setDireccion(rs.getString("direccion"));
                 propiedad.setPrecio(rs.getDouble("precio"));
                 propiedad.setEstado(rs.getString("estado"));
@@ -90,25 +91,4 @@ public class FiltrarPropiedadesServlet extends HttpServlet {
         }
         return propiedades;
     }
-}
-
-// Clase auxiliar Propiedad
-class Propiedad {
-    private int idPropiedad;
-    private String direccion;
-    private double precio;
-    private String estado;
-    private String imagen;
-
-    // Getters y setters
-    public int getIdPropiedad() { return idPropiedad; }
-    public void setIdPropiedad(int idPropiedad) { this.idPropiedad = idPropiedad; }
-    public String getDireccion() { return direccion; }
-    public void setDireccion(String direccion) { this.direccion = direccion; }
-    public double getPrecio() { return precio; }
-    public void setPrecio(double precio) { this.precio = precio; }
-    public String getEstado() { return estado; }
-    public void setEstado(String estado) { this.estado = estado; }
-    public String getImagen() { return imagen; }
-    public void setImagen(String imagen) { this.imagen = imagen; }
 }
