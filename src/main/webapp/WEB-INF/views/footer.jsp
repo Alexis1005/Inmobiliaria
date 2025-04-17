@@ -16,11 +16,11 @@
                             <i class="bi bi-instagram"></i>
                         </a>
                     </div>
-    
+                    <div>
                         <a href="index.html" class="logo-container">
                             <img src="${pageContext.request.contextPath}/imagenes/logo.png" alt="Moreno Galeano" class="footer-logo">
                         </a>
-                    
+                    </div>
         
                     <!-- Aviso Legal -->
                     <div class="col-12 aviso-legal m-0 p-0">

@@ -65,7 +65,7 @@
                         </div>
                         <!-- Tipo de propiedad -->
                         <div class="d-flex align-items-center justify-content-center" style="min-width: 200px;">
-                            <select id="idTipo" name="idTipo" class="form-select navegacion w-100">
+                            <select id="tipoPropiedad" name="tipoPropiedad" class="form-select navegacion w-100">
                                 <option value="" disabled selected>TIPO DE PROPIEDAD</option>
                                 <c:forEach var="tipo" items="${tiposPropiedad}">
                                     <option value="${tipo.id_tipo}">${tipo.nombre}</option>
@@ -93,7 +93,7 @@
                             <a class="nav-link text-white fs-4 fw-bold" href="#">Inicio</a>
                         </li>
                         <li class="nav-item my-3 bordecito">
-                            <a class="nav-link text-white fs-4 fw-bold" href="#">La Empresa</a>
+                            <a class="nav-link text-white fs-4 fw-bold" href="${pageContext.request.contextPath}/sobreNosotros">La Empresa</a>
                         </li>
                         <li class="nav-item mt-3 mb-3 bordecito">
                             <a class="nav-link text-white fs-4 fw-bold" href="#">Contacto</a>

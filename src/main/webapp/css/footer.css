@@ -72,37 +72,18 @@
 /* Responsive: Ajuste para pantallas pequeñas */
 @media (max-width: 768px) {
     .footer .row {
-        display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
     }
 
-    /* el Logo aparece primero */
     .footer-logo {
         order: 1;
-        margin: 50px 0 5px 0;
+        margin: 20px 0 10px 0;
     }
 
-    
-
-    /* Información de contacto: se sube y se centra */
     .contact-info {
-        order: 2; /* se posiciona antes del viso legal */
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        margin-top: 0;
-        position: relative;
-        top: -90px; /* mueve la info más arriba */
-    }
-
-    /* Aviso legal: se baja */
-    .aviso-legal {
-        order: 3; /* se posiciona al final */
+        order: 2;
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -110,21 +91,33 @@
         justify-content: center;
         width: 100%;
         margin-top: 10px;
-        position: relative;
-        top: 90px; /* se mueve más abajo */
+        position: static; /* 👈 Eliminamos el posicionamiento forzado */
     }
 
-    /* Ajusta el espaciado del texto del aviso legal */
+    .aviso-legal {
+        order: 3;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 15px;
+        position: static; /* 👈 Igual acá */
+    }
+
     .aviso-legal p {
-        line-height: 1;
+        line-height: 1.4;
         text-align: center;
     }
 
     .footer .social-icons {
-        top: 25px;
-        gap: 25px;
+        position: static; /* 👈 Que se integre al flujo normal */
+        justify-content: center;
+        margin-bottom: 10px;
     }
 }
+
 
 /* Responsive: Ajuste para pantallas grandes */
 .contact-info {

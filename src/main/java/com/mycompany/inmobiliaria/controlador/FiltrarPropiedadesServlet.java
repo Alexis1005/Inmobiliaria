@@ -53,7 +53,7 @@ public class FiltrarPropiedadesServlet extends HttpServlet {
             params.add(modalidad.toLowerCase()); // Normalizar a minúsculas
         }
         if (tipoPropiedad != null && !tipoPropiedad.isEmpty()) {
-            sql.append(" AND tp.nombre = ?");
+            sql.append(" AND tp.id_tipo = ?");
             params.add(tipoPropiedad);
         }
 

@@ -1,46 +1,30 @@
-.contenedor {
-    background: #4eaf7631; /* color con transparencia */
-    padding: 25px; /* espacio interno */
-    border-radius: 7px; 
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
-    margin-bottom: 30px;/* espaciado entre las secciones */
-}
-
-.titulo {
-    font-family: monospace;
+.section-title {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 1.8rem;
-    font-weight: bold;
-    color: #000000b9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-weight: 600;
+    color: #1f3c2e;
     text-align: center;
-    height: 100%;
-    text-decoration: underline; 
-    text-decoration-color: #d4782c67; 
-    text-decoration-style: none; 
-    text-decoration-thickness: 5px; /* Grosor del subrayado */
+    padding: 20px;
+    text-transform: uppercase;
+    border-left: 5px solid #4CAF50;
 }
 
-.descripcion {
-    font-family:Arial, Helvetica, sans-serif;
-    font-size: 17px;
-    color: #000000;
-    line-height: 1.5; /* espaciado entre lineas */
+.section-description {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.05rem;
+    color: #333;
+    line-height: 1.7;
+    text-align: justify;
 }
 
-/* descripcion centrada solo en pantallas pequeñas */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    .contenedor {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        min-height: 200px; /* minimo de pixeles de alto del contenedor*/
+    .section-title {
+        font-size: 1.5rem;
+        padding: 15px;
     }
 
-    .titulo {
-        margin-bottom: 17px; /* espacio adicional abajo del título */
+    .section-description {
+        font-size: 1rem;
     }
 }
