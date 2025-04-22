@@ -29,9 +29,9 @@
 /* Estilos para la información de contacto */
 .contact-info {
     text-align: left; /* Alineación a la izquierda */
-    padding-right: 30px;
     margin-bottom: 10px; /* Reducido el margen inferior */
     top: 5px; /* Ajustado para mover la info de contacto un poco más abajo */
+    width: 100%;
 }
 
 /* Estilos para los íconos de redes sociales */
@@ -39,7 +39,6 @@
     display: flex;
     justify-content: center;
     gap: 25px; /* espacio entre iconos */
-
     position: absolute;
     top: 30px; /* ubicacion fija */
     left: 50%;
@@ -70,31 +69,25 @@
 }
 
 /* Responsive: Ajuste para pantallas pequeñas */
-@media (max-width: 768px) {
-    .footer .row {
+@media (max-width: 767.98px) {
+    .footer .row .contenedorGeneral{
         flex-direction: column;
         align-items: center;
         text-align: center;
     }
 
-    .footer-logo {
+    .social-icons {
         order: 1;
-        margin: 20px 0 10px 0;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+    .footer-logo {
+        order: 2;
+        max-width: 180px;
+        margin: 35px 0 20px 0;
     }
 
     .contact-info {
-        order: 2;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        margin-top: 10px;
-        position: static; /* 👈 Eliminamos el posicionamiento forzado */
-    }
-
-    .aviso-legal {
         order: 3;
         text-align: center;
         display: flex;
@@ -102,34 +95,64 @@
         align-items: center;
         justify-content: center;
         width: 100%;
-        margin-top: 15px;
-        position: static; /* 👈 Igual acá */
+        margin-top: 50px;
+    }
+
+    .aviso-legal {
+        order: 4;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin: 50px 0 25px 0!important;
+    }
+    
+    .lineaDivisoria{
+        order:5;
+        position: relative;
+        bottom: -40px;
+        margin: 15px; 
+    }
+    .derechos{
+        order: 6;
+        margin-top: 80px;
     }
 
     .aviso-legal p {
         line-height: 1.4;
-        text-align: center;
+        text-align: justify;
     }
 
-    .footer .social-icons {
-        position: static; /* 👈 Que se integre al flujo normal */
-        justify-content: center;
-        margin-bottom: 10px;
+}
+@media (max-width: 425px){
+    .aviso-legal{
+        margin: 70px 0 35px 0!important;
+    }
+    .derechos{
+        margin-top: 120px;
+        font-size: 0.7rem;
+    }
+    .lineaDivisoria{
+        bottom: -60px;
+        margin-left: 0!important;
+        margin-right: 0!important;
+        width: 100%;
     }
 }
-
-
-/* Responsive: Ajuste para pantallas grandes */
-.contact-info {
-    text-align: left;
-    padding-right: 12px;
-    margin-bottom: 0;
-    position: relative;
-    bottom: 20px; /* sube la info de contacto antes de la barra */
-    right: 0;
-    width: 100%;
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .contact-info {
+        font-size: 0.8rem;
+    }
+    .aviso-legal{
+       margin: -30px 0 25px 0 !important;
+       line-height: 1.3;
+    }
+    .contact-info{
+        margin-top: 10px;
+    }
 }
-
 
 
 .footer .social-icons {
@@ -138,6 +161,6 @@
 }
 
 /* Espaciado de la línea divisoria */
-hr {
+.lineaDivisoria{
     margin-bottom: 10px; /* Reduce el espacio entre la línea y el contenido */
 }

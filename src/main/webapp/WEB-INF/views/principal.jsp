@@ -104,13 +104,19 @@
         </div>
 
         <!-- Flecha para seguir navegando (CENTRADA DENTRO del carrusel) -->
-        <div class="scroll-down scroll m-0 p-0 d-flex align-items-center justify-content-center">
-            <i class="fa-solid fa-chevron-down fa-2x icono-scroll" style="color: white"></i>
+
+        <div class="scroll-down position-absolute bottom-0 start-50 translate-middle-x mb-3
+             rounded-circle d-flex align-items-center justify-content-center">
+
+            <!-- Ícono centrado -->
+            <i class="fa-solid fa-chevron-down fa-lg text-white"></i>
         </div>
+
+
     </div>
 
-    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 100;">
-        <div class="social-icons whatsapp-icon p-2 shadow" style="background-color: #25D366;">
+    <div class="position-fixed bottom-0 end-0 p-2" style="z-index: 100;">
+        <div class="social-icons whatsapp-icon p-2 shadow align-items-center" style="background-color: #25D366;">
             <i class="fab fa-whatsapp text-light fa-3x"></i>
         </div>
     </div>
@@ -177,30 +183,30 @@
     crossorigin="anonymous"></script>
 </script>
 <script>
-                                // Desplazamiento al hacer clic en la flecha
-                                document.querySelector('.scroll-down').addEventListener('click', function () {
-                                    window.scrollBy({top: window.innerHeight, behavior: 'smooth'});
-                                });
-                                // Selecciona el contenedor en lugar del icono
-                                document.querySelector('.whatsapp-icon').addEventListener('click', function () {
-                                    window.open('https://wa.me/5493515555555', '_blank');
-                                });
-                                // Script para el formulario de filtrado
-                                document.addEventListener('DOMContentLoaded', function () {
-                                    const modalidad = document.getElementById('modalidad');
-                                    const tipoPropiedad = document.getElementById('tipoPropiedad');
+                                        // Desplazamiento al hacer clic en la flecha
+                                        document.querySelector('.scroll-down').addEventListener('click', function () {
+                                            window.scrollBy({top: window.innerHeight, behavior: 'smooth'});
+                                        });
+                                        // Selecciona el contenedor en lugar del icono
+                                        document.querySelector('.whatsapp-icon').addEventListener('click', function () {
+                                            window.open('https://wa.me/5493515555555', '_blank');
+                                        });
+                                        // Script para el formulario de filtrado
+                                        document.addEventListener('DOMContentLoaded', function () {
+                                            const modalidad = document.getElementById('modalidad');
+                                            const tipoPropiedad = document.getElementById('tipoPropiedad');
 
-                                    if (modalidad) {
-                                        modalidad.addEventListener('change', function () {
-                                            console.log('Modalidad cambiada:', this.value);
+                                            if (modalidad) {
+                                                modalidad.addEventListener('change', function () {
+                                                    console.log('Modalidad cambiada:', this.value);
+                                                });
+                                            }
+                                            if (tipoPropiedad) {
+                                                tipoPropiedad.addEventListener('change', function () {
+                                                    console.log('Tipo de propiedad cambiado:', this.value);
+                                                });
+                                            }
                                         });
-                                    }
-                                    if (tipoPropiedad) {
-                                        tipoPropiedad.addEventListener('change', function () {
-                                            console.log('Tipo de propiedad cambiado:', this.value);
-                                        });
-                                    }
-                                });
 </script>
 
 </html>

@@ -3,18 +3,12 @@ nav.navbar {
     position: relative;
 }
 .scroll-down{
-    position: absolute;
-    margin: auto;
-    right: 50%;
-    height: 60px;
-    width: 60px;
     z-index: 100;
-    bottom: 2.5%;
-    padding: 1%;
     border: 4px solid white;
     opacity: 0.8;
-    border-radius: 50%;
     cursor: pointer;
+    width: 60px; 
+    height: 60px
 }
 .scroll-down:hover{
     opacity: 1;
@@ -61,6 +55,8 @@ nav.navbar {
     opacity: 0.8;
     transition: all 0.3s;
     border-radius: 50%;
+    height: 60px!important;
+    width: 60px!important;
 }
 .whatsapp-icon:hover {
     transform: scale(1.05);
@@ -179,6 +175,17 @@ nav.navbar {
         align-items: center;
         justify-content: center;
         gap: 10px;
+    }.scroll-down{
+        width: 40px!important;
+        height: 40px!important;
+        border: 2px solid white;
+    }
+    .whatsapp-icon{
+      width: 45px!important;  
+      height: 45px!important;  
+    }
+    .whatsapp-icon i{
+        font-size: 2.2rem;
     }
 
 }
@@ -190,6 +197,8 @@ nav.navbar {
 .busqueda form .btn {
     width: 100%;
 }
-
+.logo_nav{
+    filter: drop-shadow(10px 10px 6px rgba(0, 0, 0, 0.61));
+}
 
 
