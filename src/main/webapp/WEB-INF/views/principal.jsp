@@ -60,7 +60,7 @@
                                     <option value="arrendamiento">Arrendamiento</option>
                                 </select>
                             </div>
-                            <!-- Tipo de propiedad -->
+                            <!-- Tipo de propiedadddd -->
                             <div class="d-flex align-items-center justify-content-center" style="min-width: 200px;">
                                 <select id="idTipo" name="idTipo" class="form-select navegacion">
                                     <option value="" disabled selected>TIPO DE PROPIEDAD</option>
@@ -167,7 +167,7 @@
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
         crossorigin="anonymous"></script>
     </script>
     <script>

@@ -15,11 +15,9 @@ com\mycompany\inmobiliaria\controlador\ImagenServlet.class
 com\mycompany\inmobiliaria\modelo\dao\PropiedadesDAO.class
 com\mycompany\inmobiliaria\controlador\PrincipalServlet.class
 com\mycompany\inmobiliaria\controlador\PropiedadesServlet.class
-com\mycompany\inmobiliaria\controlador\Propiedad.class
 com\mycompany\inmobiliaria\modelo\Agente.class
 com\mycompany\inmobiliaria\modelo\Caracteristicas.class
 com\mycompany\inmobiliaria\controlador\SubirPropiedadServlet.class
 com\mycompany\inmobiliaria\modelo\TiposPropiedad.class
 com\mycompany\inmobiliaria\modelo\FotosPropiedad.class
-com\mycompany\inmobiliaria\controladores\Propiedades.class
 com\mycompany\inmobiliaria\modelo\dao\CaracteristicasDAO.class

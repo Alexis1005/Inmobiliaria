@@ -15,32 +15,31 @@ public class PropiedadesDAO {
 
     private static final Logger logger = Logger.getLogger(PropiedadesDAO.class.getName());
 
-   public int insertar(Propiedades propiedad) {
-    int idGenerado = -1;
-    try (Connection cn = Conexion.getConnection();
-         PreparedStatement ps = cn.prepareStatement(
-             "INSERT INTO Propiedades (id_tipo, id_agente, direccion, precio, descripcion, estado, modalidad, imagen, caracteristicasGenerales) " +
-             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS)) {
-        ps.setInt(1, propiedad.getId_tipo());
-        ps.setInt(2, propiedad.getId_agente());
-        ps.setString(3, propiedad.getDireccion());
-        ps.setDouble(4, propiedad.getPrecio());
-        ps.setString(5, propiedad.getDescripcion());
-        ps.setString(6, propiedad.getEstado());
-        ps.setString(7, propiedad.getModalidad());
-        ps.setString(8, propiedad.getImagen()); // Incluir el campo imagen
-        ps.setString(9, propiedad.getCaracteristicasGenerales());
-        ps.executeUpdate();
+    public int insertar(Propiedades propiedad) {
+        int idGenerado = -1;
+        try (Connection cn = Conexion.getConnection(); PreparedStatement ps = cn.prepareStatement(
+                "INSERT INTO Propiedades (id_tipo, id_agente, direccion, precio, descripcion, estado, modalidad, imagen, caracteristicasGenerales) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS)) {
+            ps.setInt(1, propiedad.getId_tipo());
+            ps.setInt(2, propiedad.getId_agente());
+            ps.setString(3, propiedad.getDireccion());
+            ps.setDouble(4, propiedad.getPrecio());
+            ps.setString(5, propiedad.getDescripcion());
+            ps.setString(6, propiedad.getEstado());
+            ps.setString(7, propiedad.getModalidad());
+            ps.setString(8, propiedad.getImagen()); // Incluir el campo imagen
+            ps.setString(9, propiedad.getCaracteristicasGenerales());
+            ps.executeUpdate();
 
-        ResultSet rs = ps.getGeneratedKeys();
-        if (rs.next()) {
-            idGenerado = rs.getInt(1);
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                idGenerado = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error al insertar propiedad: " + e.getMessage(), e);
         }
-    } catch (SQLException e) {
-        logger.log(Level.SEVERE, "Error al insertar propiedad: " + e.getMessage(), e);
+        return idGenerado;
     }
-    return idGenerado;
-}
 
     public ArrayList<Propiedades> listar(Integer idTipo, String modalidad, String modality) {
         ArrayList<Propiedades> lista = new ArrayList<>();
@@ -130,7 +129,7 @@ public class PropiedadesDAO {
             ps.setString(6, obj.getEstado());
             ps.setString(7, obj.getModalidad());
             ps.setString(8, obj.getImagen()); // Incluir el campo imagen
-            ps.setString(9,obj.getCaracteristicasGenerales());
+            ps.setString(9, obj.getCaracteristicasGenerales());
             ps.setInt(9, obj.getId_propiedad());
             result = ps.executeUpdate();
         } catch (SQLException e) {
@@ -195,6 +194,7 @@ public class PropiedadesDAO {
             throw new SQLException("Error al actualizar la imagen de la propiedad: " + e.getMessage(), e);
         }
     }
+
     // Método para obtener una propiedad por ID (necesario para la edición)
     public Propiedades obtenerPropiedadPorId(int id_propiedad) throws SQLException {
         Propiedades propiedad = null;
@@ -220,4 +220,46 @@ public class PropiedadesDAO {
         }
         return propiedad;
     }
+
+    public List<Propiedades> obtenerTodasLasPropiedades() throws SQLException {
+        List<Propiedades> lista = new ArrayList<>();
+
+        String sql = "SELECT * FROM propiedades";
+
+        try (Connection conn = Conexion.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Propiedades p = new Propiedades();
+                p.setId_propiedad(rs.getInt("id_propiedad"));
+                p.setId_tipo(rs.getInt("id_tipo"));
+                p.setId_agente(rs.getInt("id_agente"));
+                p.setDireccion(rs.getString("direccion"));
+                p.setPrecio(rs.getDouble("precio"));
+                p.setDescripcion(rs.getString("descripcion"));
+                p.setEstado(rs.getString("estado"));
+                p.setModalidad(rs.getString("modalidad"));
+                p.setImagen(rs.getString("imagen"));
+                p.setCaracteristicasGenerales(rs.getString("caracteristicasGenerales")); //posible cambio
+
+                lista.add(p);
+            }
+        }
+
+        return lista;
+    }
+
+    public void actualizarPropiedad(int id, String direccion, String descripcion, double precio) throws SQLException {
+        String sql = "UPDATE propiedades SET direccion = ?, descripcion = ?, precio = ? WHERE id_propiedad = ?";
+
+        try (Connection conn = Conexion.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, direccion);
+            stmt.setString(2, descripcion);
+            stmt.setDouble(3, precio);
+            stmt.setInt(4, id);
+
+            stmt.executeUpdate();
+        }
+    }
+
 }

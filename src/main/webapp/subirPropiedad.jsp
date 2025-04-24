@@ -1,6 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+
+<% //  Verificar si hay sesión y si el usuario está logueado
+    HttpSession sesion = request.getSession(false);
+    if (sesion == null || sesion.getAttribute("usuario") == null) {
+        response.sendRedirect("login.jsp");
+        return; // importante cortar la ejecución
+    }
+%>
+
 <html lang="es">
     <head>
         <meta charset="UTF-8">
@@ -9,8 +18,16 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
+        <nav class="nav nav-pills nav-fill bg-success">
+            <a class="nav-link fs-4 m-2 border border-2 border-light rounded" style="color: whitesmoke;" aria-current="page"
+               href="adminAgregar.jsp">Agregar propiedad</a>
+            <a class="nav-link fs-4 m-2 border border-2 border-light rounded" style="color: whitesmoke;"
+               href="adminVer.jsp">Ver propiedades</a>
+            <a class="nav-link fs-4 m-2 border border-2 border-light rounded" style="color: whitesmoke;"
+               href="editarPropiedad">Editar propiedades</a>
+        </nav>
         <div class="container mt-5">
-            <h2>Subir Nueva Propiedad</h2>
+            <h2 class="text-center mt-4 text-success">Agregando proiedad </h2>
             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editarModal" 
                     onclick="cargarDatosPropiedad('${propiedad.id_propiedad}', '${propiedad.direccion}', '${propiedad.precio}', '${propiedad.estado}', '${propiedad.caracteristicasGenerales}', '${propiedad.imagen}')">
                 Editar
@@ -44,10 +61,10 @@
                         <option value="Alquiler">Alquiler</option>
                     </select>
                 </div>
-                <!-- Tipo de Propiedad -->
+                <!-- Tipo de Propiedadddd -->
                 <div class="mb-3">
                     <label for="idTipo" class="form-label">Tipo de Propiedad</label>
-                    <select class="form-select" id="idTipo" name="idTipo" required>
+                    <select class="form-select" id="idTipo" name="id_tipo" required>
                         <option value="">Seleccione un tipo</option>
                         <c:forEach var="tipo" items="${tiposPropiedad}">
                             <option value="${tipo.id_tipo}">${tipo.nombre}</option>
@@ -115,54 +132,53 @@
             </div>
         </div>
         <!-- Modal para Editar Propiedades -->
-    <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editarModalLabel">Editar Propiedad</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="editarForm" action="${pageContext.request.contextPath}/editarPropiedad" method="post" enctype="multipart/form-data">
-                        <input type="hidden" id="editId" name="id">
-                        <div class="mb-3">
-                            <label for="editDireccion" class="form-label">Dirección</label>
-                            <input type="text" class="form-control" id="editDireccion" name="direccion" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editPrecio" class="form-label">Precio</label>
-                            <input type="number" step="0.01" class="form-control" id="editPrecio" name="precio" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editEstado" class="form-label">Estado</label>
-                            <select class="form-select" id="editEstado" name="estado" required>
-                                <option value="Disponible">Disponible</option>
-                                <option value="Alquilado">Alquilado</option>
-                                <option value="Vendido">Vendido</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editCaracteristicasGenerales" class="form-label">Características Generales</label>
-                            <textarea class="form-control" id="editCaracteristicasGenerales" name="caracteristicasGenerales" rows="5"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editImagen" class="form-label">Imagen (dejar en blanco para mantener la actual)</label>
-                            <input type="file" class="form-control" id="editImagen" name="imagen">
-                            <img id="imagenActual" src="" alt="Imagen actual" style="max-width: 200px; display: none;">
-                            <input type="hidden" id="editImagenActual" name="imagenActual">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    </form>
+        <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editarModalLabel">Editar Propiedad</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editarForm" action="${pageContext.request.contextPath}/editarPropiedad" method="post" enctype="multipart/form-data">
+                            <input type="hidden" id="editId" name="id">
+                            <div class="mb-3">
+                                <label for="editDireccion" class="form-label">Dirección</label>
+                                <input type="text" class="form-control" id="editDireccion" name="direccion" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editPrecio" class="form-label">Precio</label>
+                                <input type="number" step="0.01" class="form-control" id="editPrecio" name="precio" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editEstado" class="form-label">Estado</label>
+                                <select class="form-select" id="editEstado" name="estado" required>
+                                    <option value="Disponible">Disponible</option>
+                                    <option value="Alquilado">Alquilado</option>
+                                    <option value="Vendido">Vendido</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editCaracteristicasGenerales" class="form-label">Características Generales</label>
+                                <textarea class="form-control" id="editCaracteristicasGenerales" name="caracteristicasGenerales" rows="5"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editImagen" class="form-label">Imagen (dejar en blanco para mantener la actual)</label>
+                                <input type="file" class="form-control" id="editImagen" name="imagen">
+                                <img id="imagenActual" src="" alt="Imagen actual" style="max-width: 200px; display: none;">
+                                <input type="hidden" id="editImagenActual" name="imagenActual">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
         <!-- Scripts -->
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <script>
                             // Cargar características cuando cambie el tipo de propiedad
@@ -234,41 +250,41 @@
                                             alert('Error al agregar la característica: ' + error.message);
                                         });
                             }
-                          
-        // Script para cargar los datos de la propiedad en el modal
-        function cargarDatosPropiedad(id, direccion, precio, estado, caracteristicasGenerales, imagen) {
-            document.getElementById('editId').value = id;
-            document.getElementById('editDireccion').value = direccion;
-            document.getElementById('editPrecio').value = precio;
-            document.getElementById('editEstado').value = estado;
-            document.getElementById('editCaracteristicasGenerales').value = caracteristicasGenerales || '';
-            document.getElementById('editImagenActual').value = imagen;
-            
-            const imagenActual = document.getElementById('imagenActual');
-            if (imagen) {
-                imagenActual.src = '${pageContext.request.contextPath}/imagenes/' + imagen;
-                imagenActual.style.display = 'block';
-            } else {
-                imagenActual.style.display = 'none';
-            }
-        }
-        // Script para el formulario de filtrado
-        document.addEventListener('DOMContentLoaded', function() {
-            const modalidad = document.getElementById('modalidad');
-            const tipoPropiedad = document.getElementById('tipoPropiedad');
-            
-            if (modalidad) {
-                modalidad.addEventListener('change', function() {
-                    console.log('Modalidad cambiada:', this.value);
-                });
-            }
-            if (tipoPropiedad) {
-                tipoPropiedad.addEventListener('change', function() {
-                    console.log('Tipo de propiedad cambiado:', this.value);
-                });
-            }
-        });
-    </script>
+
+                            // Script para cargar los datos de la propiedad en el modal
+                            function cargarDatosPropiedad(id, direccion, precio, estado, caracteristicasGenerales, imagen) {
+                                document.getElementById('editId').value = id;
+                                document.getElementById('editDireccion').value = direccion;
+                                document.getElementById('editPrecio').value = precio;
+                                document.getElementById('editEstado').value = estado;
+                                document.getElementById('editCaracteristicasGenerales').value = caracteristicasGenerales || '';
+                                document.getElementById('editImagenActual').value = imagen;
+
+                                const imagenActual = document.getElementById('imagenActual');
+                                if (imagen) {
+                                    imagenActual.src = '${pageContext.request.contextPath}/imagenes/' + imagen;
+                                    imagenActual.style.display = 'block';
+                                } else {
+                                    imagenActual.style.display = 'none';
+                                }
+                            }
+                            // Script para el formulario de filtrado
+                            document.addEventListener('DOMContentLoaded', function () {
+                                const modalidad = document.getElementById('modalidad');
+                                const tipoPropiedad = document.getElementById('tipoPropiedad');
+
+                                if (modalidad) {
+                                    modalidad.addEventListener('change', function () {
+                                        console.log('Modalidad cambiada:', this.value);
+                                    });
+                                }
+                                if (tipoPropiedad) {
+                                    tipoPropiedad.addEventListener('change', function () {
+                                        console.log('Tipo de propiedad cambiado:', this.value);
+                                    });
+                                }
+                            });
         </script>
-    </body>
+    </script>
+</body>
 </html>

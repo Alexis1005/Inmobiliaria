@@ -34,7 +34,7 @@ public class CaracteristicasDAO {
 
     public List<Caracteristica> listarPorTipo(int tipoId) throws SQLException {
         List<Caracteristica> lista = new ArrayList<>();
-        String sql = "SELECT * FROM caracteristicas WHERE tipo_propiedad_id = ?";
+        String sql = "SELECT * FROM caracteristicas WHERE id_tipo = ?";
         try (Connection cn = Conexion.getConnection();
              PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setInt(1, tipoId);
@@ -44,7 +44,7 @@ public class CaracteristicasDAO {
                     obj.setId_caracteristica(rs.getInt("id_caracteristica"));
                     obj.setNombre(rs.getString("nombre"));
                     obj.setDetalle(rs.getString("detalles"));
-                    obj.setTipoPropiedadId(rs.getInt("tipo_propiedad_id"));
+                    obj.setTipoPropiedadId(rs.getInt("id_tipo"));
                     lista.add(obj);
                 }
             }

@@ -1,24 +1,24 @@
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\dao\CaracteristicasDAO.java
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controlador\CaracteristicasServlet.java
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controlador\EditarPropiedadServlet.java
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controladores\Propiedades.java
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\FotosPropiedad.java
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controlador\PrincipalServlet.java
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\Agente.java
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\dao\PropiedadesDAO.java
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\Propiedades.java
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controlador\FiltrarPropiedadesServlet.java
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\resources\config\Conexion.java
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controlador\AgregarCaracteristicaServlet.java
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controlador\DetallePropiedadServlet.java
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\dao\PropiedadesCaracteristicasDAO.java
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\Caracteristica.java
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\dao\FotosPropiedadDAO.java
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\Caracteristicas.java
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\TiposPropiedad.java
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controlador\SubirPropiedadServlet.java
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\PropiedadesCaracteristicas.java
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\dao\AgenteDAO.java
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controlador\PropiedadesServlet.java
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controlador\ImagenServlet.java
-D:\Usuarios\Ruben\Desktop\inmobiliaria BACK - copia\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\dao\TiposPropiedadDAO.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controlador\AgregarCaracteristicaServlet.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controlador\PrincipalServlet.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controlador\LoginServlet.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\dao\CaracteristicasDAO.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controlador\EditarPropiedadServlet.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\dao\PropiedadesDAO.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controlador\PropiedadesServlet.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\PropiedadesCaracteristicas.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controlador\FiltrarPropiedadesServlet.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\Agente.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\dao\AgenteDAO.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\TiposPropiedad.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controlador\DetallePropiedadServlet.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controlador\SubirPropiedadServlet.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\Caracteristica.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controlador\CaracteristicasServlet.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\controlador\ImagenServlet.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\Propiedades.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\FotosPropiedad.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\dao\PropiedadesCaracteristicasDAO.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\dao\TiposPropiedadDAO.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\Caracteristicas.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\modelo\dao\FotosPropiedadDAO.java
+C:\Users\jx\Documents\NetBeansProjects\Inmobiliaria\src\main\java\com\mycompany\inmobiliaria\resources\config\Conexion.java

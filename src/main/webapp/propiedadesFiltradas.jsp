@@ -39,7 +39,7 @@
                             <h5 class="card-title">${propiedad.direccion}</h5>
                             <p class="price">$${propiedad.precio}</p>
                             <p class="card-text"><strong>Estado:</strong> ${propiedad.estado}</p>
-                            <a href="${pageContext.request.contextPath}/detallePropiedad?id=${propiedad.idPropiedad}" class="btn btn-primary">Ver Detalles</a>
+                            <a href="${pageContext.request.contextPath}/detallePropiedad?id=${propiedad.id_propiedad}" class="btn btn-primary">Ver Detalles</a>
                         </div>
                     </div>
                 </div>
