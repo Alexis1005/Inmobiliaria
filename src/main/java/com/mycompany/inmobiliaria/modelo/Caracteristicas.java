@@ -4,25 +4,12 @@ package com.mycompany.inmobiliaria.modelo;
 
 public class Caracteristicas {
 
-    private int id_caracteristica;
-    private String nombre;
-    private String detalle;
+    int id_caracteristica;
+    String nombre;
     
     // Constructor
-    public Caracteristicas(){
-    }
-    
-    public Caracteristicas(String nombre, String detalle) {
+    public Caracteristicas(String nombre) {
         this.nombre = nombre;
-        this.detalle = detalle;
-    }
-
-    public String getDetalle() {
-        return detalle;
-    }
-
-    public void setDetalle(String detalle) {
-        this.detalle = detalle;
     }
 
     public int getId_caracteristica() {
@@ -40,7 +27,5 @@ public class Caracteristicas {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
- 
     
 }

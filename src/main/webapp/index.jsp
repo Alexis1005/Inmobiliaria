@@ -1,6 +1,9 @@
+
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
 <head>
     <title>Inmobiliaria</title>
 </head>
@@ -10,3 +13,13 @@
     <a href="${pageContext.request.contextPath}/principal">Principal</a>
 </body>
 </html>
+=======
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Inicio</title>
+    </head>
+    <body>
+        
+    </body>
+</html>
+>>>>>>> origin/andres
