@@ -116,7 +116,7 @@
     </div>
 
     <div class="position-fixed bottom-0 end-0 p-2" style="z-index: 100;">
-        <div class="social-icons whatsapp-icon p-2 shadow align-items-center" style="background-color: #25D366;">
+        <div class="social-icons whatsapp-icon p-2 align-items-center" style="background-color: #25D366;">
             <i class="fab fa-whatsapp text-light fa-3x"></i>
         </div>
     </div>
