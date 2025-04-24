@@ -1,25 +1,25 @@
+<%
+    HttpSession sesion = request.getSession(false);
+    if (sesion == null || sesion.getAttribute("usuario") == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
 
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<<<<<<< HEAD
-<head>
-    <title>Inmobiliaria</title>
-</head>
-<body>
-    <h1>Bienvenido a Inmobiliaria</h1>
-    <a href="${pageContext.request.contextPath}/subirPropiedad">Subir Propiedad</a><br>
-    <a href="${pageContext.request.contextPath}/principal">Principal</a>
-</body>
-</html>
-=======
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Inicio</title>
+        <meta charset="UTF-8">
+        <title>Inicio - Inmobiliaria</title>
     </head>
-    <body>
-        
+    <body style="background-color: #dee2e6">
+        <h1>Bienvenido a Inmobiliaria Moreno Galeano</h1>
+        <!--muestra que usuario esta logeado  -->
+        <p>Usuario: <strong><%= sesion.getAttribute("usuario") %></strong></p> 
+        <ul>
+            <li><a href="subirPropiedad.jsp">Subir Propiedad</a></li>
+            <li><a href="principal">Principal</a></li>
+            <li><a href="logout.jsp" class="btn btn-danger">Cerrar sesi?n</a></li>
+        </ul>
     </body>
 </html>
->>>>>>> origin/andres

@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 
 @WebServlet("/principal")
 public class PrincipalServlet extends HttpServlet {
+
     private static final Logger logger = Logger.getLogger(PrincipalServlet.class.getName());
     private PropiedadesDAO propiedadesDAO;
     private final TiposPropiedadDAO tiposPropiedadDAO = new TiposPropiedadDAO();
@@ -28,14 +29,16 @@ public class PrincipalServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+
         try {
             List<TiposPropiedad> tipos = tiposPropiedadDAO.ListarTiposPropiedades();
             // Obtén parámetros opcionales (puedes omitirlos si no los usas)
             Integer idTipo = request.getParameter("id_tipo") != null ? Integer.parseInt(request.getParameter("id_tipo")) : null;
             String modalidad = request.getParameter("modalidad");
 
-                // Lista las propiedades, mostrando solo las disponibles
-                List<Propiedades> listaPropiedades = propiedadesDAO.listar(idTipo, modalidad, "disponible");
+            // Lista las propiedades, mostrando solo las disponibles
+            List<Propiedades> listaPropiedades = propiedadesDAO.listar(idTipo, modalidad, "disponible");
 
             // Coloca la lista en el request
             request.setAttribute("tiposPropiedad", tipos);

@@ -90,7 +90,7 @@ public class PropiedadesDAO {
                     lista.add(obj);
                 }
             }
-            logger.info("Propiedades listadas: " + lista.size());
+            logger.log(Level.INFO, "Propiedades listadas: {0}", lista.size());
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, "Error al listar propiedades: " + ex.getMessage(), ex);
             throw new RuntimeException("Error al listar propiedades", ex);
@@ -196,6 +196,32 @@ public class PropiedadesDAO {
     }
 
     // Método para obtener una propiedad por ID (necesario para la edición)
+    public Propiedades obtenerPropiedadPorId(int id_propiedad) throws SQLException {
+        Propiedades propiedad = null;
+        String sql = "SELECT * FROM propiedades WHERE id_propiedad = ?";
+        try (Connection cn = Conexion.getConnection(); PreparedStatement ps = cn.prepareStatement(sql)) {
+            ps.setInt(1, id_propiedad);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    propiedad = new Propiedades();
+                    propiedad.setId_propiedad(rs.getInt("id_propiedad"));
+                    propiedad.setId_tipo(rs.getInt("id_tipo"));
+                    propiedad.setId_agente(rs.getInt("id_agente"));
+                    propiedad.setDireccion(rs.getString("direccion"));
+                    propiedad.setPrecio(rs.getDouble("precio"));
+                    propiedad.setDescripcion(rs.getString("descripcion"));
+                    propiedad.setEstado(rs.getString("estado"));
+                    propiedad.setModalidad(rs.getString("modalidad"));
+                    propiedad.setImagen(rs.getString("imagen")); // Usar el campo imagen de Propiedades
+                    propiedad.setCaracteristicasGenerales(rs.getString("propiedadesCaracteristicas"));
+                }
+            }
+            return propiedad;
+        }
+    }
+        
+    
+
     public List<Propiedades> obtenerTodasLasPropiedades() throws SQLException {
         List<Propiedades> lista = new ArrayList<>();
 
@@ -221,8 +247,8 @@ public class PropiedadesDAO {
         }
         return lista;
     }
-    
-     public void actualizarPropiedad(int id, String direccion, String descripcion, double precio) throws SQLException {
+
+    public void actualizarPropiedad(int id, String direccion, String descripcion, double precio) throws SQLException {
         String sql = "UPDATE propiedades SET direccion = ?, descripcion = ?, precio = ? WHERE id_propiedad = ?";
 
         try (Connection conn = Conexion.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -234,5 +260,6 @@ public class PropiedadesDAO {
 
             stmt.executeUpdate();
         }
+
     }
 }

@@ -1,6 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+
+<% //  Verificar si hay sesión y si el usuario está logueado
+    HttpSession sesion = request.getSession(false);
+    if (sesion == null || sesion.getAttribute("usuario") == null) {
+        response.sendRedirect("login.jsp");
+        return; // importante cortar la ejecución
+    }
+%>
+
 <html lang="es">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -57,7 +66,7 @@
                         <option value="Alquiler">Arrendamiento</option>
                     </select>
                 </div>
-                <!-- Tipo de Propiedad -->
+                <!-- Tipo de Propiedadddd -->
                 <div class="mb-3">
                     <label for="idTipo" class="form-label fw-bold">Tipo de Propiedad</label>
                     <select class="form-select" id="idTipo" name="idTipo" required>

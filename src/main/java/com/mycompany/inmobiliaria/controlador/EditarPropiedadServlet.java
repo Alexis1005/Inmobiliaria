@@ -23,6 +23,13 @@ public class EditarPropiedadServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        // verificación de sesión
+        if (request.getSession(false) == null || request.getSession(false).getAttribute("usuario") == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
         PropiedadesDAO propiedadesDAO = new PropiedadesDAO();
         try {
             List<Propiedades> propiedades = propiedadesDAO.obtenerTodasLasPropiedades();
@@ -36,15 +43,22 @@ public class EditarPropiedadServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        // verificación de sesión
+        if (request.getSession(false) == null || request.getSession(false).getAttribute("usuario") == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
         try {
             // Obtené los parámetros del formulario
             int id = Integer.parseInt(request.getParameter("id"));
             String direccion = request.getParameter("direccion");
             String descripcion = request.getParameter("descripcion");
             double precio = Double.parseDouble(request.getParameter("precio"));
-            
+
             PropiedadesDAO propiedadesDAO = new PropiedadesDAO();
-            
+
             // Actualizar la propiedad en la base de datos
             propiedadesDAO.actualizarPropiedad(id, direccion, descripcion, precio);
             // Redirigir a la página de edición nuevamente (o a otra)
