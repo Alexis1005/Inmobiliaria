@@ -77,4 +77,26 @@ public class TiposPropiedadDAO {
 
         return result;
     }
+
+    public TiposPropiedad obtenerPorId(int id_tipo) throws SQLException {
+        TiposPropiedad tipo = null;
+        String sql = "SELECT * FROM TiposPropiedad WHERE id_tipo = ?";
+        
+        // Usamos try-with-resources para cerrar automáticamente los recursos
+        try (Connection conn = Conexion.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id_tipo);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    tipo = new TiposPropiedad();
+                    tipo.setId_tipo(rs.getInt("id_tipo"));
+                    tipo.setNombre(rs.getString("nombre"));
+                    // Agrega otros campos según tu tabla
+                }
+            }
+        } catch (SQLException e) {
+            throw new SQLException("Error al obtener el tipo de propiedad por ID: " + id_tipo, e);
+        }
+        return tipo;
+    }
 }

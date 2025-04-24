@@ -1,72 +1,104 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <title>Detalle de Propiedad</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <style>
-            .carousel-inner img {
-                height: 400px;
-                object-fit: cover;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container mt-5">
-            <h2>Detalle de Propiedad</h2>
-            <c:if test="${not empty propiedad}">
-                <div class="card">
-                    <!-- Carrusel de fotos -->
-                    <!-- Carrusel de fotos -->
-<div id="carouselFotos" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        <c:forEach var="foto" items="${fotos}" varStatus="loop">
-            <div class="carousel-item ${loop.first ? 'active' : ''}">
-                <img src="${pageContext.request.contextPath}/imagenes/${fn:replace(foto.rutaFoto, ' ', '%20')}" class="d-block w-100" alt="Foto de la propiedad">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/carrusel.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/nav.css">
+    <title>Detalle propiedad</title>
+</head>
+<body style="background-color: #19875409;">
+    <!-- Carrusel de imágenes -->
+    <div class="container d-flex align-items-center justify-content-center">
+        <div class="section section-custom text-center w-100">
+            <div id="carouselExampleIndicators" class="carousel slide my-2 shadow-lg w-75 m-auto" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <c:forEach var="foto" items="${fotos}" varStatus="status">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${status.index}"
+                                class="${status.first ? 'active' : ''}" aria-current="${status.first ? 'true' : 'false'}"
+                                aria-label="Slide ${status.count}"></button>
+                    </c:forEach>
+                </div>
+                <div class="carousel-inner">
+                    <c:forEach var="foto" items="${fotos}" varStatus="status">
+                        <div class="carousel-item ${status.first ? 'active' : ''}">
+                            <img src="${pageContext.request.contextPath}/${foto.ruta_foto}" class="d-block w-100" alt="Foto de la propiedad">
+                        </div>
+                    </c:forEach>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-        </c:forEach>
+        </div>
     </div>
-    <!-- Controles si hay más de una foto -->
-    <c:if test="${not empty fotos and fn:length(fotos) > 1}">
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselFotos" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Anterior</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselFotos" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Siguiente</span>
-        </button>
-    </c:if>
-</div>
 
-
-                    <div class="card-body">
-                        <h5 class="card-title">${propiedad.direccion}</h5>
-                        <p class="card-text"><strong>Precio:</strong> ${propiedad.precio}</p>
-                        <p class="card-text"><strong>Descripción:</strong> ${propiedad.descripcion}</p>
-                        <p class="card-text"><strong>Estado:</strong> ${propiedad.estado}</p>
-                        <p class="card-text"><strong>Modalidad:</strong> ${propiedad.modalidad}</p>
-                        <c:if test="${not empty propiedad.caracteristicas}">
-                            <h6>Características:</h6>
-                            <ul>
-                                <c:forEach var="caracteristica" items="${propiedad.caracteristicas}">
-                                    <li>${caracteristica}</li>
-                                    </c:forEach>
-                            </ul>
-                        </c:if>
+    <!-- Descripción (lado izquierdo) -->
+    <div class="container mt-3">
+        <div class="row g-2">
+            <div class="col-md-8">
+                <h1>${propiedad.descripcion}</h1>
+                <div class="row g-2">
+                    <h3>Información Básica</h3>
+                    <div class="col-md-6">
+                        <ul class="lista-custom">
+                            <li>Operación: <strong>${propiedad.modalidad}</strong></li>
+                            <c:forEach var="caracteristica" items="${caracteristicas}">
+                                <li>${caracteristica.nombre}: <strong>${caracteristica.detalle}</strong></li>
+                            </c:forEach>
+                        </ul>
                     </div>
                 </div>
-            </c:if>
-            <c:if test="${empty propiedad}">
-                <div class="alert alert-warning" role="alert">
-                    Propiedad no encontrada.
-                </div>
-            </c:if>
-            <a href="${pageContext.request.contextPath}/principal" class="btn btn-primary mt-3">Volver al Inicio</a>
+                <hr class="w-75">
+                <p>Descripción general de la ${propiedad.tipoPropiedad.nombre}:</p>
+                <p>${propiedad.caracteristicasGenerales}</p>
+                <h3>USD$ <strong>${propiedad.precio}</strong></h3>
+                <hr class="w-75">
+            </div>
+
+            <!-- Formulario de contacto (lado derecho) -->
+            <div class="col-md-4 mt-5 mb-3 position-relative">
+                <h4 class="position-absolute top-0 start-50 translate-middle bg-white px-3 rounded text-success">Contacto</h4>
+                <form method="post" action="${pageContext.request.contextPath}/enviarContacto" class="form-custom border border-2 border-success p-4 w-100 rounded">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre completo</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tel" class="form-label">Teléfono</label>
+                        <input type="text" class="form-control" id="tel" name="tel" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="correo" class="form-label">Correo electrónico</label>
+                        <input type="email" class="form-control" id="correo" name="correo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="mensajec">Mensaje</label>
+                        <textarea class="form-control" id="mensajec" name="mensaje" placeholder="Déjenos un mensaje y nos comunicaremos con usted!" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">Enviar</button>
+                </form>
+            </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+    </div>
+
+    <!-- Ubicación -->
+    <div class="container m-0 p-0">
+        <h3 style="margin-left: 6%;">Ubicación</h3>
+        <iframe class="w-100" src="https://www.google.com/maps?q=${propiedad.direccion}&output=embed" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
 </html>

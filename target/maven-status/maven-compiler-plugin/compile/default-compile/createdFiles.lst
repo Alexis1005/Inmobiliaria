@@ -21,5 +21,4 @@ com\mycompany\inmobiliaria\modelo\Caracteristicas.class
 com\mycompany\inmobiliaria\controlador\SubirPropiedadServlet.class
 com\mycompany\inmobiliaria\modelo\TiposPropiedad.class
 com\mycompany\inmobiliaria\modelo\FotosPropiedad.class
-com\mycompany\inmobiliaria\controladores\Propiedades.class
 com\mycompany\inmobiliaria\modelo\dao\CaracteristicasDAO.class

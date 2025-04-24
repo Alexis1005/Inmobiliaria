@@ -213,11 +213,34 @@ public class PropiedadesDAO {
                     propiedad.setEstado(rs.getString("estado"));
                     propiedad.setModalidad(rs.getString("modalidad"));
                     propiedad.setImagen(rs.getString("imagen")); // Usar el campo imagen de Propiedades
-                    propiedad.setCaracteristicasGenerales(rs.getString("propiedadesCaracteristicas"));
+                    propiedad.setCaracteristicasGenerales(rs.getString("caracteristicasGenerales"));
 
                 }
             }
         }
         return propiedad;
     }
-}
+    public List<Propiedades> obtenerTodasLasPropiedades() throws SQLException {
+        List<Propiedades> lista = new ArrayList<>();
+
+        String sql = "SELECT * FROM propiedades";
+
+        try (Connection conn = Conexion.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Propiedades p = new Propiedades();
+                p.setId_propiedad(rs.getInt("id_propiedad"));
+                p.setId_tipo(rs.getInt("id_tipo"));
+                p.setId_agente(rs.getInt("id_agente"));
+                p.setDireccion(rs.getString("direccion"));
+                p.setPrecio(rs.getDouble("precio"));
+                p.setDescripcion(rs.getString("descripcion"));
+                p.setEstado(rs.getString("estado"));
+                p.setModalidad(rs.getString("modalidad"));
+                p.setImagen(rs.getString("imagen"));
+                p.setCaracteristicasGenerales(rs.getString("caracteristicasGenerales")); //posible cambio
+
+                lista.add(p);
+            }
+        }return null;
+}}
