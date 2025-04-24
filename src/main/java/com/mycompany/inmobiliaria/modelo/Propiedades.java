@@ -13,6 +13,15 @@ public class Propiedades {
     private String estado;
     private String modalidad;
     private String caracteristicasGenerales;
+    private String nombreTipo;
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public void setNombretipo(String nombretipo) {
+        this.nombreTipo = nombretipo;
+    }
 
     // Relación con FotosPropiedad (solo la primera imagen por simplicidad)
     private String imagen; // Ruta de la imagen principal
@@ -95,12 +104,12 @@ public class Propiedades {
         return precio;
     }
 
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
-
     public String getDescripcion() {
         return descripcion;
+    }
+
+    public String getNombreTipo() {
+        return nombreTipo;
     }
 
     public void setDescripcion(String descripcion) {

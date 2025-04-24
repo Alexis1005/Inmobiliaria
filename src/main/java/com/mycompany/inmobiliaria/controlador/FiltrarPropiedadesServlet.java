@@ -1,6 +1,5 @@
 package com.mycompany.inmobiliaria.controlador;
 
-
 import com.mycompany.inmobiliaria.modelo.Propiedades;
 import com.mycompany.inmobiliaria.resources.config.Conexion;
 import java.io.IOException;
@@ -35,15 +34,19 @@ public class FiltrarPropiedadesServlet extends HttpServlet {
 
         // Pasar resultados a la JSP
         request.setAttribute("propiedadesFiltradas", propiedadesFiltradas);
-        request.getRequestDispatcher("/propiedadesFiltradas.jsp").forward(request, response);
+        request.setAttribute("modalidadFiltrada", modalidad);
+        //Obtener el nombre del primer tipo de propiedad si existe
+        String nombreTipo = (propiedadesFiltradas != null && !propiedadesFiltradas.isEmpty()) ? propiedadesFiltradas.get(0).getNombreTipo() : "";
+        request.setAttribute("nombreTipoPropiedad", nombreTipo);
+        request.getRequestDispatcher("/WEB-INF/views/propiedadesFiltradas.jsp").forward(request, response);
     }
 
     private List<Propiedades> obtenerPropiedadesFiltradas(String modalidad, String tipoPropiedad) {
         List<Propiedades> propiedades = new ArrayList<>();
         StringBuilder sql = new StringBuilder(
-            "SELECT p.id_propiedad, p.direccion, p.precio, p.estado, p.imagen " +
-            "FROM Propiedades p " +
-            "JOIN TiposPropiedad tp ON p.id_tipo = tp.id_tipo WHERE 1=1"
+                "SELECT p.id_propiedad, p.descripcion, p.direccion, p.precio, p.estado, p.imagen, tp.nombre AS nombreTipo "
+                + "FROM Propiedades p "
+                + "JOIN TiposPropiedad tp ON p.id_tipo = tp.id_tipo WHERE 1=1"
         );
         List<String> params = new ArrayList<>();
 
@@ -61,8 +64,7 @@ public class FiltrarPropiedadesServlet extends HttpServlet {
         System.out.println("Consulta SQL: " + sql.toString());
         System.out.println("Parámetros: " + params);
 
-        try (Connection conn = Conexion.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql.toString())) {
+        try (Connection conn = Conexion.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql.toString())) {
 
             if (conn == null) {
                 System.out.println("Error: No se pudo establecer la conexión a la base de datos.");
@@ -79,10 +81,12 @@ public class FiltrarPropiedadesServlet extends HttpServlet {
             while (rs.next()) {
                 Propiedades propiedad = new Propiedades();
                 propiedad.setId_propiedad(rs.getInt("id_propiedad"));
+                propiedad.setDescripcion(rs.getString("descripcion"));
                 propiedad.setDireccion(rs.getString("direccion"));
                 propiedad.setPrecio(rs.getDouble("precio"));
                 propiedad.setEstado(rs.getString("estado"));
                 propiedad.setImagen(rs.getString("imagen"));
+                propiedad.setNombretipo(rs.getString("nombreTipo"));
                 propiedades.add(propiedad);
             }
         } catch (SQLException e) {
