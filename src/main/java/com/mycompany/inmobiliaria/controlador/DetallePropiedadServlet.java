@@ -15,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +60,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
         request.getRequestDispatcher("/detalle.jsp").forward(request, response);
     } catch (NumberFormatException e) {
         throw new ServletException("El ID de la propiedad debe ser un número válido", e);
-    } catch (Exception e) {
+    } catch (ServletException | IOException | SQLException e) {
         throw new ServletException("Error al cargar detalle de propiedad", e);
     }
 }}
