@@ -8,26 +8,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CaracteristicasDAO {
 
-<<<<<<< HEAD
     public List<Caracteristica> listar() throws SQLException {
         List<Caracteristica> lista = new ArrayList<>();
         String sql = "SELECT * FROM caracteristicas";
-        try (Connection cn = Conexion.getConnection();
-             PreparedStatement ps = cn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+        try (Connection cn = Conexion.getConnection(); 
+                PreparedStatement ps = cn.prepareStatement(sql); 
+                ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Caracteristica obj = new Caracteristica();
                 obj.setId_caracteristica(rs.getInt("id_caracteristica"));
                 obj.setNombre(rs.getString("nombre"));
                 obj.setDetalle(rs.getString("detalles"));
                 obj.setTipoPropiedadId(rs.getInt("id_tipo"));
-=======
     private Connection cn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
+
     // sdfsdsdf
     public ArrayList<Caracteristicas> listar() {
         ArrayList<Caracteristicas> lista = new ArrayList<>();
@@ -42,7 +42,6 @@ public class CaracteristicasDAO {
                 Caracteristicas obj = new Caracteristicas("Departamento a estrenar");
                 obj.setId_caracteristica(rs.getInt("id_caracteristica"));
                 obj.setNombre(rs.getString("nombre"));
->>>>>>> origin/andres
                 lista.add(obj);
             }
         } catch (SQLException ex) {
@@ -51,12 +50,10 @@ public class CaracteristicasDAO {
         return lista;
     }
 
-<<<<<<< HEAD
     public List<Caracteristica> listarPorTipo(int tipoId) throws SQLException {
         List<Caracteristica> lista = new ArrayList<>();
         String sql = "SELECT * FROM caracteristicas WHERE id_tipo = ?";
-        try (Connection cn = Conexion.getConnection();
-             PreparedStatement ps = cn.prepareStatement(sql)) {
+        try (Connection cn = Conexion.getConnection(); PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setInt(1, tipoId);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
@@ -66,7 +63,8 @@ public class CaracteristicasDAO {
                     obj.setDetalle(rs.getString("detalles"));
                     obj.setTipoPropiedadId(rs.getInt("id_tipo"));
                     lista.add(obj);
-=======
+    
+
     public boolean insertar(Caracteristicas caracteristicas) {
         boolean resultado = false;
 
@@ -83,11 +81,9 @@ public class CaracteristicasDAO {
             try {
                 if (ps != null) {
                     ps.close();
->>>>>>> origin/andres
                 }
             }
-<<<<<<< HEAD
-=======
+
         }
         return resultado;
     }
@@ -102,18 +98,15 @@ public class CaracteristicasDAO {
             ps.setString(1, caracteristicas.getNombre());
             ps.setInt(2, caracteristicas.getId_caracteristica());
             resultado = ps.executeUpdate() > 0;
->>>>>>> origin/andres
         } catch (SQLException ex) {
             throw new SQLException("Error al listar características por tipo: " + ex.getMessage(), ex);
         }
         return lista;
     }
 
-<<<<<<< HEAD
     public boolean agregar(Caracteristica caracteristica) throws SQLException {
         String sql = "INSERT INTO caracteristicas (nombre, detalles, id_tipo) VALUES (?, ?, ?)";
-        try (Connection cn = Conexion.getConnection();
-             PreparedStatement ps = cn.prepareStatement(sql)) {
+        try (Connection cn = Conexion.getConnection(); PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setString(1, caracteristica.getNombre());
             ps.setString(2, caracteristica.getDetalle() != null ? caracteristica.getDetalle() : "");
             ps.setInt(3, caracteristica.getTipoPropiedadId());
@@ -126,8 +119,7 @@ public class CaracteristicasDAO {
 
     public boolean actualizar(Caracteristica caracteristica) throws SQLException {
         String sql = "UPDATE caracteristicas SET nombre = ?, detalles = ?, id_tipo = ? WHERE id_caracteristica = ?";
-        try (Connection cn = Conexion.getConnection();
-             PreparedStatement ps = cn.prepareStatement(sql)) {
+        try (Connection cn = Conexion.getConnection(); PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setString(1, caracteristica.getNombre());
             ps.setString(2, caracteristica.getDetalle());
             ps.setInt(3, caracteristica.getTipoPropiedadId());
@@ -141,8 +133,7 @@ public class CaracteristicasDAO {
 
     public int registrar(Caracteristica obj) throws SQLException {
         String sql = "INSERT INTO caracteristicas (nombre, detalles, id_tipo) VALUES (?, ?, ?)";
-        try (Connection cn = Conexion.getConnection();
-             PreparedStatement ps = cn.prepareStatement(sql)) {
+        try (Connection cn = Conexion.getConnection(); PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setString(1, obj.getNombre());
             ps.setString(2, obj.getDetalle());
             ps.setInt(3, obj.getTipoPropiedadId());
@@ -154,8 +145,7 @@ public class CaracteristicasDAO {
 
     public int editar(Caracteristica obj) throws SQLException {
         String sql = "UPDATE caracteristicas SET nombre = ?, detalles = ?, id_tipo = ? WHERE id_caracteristica = ?";
-        try (Connection cn = Conexion.getConnection();
-             PreparedStatement ps = cn.prepareStatement(sql)) {
+        try (Connection cn = Conexion.getConnection(); PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setString(1, obj.getNombre());
             ps.setString(2, obj.getDetalle());
             ps.setInt(3, obj.getTipoPropiedadId());
@@ -168,8 +158,7 @@ public class CaracteristicasDAO {
 
     public int eliminar(int idCaracteristica) throws SQLException {
         String sql = "DELETE FROM caracteristicas WHERE id_caracteristica = ?";
-        try (Connection cn = Conexion.getConnection();
-             PreparedStatement ps = cn.prepareStatement(sql)) {
+        try (Connection cn = Conexion.getConnection(); PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setInt(1, idCaracteristica);
             return ps.executeUpdate();
         } catch (SQLException ex) {
@@ -180,8 +169,7 @@ public class CaracteristicasDAO {
     public Caracteristica buscarPorId(int id) throws SQLException {
         Caracteristica obj = null;
         String sql = "SELECT * FROM caracteristicas WHERE id_caracteristica = ?";
-        try (Connection cn = Conexion.getConnection();
-             PreparedStatement ps = cn.prepareStatement(sql)) {
+        try (Connection cn = Conexion.getConnection(); PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
@@ -201,9 +189,7 @@ public class CaracteristicasDAO {
     public List<String> listarNombres() throws SQLException {
         List<String> nombres = new ArrayList<>();
         String sql = "SELECT DISTINCT nombre FROM caracteristicas";
-        try (Connection cn = Conexion.getConnection();
-             PreparedStatement ps = cn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+        try (Connection cn = Conexion.getConnection(); PreparedStatement ps = cn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 nombres.add(rs.getString("nombre"));
             }
@@ -216,9 +202,7 @@ public class CaracteristicasDAO {
     public List<String> listarDetalles() throws SQLException {
         List<String> detalles = new ArrayList<>();
         String sql = "SELECT DISTINCT detalles FROM caracteristicas";
-        try (Connection cn = Conexion.getConnection();
-             PreparedStatement ps = cn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+        try (Connection cn = Conexion.getConnection(); PreparedStatement ps = cn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 detalles.add(rs.getString("detalles"));
             }
@@ -227,6 +211,4 @@ public class CaracteristicasDAO {
         }
         return detalles;
     }
-=======
->>>>>>> origin/andres
 }
