@@ -1,5 +1,4 @@
 package com.mycompany.inmobiliaria.modelo.dao;
-
 import com.mycompany.inmobiliaria.modelo.Caracteristica;
 
 import com.mycompany.inmobiliaria.resources.config.Conexion;
@@ -68,33 +67,33 @@ public class CaracteristicasDAO {
         }
     }
 
-    public boolean actualizar(Caracteristica caracteristica) throws SQLException {
-        String sql = "UPDATE caracteristicas SET nombre = ?, detalles = ?, tipo_propiedad_id = ? WHERE id_caracteristica = ?";
-        try (Connection cn = Conexion.getConnection();
-             PreparedStatement ps = cn.prepareStatement(sql)) {
-            ps.setString(1, caracteristica.getNombre());
-            ps.setString(2, caracteristica.getDetalle());
-            ps.setInt(3, caracteristica.getTipoPropiedadId());
-            ps.setInt(4, caracteristica.getId_caracteristica());
-            int rowsAffected = ps.executeUpdate();
-            return rowsAffected > 0;
-        } catch (SQLException ex) {
-            throw new SQLException("Error al actualizar característica: " + ex.getMessage(), ex);
-        }
-    }
+//    public boolean actualizar(Caracteristica caracteristica) throws SQLException {
+//        String sql = "UPDATE caracteristicas SET nombre = ?, detalles = ?, tipo_propiedad_id = ? WHERE id_caracteristica = ?";
+//        try (Connection cn = Conexion.getConnection();
+//             PreparedStatement ps = cn.prepareStatement(sql)) {
+//            ps.setString(1, caracteristica.getNombre());
+//            ps.setString(2, caracteristica.getDetalle());
+//            ps.setInt(3, caracteristica.getTipoPropiedadId());
+//            ps.setInt(4, caracteristica.getId_caracteristica());
+//            int rowsAffected = ps.executeUpdate();
+//            return rowsAffected > 0;
+//        } catch (SQLException ex) {
+//            throw new SQLException("Error al actualizar característica: " + ex.getMessage(), ex);
+//        }
+//    }
 
-    public int registrar(Caracteristica obj) throws SQLException {
-        String sql = "INSERT INTO caracteristicas (nombre, detalles, tipo_propiedad_id) VALUES (?, ?, ?)";
-        try (Connection cn = Conexion.getConnection();
-             PreparedStatement ps = cn.prepareStatement(sql)) {
-            ps.setString(1, obj.getNombre());
-            ps.setString(2, obj.getDetalle());
-            ps.setInt(3, obj.getTipoPropiedadId());
-            return ps.executeUpdate();
-        } catch (SQLException ex) {
-            throw new SQLException("Error al registrar característica: " + ex.getMessage(), ex);
-        }
-    }
+//    public int registrar(Caracteristica obj) throws SQLException {
+//        String sql = "INSERT INTO caracteristicas (nombre, detalles, tipo_propiedad_id) VALUES (?, ?, ?)";
+//        try (Connection cn = Conexion.getConnection();
+//             PreparedStatement ps = cn.prepareStatement(sql)) {
+//            ps.setString(1, obj.getNombre());
+//            ps.setString(2, obj.getDetalle());
+//            ps.setInt(3, obj.getTipoPropiedadId());
+//            return ps.executeUpdate();
+//        } catch (SQLException ex) {
+//            throw new SQLException("Error al registrar característica: " + ex.getMessage(), ex);
+//        }
+//    }
 
     public int editar(Caracteristica obj) throws SQLException {
         String sql = "UPDATE caracteristicas SET nombre = ?, detalles = ?, tipo_propiedad_id = ? WHERE id_caracteristica = ?";
