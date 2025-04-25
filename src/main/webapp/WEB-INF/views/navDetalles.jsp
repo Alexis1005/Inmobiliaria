@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<nav class="nav nav-pills nav-fill p-0 m-0" style="height: 100px; background-color: #138a0f">
+<nav class="nav nav-pills nav-fill navDetalle p-0 m-0" style="height: 100px; background-color: rgba(26, 175, 251, 0.8);">
     <div class="container h-100">
         <div class="row w-100 align-items-center">
             <!-- Columna izquierda: Logo -->
@@ -14,12 +14,12 @@
             </div>
 
             <!-- Columna central: Título -->
-            <div class="col-4 text-center">
+            <div class="col-4 text-center textoNav">
                 <c:choose>
                     <c:when test="${not empty nombreTipoPropiedad and not empty modalidadFiltrada}">
                         <c:set var="tipoCapitalizado" value="${fn:toUpperCase(fn:substring(nombreTipoPropiedad, 0, 1))}${fn:substring(nombreTipoPropiedad, 1, fn:length(nombreTipoPropiedad))}" />
                         <c:set var="modalidadCapitalizada" value="${modalidadFiltrada}"/>
-                        <h2 class="m-0" style="color: whitesmoke;">
+                        <h2 class="m-0 " style="color: whitesmoke;">
                             <c:out value="${tipoCapitalizado}" />s en <c:out value="${modalidadCapitalizada}" />
                         </h2>
                     </c:when>
@@ -38,7 +38,7 @@
             </button>
 
             <div class="collapse navbar-collapse position-absolute top-100 end-0 p-3 menu-content" id="navbarNav">
-                <ul class="navbar-nav text-center mx-3">
+                <ul class="navbar-nav hamburguesa text-center mx-3">
                     <li class="nav-item my-3 bordecito">
                         <a class="nav-link text-white fs-4 fw-bold" href="#">Inicio</a>
                     </li>
