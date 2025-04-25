@@ -79,7 +79,7 @@ public class SubirPropiedadServlet extends HttpServlet {
             int idPropiedad = propiedadesDAO.insertar(propiedad);
             logger.log(Level.INFO, "Propiedad insertada con ID: {0}", idPropiedad);
 
-            // Manejar las imágenes subidas
+            // Manejar las imagenes subidas
             List<String> imagenesRutas = new ArrayList<>();
             String appPath = request.getServletContext().getRealPath("");
             String projectImagePath = appPath + File.separator + "imagenes";
@@ -103,7 +103,7 @@ public class SubirPropiedadServlet extends HttpServlet {
                         String relativePath = "imagenes/" + fileName;
                         imagenesRutas.add(relativePath);
                     } else {
-                        logger.log(Level.WARNING, "Parte ignorada: {0}", fileName == null ? "Nombre nulo" : "Archivo vacío");
+                        logger.log(Level.WARNING, "Parte ignorada: {0}", fileName == null ? "Nombre nulo" : "Archivo vacio");
                     }
                 }
             }
@@ -114,37 +114,39 @@ public class SubirPropiedadServlet extends HttpServlet {
                 propiedadesDAO.actualizarImagen(idPropiedad, imagenesRutas.get(0));
             }
 
-            // Guardar rutas de imágenes en la base de datos
+            // Guardar rutas de imagenes en la base de datos
             for (String ruta : imagenesRutas) {
                 FotosPropiedad foto = new FotosPropiedad();
                 foto.setId_propiedad(idPropiedad);
                 foto.setRuta_foto(ruta);
                 fotosDAO.insertar(foto);
             }
+
+            // Guardar caracteristicas dinamicas
             PropiedadesCaracteristicasDAO pcDAO = new PropiedadesCaracteristicasDAO();
             Enumeration<String> parameterNames = request.getParameterNames();
-            logger.info("Parámetros recibidos:");
+            logger.info("Parametros recibidos:");
             while (parameterNames.hasMoreElements()) {
                 String paramName = parameterNames.nextElement();
-                logger.log(Level.INFO, "Par\u00e1metro: {0} = {1}", new Object[]{paramName, request.getParameter(paramName)});
+                logger.log(Level.INFO, "Parametro: {0} = {1}", new Object[]{paramName, request.getParameter(paramName)});
                 if (paramName.startsWith("detalle_")) {
                     String idCaracteristicaStr = paramName.substring("detalle_".length());
                     int idCaracteristica = Integer.parseInt(idCaracteristicaStr);
                     String detalle = request.getParameter(paramName);
-                    logger.log(Level.INFO, "Procesando caracter\u00edstica: idCaracteristica={0}, detalle={1}", new Object[]{idCaracteristica, detalle});
+                    logger.log(Level.INFO, "Procesando caracteristica: idCaracteristica={0}, detalle={1}", new Object[]{idCaracteristica, detalle});
                     if (detalle != null && !detalle.trim().isEmpty()) {
                         PropiedadesCaracteristicas pc = new PropiedadesCaracteristicas(idPropiedad, idCaracteristica, detalle);
                         pcDAO.agregar(pc);
-                        logger.log(Level.INFO, "Caracter\u00edstica guardada: {0}", pc);
+                        logger.log(Level.INFO, "Caracteristica guardada: {0}", pc);
                     }
                 }
             }
 
-            // Redirigir solo una vez al finalizar con éxito
+            // Redirigir solo una vez al finalizar con exito
             response.sendRedirect(request.getContextPath() + "/propiedades");
         } catch (ServletException | IOException | NumberFormatException | SQLException e) {
             logger.log(Level.SEVERE, "Error al subir propiedad: " + e.getMessage(), e);
-            // Establecer mensaje de error y reenviar a una página de error
+            // Establecer mensaje de error y reenviar a una pagina de error
             request.setAttribute("errorMessage", "Error al subir propiedad: " + e.getMessage());
             request.getRequestDispatcher("/error.jsp").forward(request, response);
         }

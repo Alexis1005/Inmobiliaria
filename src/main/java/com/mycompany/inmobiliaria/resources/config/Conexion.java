@@ -15,12 +15,12 @@ public class Conexion {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             cn = DriverManager.getConnection(url, username, password);
-            System.out.println("Conexión exitosa!");
+            System.out.println("Conexion exitosa!");
         } catch (ClassNotFoundException e) {
             System.out.println("Error: Driver no encontrado - " + e.getMessage());
             e.printStackTrace();
         } catch (SQLException e) {
-            System.out.println("Error: Fallo en la conexión a la base de datos - " + e.getMessage());
+            System.out.println("Error: Fallo en la conexion a la base de datos - " + e.getMessage());
             e.printStackTrace();
         }
         return cn;
