@@ -17,9 +17,9 @@
         <!--muestra que usuario esta logeado  -->
         <p>Usuario: <strong><%= sesion.getAttribute("usuario") %></strong></p> 
         <ul>
-            <li><a href="subirPropiedad.jsp">Subir Propiedad</a></li>
-            <li><a href="principal">Principal</a></li>
-            <li><a href="logout.jsp" class="btn btn-danger">Cerrar sesi?n</a></li>
+            <li><a href="${pageContext.request.contextPath}/subirPropiedad">Subir Propiedad</a></li>
+            <li><a href="${pageContext.request.contextPath}/principal">Principal</a></li>
+            <li><a href="logout.jsp" class="btn btn-danger">Cerrar sesión</a></li>
         </ul>
     </body>
 </html>
