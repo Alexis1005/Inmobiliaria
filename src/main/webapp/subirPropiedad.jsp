@@ -39,7 +39,7 @@
             <form action="${pageContext.request.contextPath}/subirPropiedad" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="descripcion" class="form-label fw-bold">Título de la propiedad</label>
-                    <input type="text" class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+                    <input type="text" class="form-control" id="descripcion" name="descripcion" rows="3" required>
                 </div>
                 <div class="mb-3">
                     <label for="direccion" class="form-label fw-bold">Dirección</label>
@@ -63,7 +63,7 @@
                     <select class="form-select" id="modalidad" name="modalidad" required>
                         <option value="Venta">Venta</option>
                         <option value="Alquiler">Alquiler</option>
-                        <option value="Alquiler">Arrendamiento</option>
+                        <option value="Arrendamiento">Arrendamiento</option>
                     </select>
                 </div>
                 <!-- Tipo de Propiedadddd -->
@@ -108,9 +108,6 @@
                     <button type="submit" class="btn btn-success mt-3 mb-3" style="width: 80%;">Subir Propiedad</button>
                 </div>
             </form>
-                <!-- 
-            <a href="${pageContext.request.contextPath}/propiedades" class="btn btn-secondary mt-3">Volver a Propiedades</a>
-                -->
                 </div>
 
         <!-- Modal para agregar nueva característica -->
@@ -203,7 +200,7 @@
                                                     var div = document.createElement('div');
                                                     div.className = 'mb-2';
                                                     div.innerHTML = '<label class="form-label">' + caracteristica.nombre + '</label>' +
-                                                            '<input type="text" class="form-control" name="detalle_' + caracteristica.idCaracteristica + '" placeholder="Ingrese detalle para ' + caracteristica.nombre + '" value="' + (caracteristica.detalle || '') + '">';
+                                                            '<input type="text" class="form-control" name="detalle_' + caracteristica.id_caracteristica + '" placeholder="Ingrese detalle para ' + caracteristica.nombre + '" value="' + (caracteristica.detalle || '') + '">';
                                                     container.appendChild(div);
                                                 });
                                             })
@@ -293,6 +290,5 @@
                                 }
                             });
         </script>
-    </script>
 </body>
 </html>

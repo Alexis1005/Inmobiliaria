@@ -4,6 +4,15 @@ public class PropiedadesCaracteristicas {
     private int id_propiedad;
     private int id_caracteristica;
     private String detalle;
+    private String nombre;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
     // Constructor vacío
     public PropiedadesCaracteristicas() {

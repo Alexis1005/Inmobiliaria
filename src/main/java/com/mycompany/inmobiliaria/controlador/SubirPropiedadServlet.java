@@ -130,12 +130,12 @@ public class SubirPropiedadServlet extends HttpServlet {
                 String paramName = parameterNames.nextElement();
                 logger.log(Level.INFO, "Parametro: {0} = {1}", new Object[]{paramName, request.getParameter(paramName)});
                 if (paramName.startsWith("detalle_")) {
-                    String idCaracteristicaStr = paramName.substring("detalle_".length());
-                    int idCaracteristica = Integer.parseInt(idCaracteristicaStr);
+                    String id_caracteristicaStr = paramName.substring("detalle_".length());
+                    int id_caracteristica = Integer.parseInt(id_caracteristicaStr);
                     String detalle = request.getParameter(paramName);
-                    logger.log(Level.INFO, "Procesando caracteristica: idCaracteristica={0}, detalle={1}", new Object[]{idCaracteristica, detalle});
+                    logger.log(Level.INFO, "Procesando caracteristica: idCaracteristica={0}, detalle={1}", new Object[]{id_caracteristica, detalle});
                     if (detalle != null && !detalle.trim().isEmpty()) {
-                        PropiedadesCaracteristicas pc = new PropiedadesCaracteristicas(idPropiedad, idCaracteristica, detalle);
+                        PropiedadesCaracteristicas pc = new PropiedadesCaracteristicas(idPropiedad, id_caracteristica, detalle);
                         pcDAO.agregar(pc);
                         logger.log(Level.INFO, "Caracteristica guardada: {0}", pc);
                     }
@@ -143,7 +143,7 @@ public class SubirPropiedadServlet extends HttpServlet {
             }
 
             // Redirigir solo una vez al finalizar con exito
-            response.sendRedirect(request.getContextPath() + "/propiedades");
+            response.sendRedirect(request.getContextPath() + "/principal");
         } catch (ServletException | IOException | NumberFormatException | SQLException e) {
             logger.log(Level.SEVERE, "Error al subir propiedad: " + e.getMessage(), e);
             // Establecer mensaje de error y reenviar a una pagina de error
