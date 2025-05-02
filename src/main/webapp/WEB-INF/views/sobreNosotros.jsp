@@ -22,14 +22,51 @@
     </head>
     <body>
 
-        <div class="container py-5 ">
-                <a class="navbar-brand position-absolute d-md-block" style="top:1rem; left: 1rem" href="${pageContext.request.contextPath}/principal">
-                    <img src="${pageContext.request.contextPath}/imagenes/logo.png" class="logo_nav img-fluid" style="height: 11rem" alt="Inicio"/> 
-                </a>
-                <div class="text-center mb-5 ">
-                    <h1 class="display-5 fw-bold text-primary">Sobre Nosotros</h1>
-                    <p class="lead text-muted">Conocé quiénes somos y qué nos mueve.</p>
+        <nav class="nav nav-pills nav-fill navDetalle p-0 m-0" style="height: 100px; background-color: rgba(26, 175, 251, 0.8);">
+            <div class="container h-100">
+                <div class="row w-100 align-items-center">
+                    <!-- Columna izquierda: Logo -->
+                    <div class="col-4 text-start">
+                        <a class="navbar-brand m-0" href="${pageContext.request.contextPath}/principal">
+                            <img src="${pageContext.request.contextPath}/imagenes/logo.png" alt="Logo" width="140px" height="110px"
+                                 class="d-inline-block align-text-center footer-logonav">
+                        </a>
+                    </div>
+
+                    <!-- Columna central: Título -->
+                    <div class="col-4 text-center textoNav">
+                        <h2 class="m-0" style="color: whitesmoke;">
+                            Sobre nosotros
+                        </h2>
+                        <br>
+                        <p class="textoNav" style="color: white;">Cococé quienes somos y que nos mueve</p>
+                    </div>
                 </div>
+
+                <!-- Menú desplegable posicionado con clases utilitarias -->
+                <div class="dropdown position-absolute top-0 end-0 mt-3 me-3" style="z-index: 1000;">
+                    <button class="navbar-toggler menu-btn" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarNav" style="color: white!important;">
+                        <i class="fa-solid fa-bars fa-2x hambur" style="color: whitesmoke!important;"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse position-absolute top-100 end-0 p-3 menu-content" id="navbarNav">
+                        <ul class="navbar-nav hamburguesa text-center mx-3">
+                            <li class="nav-item my-3 bordecito">
+                                <a class="nav-link text-white fs-4 fw-bold" href="#">Inicio</a>
+                            </li>
+                            <li class="nav-item my-3 bordecito">
+                                <a class="nav-link text-white fs-4 fw-bold" href="${pageContext.request.contextPath}/sobreNosotros">La Empresa</a>
+                            </li>
+                            <li class="nav-item mt-3 mb-3 bordecito">
+                                <a class="nav-link text-white fs-4 fw-bold" href="#">Contacto</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container py-5 ">
             <div class="card shadow mb-4">
                 <div class="row g-0">
                     <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
