@@ -121,7 +121,6 @@
             <div class="text-center navDetalle subtituloContenedor text-white py-4 fs-4 mb-4">
                 <h2 class="subtitulo">Propiedades disponibles</h2>
             </div>
-                    <h3>DEBUG: claves en detallesMap</h3>
             <div class="row row-cols-1 row-cols-md-3 g-4 mx-0">
                 <c:forEach var="propiedad" items="${propiedades}" varStatus="status">
                     <c:if test="${status.index < 15}">
@@ -144,11 +143,6 @@
 
                                     <!-- Cargo los detalles de esta propiedad -->
                                     <c:set var="detalles" value="${detallesMap[propiedad.id_propiedad]}"/>
-                                    <p>
-                                                                    <strong>Característica:</strong> ${det.nombre}  
-                                                                    &nbsp;|&nbsp;
-                                                                    <strong>Valor:</strong> ${det.detalle}
-                                                                </p>
                                     <div class="row my-3">
                                         <!-- Ambientes -->
                                         <div class="col-6 mb-3">
@@ -162,9 +156,9 @@
                                                         </c:when>
                                                         <c:otherwise>
                                                             <c:forEach var="det" items="${detalles}">
-                                                                
+
                                                                 <c:if test="${fn:toLowerCase(det.nombre) == 'ambientes'}">
-                                                                    ${det.detalle}
+                                                                    <strong>${det.nombre}</strong>: ${det.detalle} 
                                                                 </c:if>
                                                             </c:forEach>
                                                         </c:otherwise>
@@ -186,7 +180,7 @@
                                                         <c:otherwise>
                                                             <c:forEach var="det" items="${detalles}">
                                                                 <c:if test="${fn:toLowerCase(det.nombre) eq 'superficie'}">
-                                                                    ${det.detalle}
+                                                                    <strong>${det.nombre}</strong>: ${det.detalle}  
                                                                 </c:if>
                                                             </c:forEach>
                                                         </c:otherwise>
@@ -208,7 +202,7 @@
                                                         <c:otherwise>
                                                             <c:forEach var="det" items="${detalles}">
                                                                 <c:if test="${fn:toLowerCase(det.nombre) eq 'baños'}">
-                                                                    ${det.detalle}
+                                                                    <strong>${det.nombre}</strong>: ${det.detalle}  
                                                                 </c:if>
                                                             </c:forEach>
                                                         </c:otherwise>
@@ -230,7 +224,7 @@
                                                         <c:otherwise>
                                                             <c:forEach var="det" items="${detalles}">
                                                                 <c:if test="${fn:toLowerCase(det.nombre) eq 'dormitorios'}">
-                                                                    ${det.detalle}
+                                                                    <strong>${det.nombre}</strong>: ${det.detalle}  
                                                                 </c:if>
                                                             </c:forEach>
                                                         </c:otherwise>
