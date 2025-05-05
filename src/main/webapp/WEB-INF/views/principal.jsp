@@ -124,7 +124,7 @@
             <div class="row row-cols-1 row-cols-md-3 g-4 mx-0">
                 <c:forEach var="propiedad" items="${propiedades}" varStatus="status">
                     <c:if test="${status.index < 15}">
-                        <div class="col">
+                        <div class="col d-flex justify-content-center">
                             <div class="card tarjeta shadow">
                                 <c:if test="${not empty propiedad.imagen}">
                                     <img src="${pageContext.request.contextPath}/${propiedad.imagen}"
@@ -140,15 +140,13 @@
                                         ${propiedad.direccion}
                                     </p>
                                     <hr class="my-2" style="color:#ff7300"/>
-
-                                    <!-- Cargo los detalles de esta propiedad -->
                                     <c:set var="detalles" value="${detallesMap[propiedad.id_propiedad]}"/>
                                     <div class="row my-3">
                                         <!-- Ambientes -->
                                         <div class="col-6 mb-3">
                                             <div class="d-flex flex-column align-items-center">
-                                                <i class="fas fa-home fa-lg mb-2" style="color:#ff7300"></i>
-                                                <span class="small text-muted">
+                                                <i class="fas fa-home fa-lg mb-3" style="color:#ff7300"></i>
+                                                <span class="small text-muted mb-4">
                                                     <c:choose>
                                                         <c:when test="${fn:toLowerCase(propiedad.nombreTipo) == 'garaje'
                                                                         or fn:toLowerCase(propiedad.nombreTipo) == 'terreno'}">
@@ -170,8 +168,8 @@
                                         <!-- Superficie -->
                                         <div class="col-6 mb-3">
                                             <div class="d-flex flex-column align-items-center">
-                                                <i class="fas fa-expand-arrows-alt fa-lg mb-2" style="color:#ff7300"></i>
-                                                <span class="small text-muted">
+                                                <i class="fas fa-expand-arrows-alt fa-lg mb-3" style="color:#ff7300"></i>
+                                                <span class="small text-muted mb-4">
                                                     <c:choose>
                                                         <c:when test="${fn:toLowerCase(propiedad.nombreTipo) eq 'garaje' 
                                                                         or fn:toLowerCase(propiedad.nombreTipo) eq 'terreno'}">
@@ -192,7 +190,7 @@
                                         <!-- Baños -->
                                         <div class="col-6">
                                             <div class="d-flex flex-column align-items-center">
-                                                <i class="fas fa-bath fa-lg mb-2" style="color:#ff7300"></i>
+                                                <i class="fas fa-bath fa-lg mb-3" style="color:#ff7300"></i>
                                                 <span class="small text-muted">
                                                     <c:choose>
                                                         <c:when test="${fn:toLowerCase(propiedad.nombreTipo) eq 'garaje' 
@@ -214,7 +212,7 @@
                                         <!-- Dormitorios -->
                                         <div class="col-6">
                                             <div class="d-flex flex-column align-items-center">
-                                                <i class="fas fa-bed fa-lg mb-2" style="color:#ff7300"></i>
+                                                <i class="fas fa-bed fa-lg mb-3" style="color:#ff7300"></i>
                                                 <span class="small text-muted">
                                                     <c:choose>
                                                         <c:when test="${fn:toLowerCase(propiedad.nombreTipo) eq 'garaje' 
@@ -238,7 +236,7 @@
                                         <p class="card-text" style="color:#ff7300">
                                             <strong>${propiedad.precio}</strong>
                                         </p>
-                                        <button class="btn detalle btn-custom text-light fw-bold"
+                                        <button class="btn detalleDos btn-custom text-light fw-bold"
                                                 onclick="window.location.href = '${pageContext.request.contextPath}/detallePropiedad?id=${propiedad.id_propiedad}'">
                                             Ver Detalles <i class="fas fa-arrow-right"></i>
                                         </button>

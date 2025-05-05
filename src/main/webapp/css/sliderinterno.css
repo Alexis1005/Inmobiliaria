@@ -66,6 +66,21 @@ nav.navbar {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra */
 }
 
+.detalleDos {
+    transition: all 0.3s ease-in;
+    border: 2px solid #ff7300!important;
+    background-color: rgba(26, 160, 255, 1);
+    color: #ff7300!important;
+}
+
+.detalleDos:hover {
+    color: white;
+    letter-spacing: 1px;
+    background-color: #ff7300!important;
+    border: solid 2px whitesmoke;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra */
+}
+
 .whatsapp-icon {
     opacity: 0.8;
     transition: all 0.3s;
@@ -239,7 +254,7 @@ nav.navbar {
         width: 90vw!important;
         border-radius: 12px!important;
     }
-    
+
 }
 
 .busqueda form .me-2 {
@@ -264,5 +279,8 @@ nav.navbar {
     letter-spacing: 1px; /* Espaciado opcional para elegancia */
     text-shadow: 1px 1px 0.5px rgba(0,0,0,0.3);
 }
-
+.tarjeta{
+    flex: 1 1 30%;        /* Ocupan ~30% del ancho con flexbox */
+    max-width: 350px;
+}
 
