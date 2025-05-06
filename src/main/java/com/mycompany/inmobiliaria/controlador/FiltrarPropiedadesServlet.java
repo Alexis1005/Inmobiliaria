@@ -1,6 +1,8 @@
 package com.mycompany.inmobiliaria.controlador;
 
 import com.mycompany.inmobiliaria.modelo.Propiedades;
+import com.mycompany.inmobiliaria.modelo.PropiedadesCaracteristicas;
+import com.mycompany.inmobiliaria.modelo.dao.PropiedadesCaracteristicasDAO;
 import com.mycompany.inmobiliaria.resources.config.Conexion;
 import java.io.IOException;
 import java.sql.Connection;
@@ -14,9 +16,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet("/filtrarPropiedades")
 public class FiltrarPropiedadesServlet extends HttpServlet {
+       private final PropiedadesCaracteristicasDAO pcDAO = new PropiedadesCaracteristicasDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -32,8 +37,21 @@ public class FiltrarPropiedadesServlet extends HttpServlet {
         // Obtener propiedades filtradas
         List<Propiedades> propiedadesFiltradas = obtenerPropiedadesFiltradas(modalidad, tipoPropiedad);
 
+         // 2) Construyo el map id_propiedad → lista de detalles
+        Map<Integer, List<PropiedadesCaracteristicas>> detallesMap = new HashMap<>();
+        for (Propiedades p : propiedadesFiltradas) {
+            try {
+                List<PropiedadesCaracteristicas> detalles = 
+                    pcDAO.listarPorPropiedad(p.getId_propiedad());
+                detallesMap.put(p.getId_propiedad(), detalles);
+            } catch (SQLException e) {
+                throw new ServletException("Error cargando detalles para propiedad " 
+                                           + p.getId_propiedad(), e);
+            }
+        }
         // Pasar resultados a la JSP
         request.setAttribute("propiedadesFiltradas", propiedadesFiltradas);
+        request.setAttribute("detallesMap", detallesMap);
         request.setAttribute("modalidadFiltrada", modalidad);
         //Obtener el nombre del primer tipo de propiedad si existe
         String nombreTipo = (propiedadesFiltradas != null && !propiedadesFiltradas.isEmpty()) ? propiedadesFiltradas.get(0).getNombreTipo() : "";

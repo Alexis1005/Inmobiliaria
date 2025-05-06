@@ -23,9 +23,6 @@
                             <c:out value="${tipoCapitalizado}" />s en <c:out value="${modalidadCapitalizada}" />
                         </h2>
                     </c:when>
-                    <c:otherwise>
-                        <h2 class="m-0 text-danger fw-bold" style="color: whitesmoke;">No hay propiedades disponibles</h2>
-                    </c:otherwise>
                 </c:choose>
             </div>
         </div>
