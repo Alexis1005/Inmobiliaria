@@ -1,7 +1,8 @@
 package com.mycompany.inmobiliaria.controlador;
 
-
 import com.mycompany.inmobiliaria.modelo.Propiedades;
+import com.mycompany.inmobiliaria.modelo.PropiedadesCaracteristicas;
+import com.mycompany.inmobiliaria.modelo.dao.PropiedadesCaracteristicasDAO;
 import com.mycompany.inmobiliaria.resources.config.Conexion;
 import java.io.IOException;
 import java.sql.Connection;
@@ -15,9 +16,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet("/filtrarPropiedades")
 public class FiltrarPropiedadesServlet extends HttpServlet {
+       private final PropiedadesCaracteristicasDAO pcDAO = new PropiedadesCaracteristicasDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -33,17 +37,34 @@ public class FiltrarPropiedadesServlet extends HttpServlet {
         // Obtener propiedades filtradas
         List<Propiedades> propiedadesFiltradas = obtenerPropiedadesFiltradas(modalidad, tipoPropiedad);
 
+         // 2) Construyo el map id_propiedad → lista de detalles
+        Map<Integer, List<PropiedadesCaracteristicas>> detallesMap = new HashMap<>();
+        for (Propiedades p : propiedadesFiltradas) {
+            try {
+                List<PropiedadesCaracteristicas> detalles = 
+                    pcDAO.listarPorPropiedad(p.getId_propiedad());
+                detallesMap.put(p.getId_propiedad(), detalles);
+            } catch (SQLException e) {
+                throw new ServletException("Error cargando detalles para propiedad " 
+                                           + p.getId_propiedad(), e);
+            }
+        }
         // Pasar resultados a la JSP
         request.setAttribute("propiedadesFiltradas", propiedadesFiltradas);
-        request.getRequestDispatcher("/propiedadesFiltradas.jsp").forward(request, response);
+        request.setAttribute("detallesMap", detallesMap);
+        request.setAttribute("modalidadFiltrada", modalidad);
+        //Obtener el nombre del primer tipo de propiedad si existe
+        String nombreTipo = (propiedadesFiltradas != null && !propiedadesFiltradas.isEmpty()) ? propiedadesFiltradas.get(0).getNombreTipo() : "";
+        request.setAttribute("nombreTipoPropiedad", nombreTipo);
+        request.getRequestDispatcher("/WEB-INF/views/propiedadesFiltradas.jsp").forward(request, response);
     }
 
     private List<Propiedades> obtenerPropiedadesFiltradas(String modalidad, String tipoPropiedad) {
         List<Propiedades> propiedades = new ArrayList<>();
         StringBuilder sql = new StringBuilder(
-            "SELECT p.id_propiedad, p.direccion, p.precio, p.estado, p.imagen " +
-            "FROM Propiedades p " +
-            "JOIN TiposPropiedad tp ON p.id_tipo = tp.id_tipo WHERE 1=1"
+                "SELECT p.id_propiedad, p.descripcion, p.direccion, p.precio, p.estado, p.imagen, tp.nombre AS nombreTipo "
+                + "FROM Propiedades p "
+                + "JOIN TiposPropiedad tp ON p.id_tipo = tp.id_tipo WHERE 1=1"
         );
         List<String> params = new ArrayList<>();
 
@@ -53,7 +74,7 @@ public class FiltrarPropiedadesServlet extends HttpServlet {
             params.add(modalidad.toLowerCase()); // Normalizar a minúsculas
         }
         if (tipoPropiedad != null && !tipoPropiedad.isEmpty()) {
-            sql.append(" AND tp.nombre = ?");
+            sql.append(" AND tp.id_tipo = ?");
             params.add(tipoPropiedad);
         }
 
@@ -61,8 +82,7 @@ public class FiltrarPropiedadesServlet extends HttpServlet {
         System.out.println("Consulta SQL: " + sql.toString());
         System.out.println("Parámetros: " + params);
 
-        try (Connection conn = Conexion.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql.toString())) {
+        try (Connection conn = Conexion.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql.toString())) {
 
             if (conn == null) {
                 System.out.println("Error: No se pudo establecer la conexión a la base de datos.");
@@ -79,10 +99,12 @@ public class FiltrarPropiedadesServlet extends HttpServlet {
             while (rs.next()) {
                 Propiedades propiedad = new Propiedades();
                 propiedad.setId_propiedad(rs.getInt("id_propiedad"));
+                propiedad.setDescripcion(rs.getString("descripcion"));
                 propiedad.setDireccion(rs.getString("direccion"));
                 propiedad.setPrecio(rs.getDouble("precio"));
                 propiedad.setEstado(rs.getString("estado"));
                 propiedad.setImagen(rs.getString("imagen"));
+                propiedad.setNombretipo(rs.getString("nombreTipo"));
                 propiedades.add(propiedad);
             }
         } catch (SQLException e) {
@@ -92,4 +114,3 @@ public class FiltrarPropiedadesServlet extends HttpServlet {
         return propiedades;
     }
 }
-

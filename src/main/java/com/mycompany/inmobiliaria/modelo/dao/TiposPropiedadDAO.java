@@ -18,29 +18,31 @@ public class TiposPropiedadDAO {
         ArrayList<TiposPropiedad> listaTipo = new ArrayList<>();
         try {
             cn = Conexion.getConnection();
-            String sql = "select * from tiposPropiedad";
+            if (cn == null) {
+                System.out.println("Error: Conexión nula en ListarTiposPropiedades");
+                return listaTipo;
+            }
+            System.out.println("Conexión establecida. Consultando tiposPropiedad...");
+            String sql = "SELECT * FROM tiposPropiedad";
             ps = cn.prepareStatement(sql);
             rs = ps.executeQuery();
-
             while (rs.next()) {
                 TiposPropiedad obj = new TiposPropiedad();
                 obj.setId_tipo(rs.getInt("id_tipo"));
                 obj.setNombre(rs.getString("nombre"));
                 listaTipo.add(obj);
+                System.out.println("Tipo encontrado: ID=" + obj.getId_tipo() + ", Nombre=" + obj.getNombre());
             }
+            System.out.println("Total tipos encontrados: " + listaTipo.size());
         } catch (SQLException ex) {
+            System.out.println("Error al listar tipos de propiedad: " + ex.getMessage());
         } finally {
             try {
-                if (null != rs) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-                if (cn != null) {
-                    cn.close();
-                }
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (cn != null) cn.close();
             } catch (SQLException e) {
+                System.out.println("Error al cerrar recursos: " + e.getMessage());
             }
         }
         return listaTipo;
@@ -63,6 +65,7 @@ public class TiposPropiedadDAO {
             result = ps.executeUpdate();
 
         } catch (SQLException ex) {
+            System.out.println("Error al listar tipos de propiedad: " + ex.getMessage());
         } finally {
             try {
                 if (ps != null) {
@@ -72,6 +75,7 @@ public class TiposPropiedadDAO {
                     cn.close();
                 }
             } catch (SQLException e) {
+             System.out.println("Error al cerrar recursos: " + e.getMessage());
             }
         }
 

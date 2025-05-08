@@ -12,42 +12,46 @@
 
 <html lang="es">
     <head>
-        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Subir Propiedad</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <title>Panel Administrador - Agregar Propiedad</title>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="/CSS/card.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <title>Panel Administrador - Agregar Propiedad</title>
     </head>
+
     <body>
         <nav class="nav nav-pills nav-fill bg-success">
-            <a class="nav-link fs-4 m-2 border border-2 border-light rounded" style="color: whitesmoke;" aria-current="page"
-               href="adminAgregar.jsp">Agregar propiedad</a>
-            <a class="nav-link fs-4 m-2 border border-2 border-light rounded" style="color: whitesmoke;"
+            <a class="nav-link fs-4 m-2 border border-2 border-light rounded text-white"
                href="adminVer.jsp">Ver propiedades</a>
-            <a class="nav-link fs-4 m-2 border border-2 border-light rounded" style="color: whitesmoke;"
+            <a class="nav-link fs-4 m-2 border border-2 border-light rounded text-white"
                href="editarPropiedad">Editar propiedades</a>
         </nav>
-        <div class="container mt-5">
-            <h2 class="text-center mt-4 text-success">Agregando proiedad </h2>
-            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editarModal" 
-                    onclick="cargarDatosPropiedad('${propiedad.id_propiedad}', '${propiedad.direccion}', '${propiedad.precio}', '${propiedad.estado}', '${propiedad.caracteristicasGenerales}', '${propiedad.imagen}')">
-                Editar
-            </button>
+
+
+        <div class="container">
+            <h2 class="text-center mt-4 text-success" >Agregando propiedad</h2>
+            <hr class="bg-success mb-4">   
+                        
             <form action="${pageContext.request.contextPath}/subirPropiedad" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
-                    <label for="descripcion" class="form-label">Descripción</label>
-                    <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+                    <label for="descripcion" class="form-label fw-bold">Título de la propiedad</label>
+                    <input type="text" class="form-control" id="descripcion" name="descripcion" rows="3" required>
                 </div>
                 <div class="mb-3">
-                    <label for="direccion" class="form-label">Dirección</label>
+                    <label for="direccion" class="form-label fw-bold">Dirección</label>
                     <input type="text" class="form-control" id="direccion" name="direccion" required>
                 </div>
                 <div class="mb-3">
-                    <label for="precio" class="form-label">Precio</label>
+                    <label for="precio" class="form-label fw-bold">Precio</label>
                     <input type="number" step="0.01" class="form-control" id="precio" name="precio" required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="estado" class="form-label">Estado</label>
+                    <label for="estado" class="form-label fw-bold">Estado</label>
                     <select class="form-select" id="estado" name="estado" required>
                         <option value="disponible">Disponible</option>
                         <option value="vendido">Vendido</option>
@@ -55,15 +59,18 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="modalidad" class="form-label">Modalidad</label>
+                    <label for="modalidad" class="form-label fw-bold">Modalidad</label>
                     <select class="form-select" id="modalidad" name="modalidad" required>
                         <option value="Venta">Venta</option>
                         <option value="Alquiler">Alquiler</option>
+                        <option value="Arrendamiento">Arrendamiento</option>
                     </select>
                 </div>
                 <!-- Tipo de Propiedadddd -->
                 <div class="mb-3">
-                    <label for="idTipo" class="form-label">Tipo de Propiedad</label>
+
+                    <label for="idTipo" class="form-label fw-bold">Tipo de Propiedad</label>
+
                     <select class="form-select" id="idTipo" name="idTipo" required>
                         <option value="">Seleccione un tipo</option>
                         <c:forEach var="tipo" items="${tiposPropiedad}">
@@ -73,7 +80,7 @@
                 </div>
                 <!-- Agente -->
                 <div class="mb-3">
-                    <label for="idAgente" class="form-label">Agente</label>
+                    <label for="idAgente" class="form-label fw-bold">Agente</label>
                     <select class="form-select" id="idAgente" name="idAgente" required>
                         <option value="">Seleccione un agente</option>
                         <c:forEach var="agente" items="${agentes}">
@@ -83,26 +90,27 @@
                 </div>
                 <!-- Características dinámicas -->
                 <div class="mb-3">
-                    <label class="form-label">Características</label>
+                    <label class="form-label fw-bold">Características: </label>
                     <div id="caracteristicasContainer">
                         <!-- Aquí se cargarán las características dinámicamente -->
                     </div>
+                    <button type="button" class="btn btn-primary my-3" data-bs-toggle="modal" data-bs-target="#agregarCaracteristicaModal">
+                        <i class="fas fa-plus me-2"></i>Agregar Característica
+                    </button>
                     <div class="mb-3">
-                        <label for="caracteristicasGenerales" class="form-label">Características Generales</label>
+                        <label for="caracteristicasGenerales" class="form-label fw-bold">Descripción general de la propiedad</label>
                         <textarea class="form-control" id="caracteristicasGenerales" name="caracteristicasGenerales" rows="5"></textarea>
                     </div>
-                    <button type="button" class="btn btn-secondary mt-2" data-bs-toggle="modal" data-bs-target="#agregarCaracteristicaModal">
-                        Agregar Característica
-                    </button>
                 </div>
-                <div class="mb-3">
-                    <label for="imagenes" class="form-label">Imágenes</label>
-                    <input type="file" class="form-control" id="imagenes" name="imagenes" multiple accept="image/*">
+                <div class=text-start p-3 border border-light rounded col-md-6 m-auto">
+                    <label for="imagenes" class="form-label fs-3 fw-bold">Seleccione las imágenes</label>
+                    <input type="file" class="form-control mb-2" id="imagenes" name="imagenes" multiple accept="image/*">
                 </div>
-                <button type="submit" class="btn btn-primary">Subir Propiedad</button>
+                <div class="row justify-content-center">
+                    <button type="submit" class="btn btn-success mt-3 mb-3" style="width: 80%;">Subir Propiedad</button>
+                </div>
             </form>
-            <a href="${pageContext.request.contextPath}/propiedades" class="btn btn-secondary mt-3">Volver a Propiedades</a>
-        </div>
+                </div>
 
         <!-- Modal para agregar nueva característica -->
         <div class="modal fade" id="agregarCaracteristicaModal" tabindex="-1" aria-labelledby="agregarCaracteristicaModalLabel" aria-hidden="true">
@@ -178,7 +186,6 @@
 
 
         <!-- Scripts -->
-
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <script>
                             // Cargar características cuando cambie el tipo de propiedad
@@ -195,7 +202,7 @@
                                                     var div = document.createElement('div');
                                                     div.className = 'mb-2';
                                                     div.innerHTML = '<label class="form-label">' + caracteristica.nombre + '</label>' +
-                                                            '<input type="text" class="form-control" name="detalle_' + caracteristica.idCaracteristica + '" placeholder="Ingrese detalle para ' + caracteristica.nombre + '" value="' + (caracteristica.detalle || '') + '">';
+                                                            '<input type="text" class="form-control" name="detalle_' + caracteristica.id_caracteristica + '" placeholder="Ingrese detalle para ' + caracteristica.nombre + '" value="' + (caracteristica.detalle || '') + '">';
                                                     container.appendChild(div);
                                                 });
                                             })
@@ -285,6 +292,5 @@
                                 }
                             });
         </script>
-    </script>
 </body>
 </html>

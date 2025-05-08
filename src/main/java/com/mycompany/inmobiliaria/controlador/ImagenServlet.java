@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/imagenes/*")
 public class ImagenServlet extends HttpServlet {
-    private static final String RUTA_IMAGENES = "C:/Users/jx/Documents/NetBeansProjects/Inmobiliaria/img_propiedades_externas";
+    private static final String RUTA_IMAGENES = "C:/Users/PC/Documents/NetBeansProjects/inmobiliaria/img_propiedades_externas/";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String imagen = request.getPathInfo(); // Obtiene el nombre del archivo

@@ -3,6 +3,7 @@ package com.mycompany.inmobiliaria.modelo;
 import java.util.List;
 
 public class Propiedades {
+
     private int id_propiedad;
     private int id_tipo;
     private int id_agente;
@@ -12,8 +13,15 @@ public class Propiedades {
     private String estado;
     private String modalidad;
     private String caracteristicasGenerales;
+    private String nombreTipo;
 
-    
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public void setNombretipo(String nombretipo) {
+        this.nombreTipo = nombretipo;
+    }
 
     // Relación con FotosPropiedad (solo la primera imagen por simplicidad)
     private String imagen; // Ruta de la imagen principal
@@ -22,8 +30,8 @@ public class Propiedades {
     private List<String> caracteristicas; // Nombres o valores de características
 
     // Constructor
-    public Propiedades(int id_propiedad, int id_tipo, int id_agente, String direccion, double precio, 
-                       String descripcion, String estado, String modalidad, String imagen, List<String> caracteristicas) {
+    public Propiedades(int id_propiedad, int id_tipo, int id_agente, String direccion, double precio,
+            String descripcion, String estado, String modalidad, String imagen, List<String> caracteristicas) {
         this.id_propiedad = id_propiedad;
         this.id_tipo = id_tipo;
         this.id_agente = id_agente;
@@ -36,6 +44,7 @@ public class Propiedades {
         this.caracteristicas = caracteristicas;
         this.caracteristicasGenerales = caracteristicasGenerales;
     }
+
     // Constructor vacío
     public Propiedades() {
         // Opcionalmente inicializa valores por defecto
@@ -43,6 +52,7 @@ public class Propiedades {
         this.imagen = null;
         this.caracteristicas = null;
     }
+
     // Constructor para crear una nueva propiedad (usado en SubirPropiedadServlet)
     public Propiedades(int id_tipo, int id_agente, String direccion, double precio, String descripcion, String estado, String modalidad) {
         this.id_tipo = id_tipo;
@@ -94,12 +104,12 @@ public class Propiedades {
         return precio;
     }
 
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
-
     public String getDescripcion() {
         return descripcion;
+    }
+
+    public String getNombreTipo() {
+        return nombreTipo;
     }
 
     public void setDescripcion(String descripcion) {
@@ -121,6 +131,7 @@ public class Propiedades {
     public void setModalidad(String modalidad) {
         this.modalidad = modalidad;
     }
+
     public String getCaracteristicasGenerales() {
         return caracteristicasGenerales;
     }
@@ -128,9 +139,20 @@ public class Propiedades {
     public void setCaracteristicasGenerales(String caracteristicasGenerales) {
         this.caracteristicasGenerales = caracteristicasGenerales;
     }
-public String getImagen() { return imagen; } // Getter para la imagen
-    public List<String> getCaracteristicas() { return caracteristicas; }
-    
-    public void setImagen(String imagen) { this.imagen = imagen; }
-    public void setCaracteristicas(List<String> caracteristicas) { this.caracteristicas = caracteristicas; }
+
+    public String getImagen() {
+        return imagen;
+    } // Getter para la imagen
+
+    public List<String> getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public void setCaracteristicas(List<String> caracteristicas) {
+        this.caracteristicas = caracteristicas;
+    }
 }

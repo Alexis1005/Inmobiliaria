@@ -90,7 +90,7 @@ public class PropiedadesDAO {
                     lista.add(obj);
                 }
             }
-            logger.info("Propiedades listadas: " + lista.size());
+            logger.log(Level.INFO, "Propiedades listadas: {0}", lista.size());
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, "Error al listar propiedades: " + ex.getMessage(), ex);
             throw new RuntimeException("Error al listar propiedades", ex);
@@ -214,12 +214,13 @@ public class PropiedadesDAO {
                     propiedad.setModalidad(rs.getString("modalidad"));
                     propiedad.setImagen(rs.getString("imagen")); // Usar el campo imagen de Propiedades
                     propiedad.setCaracteristicasGenerales(rs.getString("propiedadesCaracteristicas"));
-
                 }
             }
+            return propiedad;
         }
-        return propiedad;
     }
+        
+    
 
     public List<Propiedades> obtenerTodasLasPropiedades() throws SQLException {
         List<Propiedades> lista = new ArrayList<>();
@@ -244,7 +245,6 @@ public class PropiedadesDAO {
                 lista.add(p);
             }
         }
-
         return lista;
     }
 
@@ -260,6 +260,6 @@ public class PropiedadesDAO {
 
             stmt.executeUpdate();
         }
-    }
 
+    }
 }

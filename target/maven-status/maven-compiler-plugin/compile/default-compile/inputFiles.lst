@@ -1,6 +1,6 @@
-/home/jx/Documentos/inmobiliariaGit/Inmobiliaria/src/main/java/com/mycompany/inmobiliaria/controlador/PropiedadesServlet.java
 /home/jx/Documentos/inmobiliariaGit/Inmobiliaria/src/main/java/com/mycompany/inmobiliaria/modelo/dao/PropiedadesCaracteristicasDAO.java
 /home/jx/Documentos/inmobiliariaGit/Inmobiliaria/src/main/java/com/mycompany/inmobiliaria/modelo/TiposPropiedad.java
+/home/jx/Documentos/inmobiliariaGit/Inmobiliaria/src/main/java/com/mycompany/inmobiliaria/controlador/SobreNosotrosServlet.java
 /home/jx/Documentos/inmobiliariaGit/Inmobiliaria/src/main/java/com/mycompany/inmobiliaria/modelo/Agente.java
 /home/jx/Documentos/inmobiliariaGit/Inmobiliaria/src/main/java/com/mycompany/inmobiliaria/resources/config/Conexion.java
 /home/jx/Documentos/inmobiliariaGit/Inmobiliaria/src/main/java/com/mycompany/inmobiliaria/controlador/AgregarCaracteristicaServlet.java
@@ -18,7 +18,6 @@
 /home/jx/Documentos/inmobiliariaGit/Inmobiliaria/src/main/java/com/mycompany/inmobiliaria/controlador/PrincipalServlet.java
 /home/jx/Documentos/inmobiliariaGit/Inmobiliaria/src/main/java/com/mycompany/inmobiliaria/controlador/SubirPropiedadServlet.java
 /home/jx/Documentos/inmobiliariaGit/Inmobiliaria/src/main/java/com/mycompany/inmobiliaria/controlador/ImagenServlet.java
-/home/jx/Documentos/inmobiliariaGit/Inmobiliaria/src/main/java/com/mycompany/inmobiliaria/modelo/Caracteristica.java
 /home/jx/Documentos/inmobiliariaGit/Inmobiliaria/src/main/java/com/mycompany/inmobiliaria/modelo/PropiedadesCaracteristicas.java
 /home/jx/Documentos/inmobiliariaGit/Inmobiliaria/src/main/java/com/mycompany/inmobiliaria/modelo/Propiedades.java
 /home/jx/Documentos/inmobiliariaGit/Inmobiliaria/src/main/java/com/mycompany/inmobiliaria/modelo/dao/CaracteristicasDAO.java

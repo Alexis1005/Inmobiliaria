@@ -1,32 +1,32 @@
-
 nav.navbar {
     position: relative;
 }
-.scroll-down{
-    position: absolute;
-    margin: auto;
-    right: 50%;
-    height: 60px;
-    width: 60px;
+
+.scroll-down {
     z-index: 100;
-    bottom: 2.5%;
-    padding: 1%;
     border: 4px solid white;
     opacity: 0.8;
-    border-radius: 50%;
     cursor: pointer;
+    width: 60px;
+    height: 60px;
 }
-.scroll-down:hover{
+
+.scroll-down:hover {
     opacity: 1;
 }
 
-.titulo, .subtitulo{
-    font-family: 'Poppins', sans-serif;
+.tituloUno, .subtitulo {
+    font-family: 'Georgia', serif; /* Negrita para destacar */
     font-weight: 600;
     color: #ffffff;
-    letter-spacing: 2px;
-    text-shadow: 5px 5px 3px rgba(0,0,0,0.4); /* Opcional: efecto sutil */
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 0.5px rgba(0,0,0,0.3); /* Opcional: efecto sutil */
 }
+
+.subtituloContenedor {
+    background-color: rgba(26, 175, 251, 0.8); /* 80% opaco */
+}
+
 .navbar-toggler {
     transition: transform 0.3s ease-in-out;
 }
@@ -37,31 +37,58 @@ nav.navbar {
 }
 
 .btn-custom {
-    background-color: rgb(119, 221, 109) !important;
+    background-color: whitesmoke !important;
+    color: rgba(26, 175, 251, 0.8) !important; /* 80% opaco */
+    border: 2px solid rgba(26, 175, 251, 1) !important;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra */
 }
 
-/* Efecto hover */
 .btn-custom:hover {
-    background-color: #4CAF50 !important; /* Verde más oscuro */
+    background-color: rgba(26, 160, 255, 1) !important;
+    color: white !important;
     transform: translateY(-2px); /* Efecto de levitación opcional */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra opcional */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra */
 }
 
-.detalle{
+.detalle {
     transition: all 0.3s ease-in;
-}
-.detalle:hover{
-    font-weight: bold;
-    letter-spacing: 1px;
+    background-color: rgba(26, 160, 255, 1);
+    color: white;
 }
 
+.detalle:hover {
+    color: white;
+    letter-spacing: 1px;
+    background-color: rgba(26, 175, 251, 1);
+    border: solid 2px whitesmoke;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra */
+}
+
+.detalleDos {
+    transition: all 0.3s ease-in;
+    border: 2px solid #ff7300!important;
+    background-color: rgba(26, 160, 255, 1);
+    color: #ff7300!important;
+}
+
+.detalleDos:hover {
+    color: white;
+    letter-spacing: 1px;
+    background-color: #ff7300!important;
+    border: solid 2px whitesmoke;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra */
+}
 
 .whatsapp-icon {
     opacity: 0.8;
     transition: all 0.3s;
     border-radius: 50%;
+    height: 60px !important;
+    width: 60px !important;
 }
+
 .whatsapp-icon:hover {
     transform: scale(1.05);
     box-shadow: 0 0 10px rgba(37, 211, 102, 0.7);
@@ -69,38 +96,62 @@ nav.navbar {
     cursor: pointer;
 }
 
-.tarjeta{
+.tarjeta {
     transition: 0.3s transform ease-in-out;
 }
 
-.tarjeta:hover{
+.tarjeta:hover {
     transform: scale(1.05);
 }
 
-/* Cambiar el color del ícono cuando el botón está expandido */
 .navbar-toggler:focus {
     outline: none;
     box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0);
 }
+
 .navbar-toggler[aria-expanded="true"] i {
-    color: rgb(119, 221, 109) !important;
+    color: rgba(26, 175, 251, 1) !important;
     transition: color 0.3s ease;
 }
 
-.navbar-collapse{
-    background-color: rgba(76, 175, 80, 0.7);
-    height: auto;
+.hamburguesa {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Espacio uniforme entre elementos */
+    gap: 1rem; /* Espaciado adicional entre items (opcional) */
+}
+
+.navbar-collapse {
+    background-color: rgba(26, 175, 251, 1);
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    height: 350px;
     width: 250px;
     border-radius: 0.25rem;
-    z-index: 10000;
+    z-index: 1001;
 }
 
 .bordecito {
-    transition: border-bottom 0.3s ease;
+    position: relative;
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
 }
 
-.bordecito:hover{
-    border-bottom: 1px solid #75bf7a;
+.bordecito::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    height: 2px;
+    width: 0;
+    background-color: #fff;
+    transition: width 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.bordecito:hover::after {
+    width: 70%; /* o el porcentaje/píxeles que quieras */
 }
 
 .img {
@@ -123,7 +174,6 @@ nav.navbar {
 }
 
 .detalles-propiedad div {
-
     padding: 5px 10px;
     border-radius: 5px;
     display: flex;
@@ -132,7 +182,6 @@ nav.navbar {
     gap: 5px;
 }
 
-/* Ajusta todas las imágenes del carrusel al mismo tamaño */
 .img-carousel {
     height: 100vh;
     object-fit: cover;
@@ -142,7 +191,7 @@ nav.navbar {
     width: 11rem; /* Ocupa todo el ancho del contenedor */
     font-size: 14px;
     white-space: nowrap; /* Evita que el texto se divida en varias líneas */
-    padding: 8px 30px 8px 15px;/* Mantiene el padding para mejor apariencia */
+    padding: 8px 30px 8px 15px; /* Mantiene el padding para mejor apariencia */
 }
 
 @media (max-width: 768px) {
@@ -163,6 +212,48 @@ nav.navbar {
         justify-content: center;
         gap: 10px;
     }
+    .scroll-down {
+        width: 40px !important;
+        height: 40px !important;
+        border: 2px solid white;
+    }
+    .whatsapp-icon {
+        width: 45px !important;
+        height: 45px !important;
+    }
+    .whatsapp-icon i {
+        font-size: 2.2rem;
+    }
+    .hamburguesa {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+
+    .hamburguesa .nav-item {
+        margin: 0 !important;
+    }
+    .hamburguesa a {
+        font-size: 16px!important;
+    }
+
+    .navbar-collapse {
+        height: auto;
+        width: 50vw!important;
+        border-radius: 12px!important;
+    }
+}
+@media (max-width: 435px){
+    .hamburguesa {
+        gap: 0.8rem;
+    }
+    .navbar-collapse {
+        height: auto;
+        width: 90vw!important;
+        border-radius: 12px!important;
+    }
 
 }
 
@@ -174,4 +265,22 @@ nav.navbar {
     width: 100%;
 }
 
+.logo_nav {
+    filter: drop-shadow(10px 10px 6px rgba(0, 0, 0, 0.61));
+}
+
+.navDetalle {
+    box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+}
+
+.textoNav h2 {
+    font-family: 'Georgia', serif; /* Negrita para destacar */
+    font-weight: 600;
+    letter-spacing: 1px; /* Espaciado opcional para elegancia */
+    text-shadow: 1px 1px 0.5px rgba(0,0,0,0.3);
+}
+.tarjeta{
+    flex: 1 1 30%;        /* Ocupan ~30% del ancho con flexbox */
+    max-width: 350px;
+}
 

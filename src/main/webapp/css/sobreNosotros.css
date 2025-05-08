@@ -1,0 +1,30 @@
+.section-title {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #1f3c2e;
+    text-align: center;
+    padding: 20px;
+    text-transform: uppercase;
+    border-left: 5px solid #4CAF50;
+}
+
+.section-description {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.05rem;
+    color: #333;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 1.5rem;
+        padding: 15px;
+    }
+
+    .section-description {
+        font-size: 1rem;
+    }
+}
