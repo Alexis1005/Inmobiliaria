@@ -64,7 +64,7 @@
                 <!-- Tipo de Propiedadddd -->
                 <div class="mb-3">
                     <label for="idTipo" class="form-label">Tipo de Propiedad</label>
-                    <select class="form-select" id="idTipo" name="id_tipo" required>
+                    <select class="form-select" id="idTipo" name="idTipo" required>
                         <option value="">Seleccione un tipo</option>
                         <c:forEach var="tipo" items="${tiposPropiedad}">
                             <option value="${tipo.id_tipo}">${tipo.nombre}</option>
