@@ -141,99 +141,73 @@
                                     </p>
                                     <hr class="my-2" style="color:#ff7300"/>
                                     <c:set var="detalles" value="${detallesMap[propiedad.id_propiedad]}"/>
-                                    <div class="row my-3">
-                                        <!-- Ambientes -->
-                                        <div class="col-6 mb-3">
-                                            <div class="d-flex flex-column align-items-center">
-                                                <i class="fas fa-home fa-lg mb-3" style="color:#ff7300"></i>
-                                                <span class="small text-muted mb-4">
-                                                    <c:choose>
-                                                        <c:when test="${fn:toLowerCase(propiedad.nombreTipo) == 'garaje'
-                                                                        or fn:toLowerCase(propiedad.nombreTipo) == 'terreno'}">
-                                                                &ndash;
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <c:forEach var="det" items="${detalles}">
+                                    <!-- Definimos las características a mostrar -->
+                                    <c:set var="caracteristicasStr" value="ambientes,superficie,baños,dormitorios" />
+                                    <c:set var="caracteristicas" value="${fn:split(caracteristicasStr, ',')}" />
 
-                                                                <c:if test="${fn:toLowerCase(det.nombre) == 'ambientes'}">
-                                                                    <strong>${det.nombre}</strong>: ${det.detalle} 
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                        <!-- Superficie -->
-                                        <div class="col-6 mb-3">
-                                            <div class="d-flex flex-column align-items-center">
-                                                <i class="fas fa-expand-arrows-alt fa-lg mb-3" style="color:#ff7300"></i>
-                                                <span class="small text-muted mb-4">
+                                    <div class="row mt-3 mb-0">
+                                        <c:forEach var="caract" items="${caracteristicas}">
+                                            <div class="col-6 mb-3">
+                                                <div class="d-flex flex-column align-items-center">
+                                                    <!-- Seleccionamos el ícono según la característica -->
                                                     <c:choose>
-                                                        <c:when test="${fn:toLowerCase(propiedad.nombreTipo) eq 'garaje' 
-                                                                        or fn:toLowerCase(propiedad.nombreTipo) eq 'terreno'}">
-                                                                &ndash;
+                                                        <c:when test="${caract == 'ambientes'}">
+                                                            <i class="fas fa-home fa-lg mb-3" style="color:#ff8533"></i>
                                                         </c:when>
-                                                        <c:otherwise>
-                                                            <c:forEach var="det" items="${detalles}">
-                                                                <c:if test="${fn:toLowerCase(det.nombre) eq 'superficie'}">
-                                                                    <strong>${det.nombre}</strong>: ${det.detalle}  
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:otherwise>
+                                                        <c:when test="${caract == 'superficie'}">
+                                                            <i class="fas fa-expand-arrows-alt fa-lg mb-3" style="color:#ff8533"></i>
+                                                        </c:when>
+                                                        <c:when test="${caract == 'baños'}">
+                                                            <i class="fas fa-bath fa-lg mb-3" style="color:#ff8533"></i>
+                                                        </c:when>
+                                                        <c:when test="${caract == 'dormitorios'}">
+                                                            <i class="fas fa-bed fa-lg mb-3" style="color:#ff8533"></i>
+                                                        </c:when>
                                                     </c:choose>
-                                                </span>
-                                            </div>
-                                        </div>
 
-                                        <!-- Baños -->
-                                        <div class="col-6">
-                                            <div class="d-flex flex-column align-items-center">
-                                                <i class="fas fa-bath fa-lg mb-3" style="color:#ff7300"></i>
-                                                <span class="small text-muted">
-                                                    <c:choose>
-                                                        <c:when test="${fn:toLowerCase(propiedad.nombreTipo) eq 'garaje' 
-                                                                        or fn:toLowerCase(propiedad.nombreTipo) eq 'terreno'}">
-                                                                &ndash;
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <c:forEach var="det" items="${detalles}">
-                                                                <c:if test="${fn:toLowerCase(det.nombre) eq 'baños'}">
-                                                                    <strong>${det.nombre}</strong>: ${det.detalle}  
+                                                    <span class="small text-muted mb-4">
+                                                        <!-- Determinamos el valor según el tipo de propiedad -->
+                                                        <c:choose>
+                                                            <c:when test="${fn:toLowerCase(propiedad.nombreTipo) == 'garaje'}">
+                                                                –
+                                                            </c:when>
+                                                            <c:when test="${fn:toLowerCase(propiedad.nombreTipo) == 'terreno'}">
+                                                                <!-- Para terrenos, mostramos solo 'superficie' y "–" para los demás -->
+                                                                <c:if test="${caract == 'superficie'}">
+                                                                    <c:set var="valor" value="–" />
+                                                                    <c:forEach var="det" items="${detalles}">
+                                                                        <c:if test="${fn:toLowerCase(fn:trim(det.nombre)) == 'superficie'}">
+                                                                            <c:set var="valor" value="${det.detalle}" />
+                                                                        </c:if>
+                                                                    </c:forEach>
+                                                                    <strong>Superficie</strong>: ${valor}
                                                                 </c:if>
-                                                            </c:forEach>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                        <!-- Dormitorios -->
-                                        <div class="col-6">
-                                            <div class="d-flex flex-column align-items-center">
-                                                <i class="fas fa-bed fa-lg mb-3" style="color:#ff7300"></i>
-                                                <span class="small text-muted">
-                                                    <c:choose>
-                                                        <c:when test="${fn:toLowerCase(propiedad.nombreTipo) eq 'garaje' 
-                                                                        or fn:toLowerCase(propiedad.nombreTipo) eq 'terreno'}">
-                                                                &ndash;
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <c:forEach var="det" items="${detalles}">
-                                                                <c:if test="${fn:toLowerCase(det.nombre) eq 'dormitorios'}">
-                                                                    <strong>${det.nombre}</strong>: ${det.detalle}  
+                                                                <c:if test="${caract != 'superficie'}">
+                                                                    –
                                                                 </c:if>
-                                                            </c:forEach>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </span>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <!-- Para casas y departamentos, mostramos el detalle si está disponible -->
+                                                                <c:set var="valor" value="–" />
+                                                                <c:forEach var="det" items="${detalles}">
+                                                                    <c:if test="${fn:toLowerCase(fn:trim(det.nombre)) == caract or 
+                                                                                  (caract == 'dormitorios' and fn:toLowerCase(fn:trim(det.nombre)) == 'habitaciones')}">
+                                                                        <c:set var="valor" value="${det.detalle}" />
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <strong>
+                                                                    ${fn:toUpperCase(fn:substring(caract, 0, 1))}${fn:toLowerCase(fn:substring(caract, 1, fn:length(caract)))}
+                                                                </strong>: ${valor}
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </span>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </c:forEach>
                                     </div>
 
                                     <div class="d-flex flex-column align-items-end mt-1">
-                                        <p class="card-text" style="color:#ff7300">
+                                        <p class="card-text" style="color:#2c3e50">
                                             <strong>${propiedad.precio}</strong>
                                         </p>
                                         <button class="btn detalleDos btn-custom text-light fw-bold"
@@ -246,8 +220,6 @@
                         </div>
                     </c:if>
                 </c:forEach>
-
-
             </div>
         </div>
         <jsp:include page="footer.jsp"/>

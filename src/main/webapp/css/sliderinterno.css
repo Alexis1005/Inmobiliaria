@@ -24,7 +24,7 @@ nav.navbar {
 }
 
 .subtituloContenedor {
-    background-color: rgba(26, 175, 251, 0.8); /* 80% opaco */
+    background-color: #5dade2; /* 80% opaco */
 }
 
 .navbar-toggler {
@@ -68,17 +68,25 @@ nav.navbar {
 
 .detalleDos {
     transition: all 0.3s ease-in;
-    border: 2px solid #ff7300!important;
-    background-color: rgba(26, 160, 255, 1);
-    color: #ff7300!important;
+    color: white!important;
+    background-color:  #ff7300!important; 
+    border: none!important;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra inicial para profundidad */
+    transition: all 0.3s ease; /* Transición suave */
 }
 
 .detalleDos:hover {
-    color: white;
+    color: white!important;
     letter-spacing: 1px;
-    background-color: #ff7300!important;
-    border: solid 2px whitesmoke;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra */
+    background-color: #e65c00!important; /* Un naranja más oscuro para el hover */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px);
+}
+.detalleDos:active {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra más pequeña para simular que se hunde */
+    transform: translateY(2px); /* Hunde el botón */
 }
 
 .whatsapp-icon {
@@ -123,7 +131,7 @@ nav.navbar {
 }
 
 .navbar-collapse {
-    background-color: rgba(26, 175, 251, 1);
+    background-color: #5dade2;
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
     height: 350px;
     width: 250px;

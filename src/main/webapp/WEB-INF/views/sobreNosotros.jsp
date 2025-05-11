@@ -22,13 +22,13 @@
     </head>
     <body>
 
-        <nav class="nav nav-pills nav-fill navDetalle p-0 m-0" style="height: 100px; background-color: rgba(26, 175, 251, 0.8);">
+        <nav class="nav nav-pills nav-fill navDetalle p-0 m-0" style="height: 100px; background-color: #5dade2;">
             <div class="container h-100">
                 <div class="row w-100 align-items-center">
                     <!-- Columna izquierda: Logo -->
                     <div class="col-4 text-start">
                         <a class="navbar-brand m-0" href="${pageContext.request.contextPath}/principal">
-                            <img src="${pageContext.request.contextPath}/imagenes/logo.png" alt="Logo" width="140px" height="110px"
+                            <img src="${pageContext.request.contextPath}/imagenes/logo.png" alt="Logo" title="Inicio" width="140px" height="110px"
                                  class="d-inline-block align-text-center footer-logonav">
                         </a>
                     </div>
