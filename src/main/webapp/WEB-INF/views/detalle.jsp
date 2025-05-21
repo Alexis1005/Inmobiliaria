@@ -1,72 +1,170 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <meta charset="UTF-8">
-        <title>Detalle de Propiedad</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <style>
-            .carousel-inner img {
-                height: 400px;
-                object-fit: cover;
-            }
-        </style>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sliderinterno.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sobreNosotros.css">
+        <title>Detalle propiedad</title>
     </head>
     <body>
-        <div class="container mt-5">
-            <h2>Detalle de Propiedad</h2>
-            <c:if test="${not empty propiedad}">
-                <div class="card">
-                    <!-- Carrusel de fotos -->
-                    <!-- Carrusel de fotos -->
-<div id="carouselFotos" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        <c:forEach var="foto" items="${fotos}" varStatus="loop">
-            <div class="carousel-item ${loop.first ? 'active' : ''}">
-                <img src="${pageContext.request.contextPath}/imagenes/${fn:replace(foto.rutaFoto, ' ', '%20')}" class="d-block w-100" alt="Foto de la propiedad">
+        <!--    <!-- Carrusel de imágenes -->
+        <div class="container d-flex align-items-center justify-content-center">
+            <div class="section section-custom text-center w-100">
+                <div id="carouselExampleIndicators" class="carousel slide my-2 shadow-lg w-75 m-auto" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <c:forEach var="foto" items="${fotos}" varStatus="status">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${status.index}"
+                                    class="${status.first ? 'active' : ''}" aria-current="${status.first ? 'true' : 'false'}"
+                                    aria-label="Slide ${status.count}"></button>
+                        </c:forEach>
+                    </div>
+                    <div class="carousel-inner">
+                        <c:forEach var="foto" items="${fotos}" varStatus="status">
+                            <div class="carousel-item ${status.first ? 'active' : ''}">
+                                <img src="${pageContext.request.contextPath}/${foto.ruta_foto}" 
+     class="img-fluid w-100 rounded imagen-ampliable" 
+     alt="Foto de la propiedad" style="max-height:300px; object-fit:cover; background-color:#f8f9fa;">
+
+
+                            </div>
+                        </c:forEach>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
             </div>
-        </c:forEach>
+        </div>
+
+        <!--    <!-- Descripción (lado izquierdo) -->
+        <div class="container mt-3">
+            <div class="row g-2">
+                <div class="col-md-8">
+                    <h1>${propiedad.descripcion}</h1>
+                    <div class="row g-2">
+                        <h3>Información Básica</h3>
+                        <ul class="lista-custom caracteristicas-grid">
+                            <li>Operación: <strong>${propiedad.modalidad}</strong></li>
+                                <c:forEach var="caracteristica" items="${caracteristicas}">
+                                <li>${caracteristica.nombre}: <strong>${caracteristica.detalle}</strong></li>
+                                </c:forEach>
+                        </ul>
+
+                    </div>
+                    <hr class="w-75">
+                    <p>Descripción general de la ${tipoPropiedad.nombre}:</p>
+                    <p>${propiedad.caracteristicasGenerales}</p>
+                    <h3>USD$ <strong>${propiedad.precio}</strong></h3>
+                    <hr class="w-75">
+                </div>
+
+                <!--            <!-- Formulario de contacto (lado derecho) -->
+                <div class="col-md-4 mt-5 mb-3 position-relative">
+                    <h4 class="position-absolute top-0 start-50 translate-middle bg-white px-3 rounded text-success">Contacto</h4>
+                    <form method="post" action="${pageContext.request.contextPath}/enviarContacto" class="form-custom border border-2 border-success p-4 w-100 rounded">
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre completo</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tel" class="form-label">Teléfono</label>
+                            <input type="text" class="form-control" id="tel" name="tel" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="correo" class="form-label">Correo electrónico</label>
+                            <input type="email" class="form-control" id="correo" name="correo" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="mensajec">Mensaje</label>
+                            <textarea class="form-control" id="mensajec" name="mensaje" placeholder="Déjenos un mensaje y nos comunicaremos con usted!" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+<!-- Modal con carrusel completo -->
+<!-- Modal -->
+<div class="modal fade" id="modalCarrusel" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content bg-dark text-white position-relative">
+
+      <!-- Botones de navegación, colocados directamente en el .modal-content -->
+      <button class="carousel-control-prev custom-control" type="button" data-bs-target="#modalCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next custom-control" type="button" data-bs-target="#modalCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+      </button>
+
+      <div class="modal-body p-0">
+        <!-- Carrusel -->
+        <div id="modalCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <c:forEach var="foto" items="${fotos}" varStatus="status">
+              <div class="carousel-item ${status.first ? 'active' : ''}">
+                <img src="${pageContext.request.contextPath}/${foto.ruta_foto}" class="d-block w-100"
+                     style="max-height: 85vh; object-fit: contain;" alt="Imagen ampliada">
+              </div>
+            </c:forEach>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer border-0 bg-dark justify-content-center">
+        <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Cerrar</button>
+      </div>
     </div>
-    <!-- Controles si hay más de una foto -->
-    <c:if test="${not empty fotos and fn:length(fotos) > 1}">
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselFotos" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Anterior</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselFotos" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Siguiente</span>
-        </button>
-    </c:if>
+  </div>
 </div>
 
 
-                    <div class="card-body">
-                        <h5 class="card-title">${propiedad.direccion}</h5>
-                        <p class="card-text"><strong>Precio:</strong> ${propiedad.precio}</p>
-                        <p class="card-text"><strong>Descripción:</strong> ${propiedad.descripcion}</p>
-                        <p class="card-text"><strong>Estado:</strong> ${propiedad.estado}</p>
-                        <p class="card-text"><strong>Modalidad:</strong> ${propiedad.modalidad}</p>
-                        <c:if test="${not empty propiedad.caracteristicas}">
-                            <h6>Características:</h6>
-                            <ul>
-                                <c:forEach var="caracteristica" items="${propiedad.caracteristicas}">
-                                    <li>${caracteristica}</li>
-                                    </c:forEach>
-                            </ul>
-                        </c:if>
-                    </div>
-                </div>
-            </c:if>
-            <c:if test="${empty propiedad}">
-                <div class="alert alert-warning" role="alert">
-                    Propiedad no encontrada.
-                </div>
-            </c:if>
-            <a href="${pageContext.request.contextPath}/principal" class="btn btn-primary mt-3">Volver al Inicio</a>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+        <!--     Ubicación -->
+        <div class="w-100 px-3 px-md-5 my-4">
+    <h3 class="text-center text-md-start mb-3">Ubicación</h3>
+    <iframe class="w-100 rounded" src="https://www.google.com/maps?q=${propiedad.direccion}&output=embed"
+            height="400" style="border:0;" allowfullscreen loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+
+        <jsp:include page="footer.jsp"/>
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script>
+    document.querySelectorAll('.imagen-ampliable').forEach((img, index) => {
+        img.addEventListener('click', () => {
+            const modal = new bootstrap.Modal(document.getElementById('modalCarrusel'));
+            modal.show();
+
+            // Activar el slide correspondiente dentro del modal
+            const slides = document.querySelectorAll('#modalCarousel .carousel-item');
+            slides.forEach(slide => slide.classList.remove('active'));
+            if (slides[index]) {
+                slides[index].classList.add('active');
+            }
+        });
+    });
+</script>
+
+
+
 </html>

@@ -88,7 +88,7 @@
                     <div class="collapse navbar-collapse position-absolute top-100 end-0 p-3 menu-content" id="navbarNav">
                         <ul class="navbar-nav hamburguesa text-center mx-3">
                             <li class="nav-item my-3 bordecito">
-                                <a class="nav-link text-white fs-4 fw-bold" href="#">Inicio</a>
+                                <a class="nav-link text-white fs-4 fw-bold" href="${pageContext.request.contextPath}/principal">Inicio</a>
                             </li>
                             <li class="nav-item my-3 bordecito">
                                 <a class="nav-link text-white fs-4 fw-bold" href="${pageContext.request.contextPath}/sobreNosotros">La Empresa</a>
@@ -147,7 +147,7 @@
 
                                     <div class="row mt-3 mb-0">
                                         <c:forEach var="caract" items="${caracteristicas}">
-                                            <div class="col-6 mb-3">
+                                            <div class="col-6 mb-3 divIcono">
                                                 <div class="d-flex flex-column align-items-center">
                                                     <!-- Seleccionamos el ícono según la característica -->
                                                     <c:choose>

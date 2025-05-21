@@ -67,7 +67,7 @@ public class PropiedadesDAO {
                 ps.setInt(paramIndex++, idTipo);
             }
             if (modalidad != null && !modalidad.isEmpty()) {
-                ps.setString(paramIndex, modality);
+                ps.setString(paramIndex, modalidad);
             }
 
             try (ResultSet rs = ps.executeQuery()) {
@@ -130,7 +130,7 @@ public class PropiedadesDAO {
             ps.setString(7, obj.getModalidad());
             ps.setString(8, obj.getImagen()); // Incluir el campo imagen
             ps.setString(9, obj.getCaracteristicasGenerales());
-            ps.setInt(9, obj.getId_propiedad());
+            ps.setInt(10, obj.getId_propiedad());
             result = ps.executeUpdate();
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "Error al actualizar propiedad: " + e.getMessage(), e);
@@ -213,7 +213,7 @@ public class PropiedadesDAO {
                     propiedad.setEstado(rs.getString("estado"));
                     propiedad.setModalidad(rs.getString("modalidad"));
                     propiedad.setImagen(rs.getString("imagen")); // Usar el campo imagen de Propiedades
-                    propiedad.setCaracteristicasGenerales(rs.getString("propiedadesCaracteristicas"));
+                    propiedad.setCaracteristicasGenerales(rs.getString("caracteristicasGenerales"));
                 }
             }
             return propiedad;
@@ -262,4 +262,8 @@ public class PropiedadesDAO {
         }
 
     }
+    
+    //----------------------------
+    // Método para traer propiedad segun el filtrado
+    //----------------------------
 }

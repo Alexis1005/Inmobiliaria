@@ -6,12 +6,12 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Propiedades</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <title>Editar Propiedades</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <style>
             .property-card {
                 border-radius: 10px;
-                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 2px 6px rgba(0,0,0,0.1);
                 padding: 10px;
                 min-height: 400px;
             }
@@ -24,21 +24,25 @@
     <body class="bg-light">
 
         <div class="container mt-4">
-            
+
+            <!-- Formulario de filtrado (GET a /editarPropiedad) -->
             <form class="mb-4" action="editarPropiedad" method="get">
                 <div class="row g-2">
                     <div class="col-md-5">
-                        <select class="form-select" name="tipo">
-                            <option value="">Tipo de propiedad...</option>
-                            <option value="casa">Casa</option>
-                            <option value="departamento">Departamento</option>
+                        <select id="tipoPropiedad" class="form-select" name="tipo">
+                            <option value="" disabled selected>Tipo de propiedad</option>
+                            <!-- Ejemplo: si tienes lista de TiposPropiedad en request -->
+                            <c:forEach var="t" items="${tiposPropiedad}">
+                                <option value="${t.id_tipo}">${t.nombre}</option>
+                            </c:forEach>
                         </select>
                     </div>
                     <div class="col-md-5">
-                        <select class="form-select" name="estado">
-                            <option value="">Estado...</option>
-                            <option value="disponible">Disponible</option>
-                            <option value="vendido">Vendido</option>
+                        <select class="form-select" name="modalidad">
+                            <option value="" disabled selected>MODALIDAD</option>
+                            <option value="venta">Venta</option>
+                            <option value="alquiler">Alquiler</option>
+                            <option value="arrendamiento">Arrendamiento</option>
                         </select>
                     </div>
                     <div class="col-md-2 d-grid gap-2 d-md-flex justify-content-md-end">
@@ -48,18 +52,30 @@
                 </div>
             </form>
 
-            <!-- Cards -->
-            <div class="row">
+            <!-- Aquí van las cards resultantes -->
+            <div class="row row-cols-1 row-cols-md-3 g-4">
                 <c:forEach var="prop" items="${listaPropiedades}">
-                    <div class="col-md-4">
-                        <div class="card mb-4 property-card">
-                            <img  src="${pageContext.request.contextPath}/${prop.imagen}" alt="Imagen de la propiedad" />
+                    <div class="col d-flex justify-content-center">
+                        <div class="card mb-4 property-card" style="width: 18rem;">
+                            <c:if test="${not empty prop.imagen}">
+                                <img src="${pageContext.request.contextPath}/${prop.imagen}"
+                                     class="card-img-top" style="height:200px;object-fit:cover" />
+                            </c:if>
                             <div class="card-body">
                                 <h5 class="card-title">${prop.direccion}</h5>
                                 <p class="card-text">${prop.descripcion}</p>
                                 <p class="card-text price">$${prop.precio}</p>
                                 <p class="card-text"><strong>Modalidad:</strong> ${prop.modalidad}</p>
                                 <p class="card-text"><strong>Estado:</strong> ${prop.estado}</p>
+
+                                <!-- Mostrar características si existen -->
+                                <c:if test="${not empty detallesMap[prop.id_propiedad]}">
+                                    <ul class="list-unstyled">
+                                        <c:forEach var="det" items="${detallesMap[prop.id_propiedad]}">
+                                            <li><strong>${det.nombre}</strong>: ${det.detalle}</li>
+                                                </c:forEach>
+                                    </ul>
+                                </c:if>
 
                                 <button class="btn btn-primary editar-btn"
                                         data-id="${prop.id_propiedad}"
@@ -74,8 +90,8 @@
                         </div>
                     </div>
                 </c:forEach>
-
             </div>
+
         </div>
 
         <!-- Modal de edición -->
@@ -104,7 +120,8 @@
                             <label for="editar-modalidad" class="form-label">Modalidad</label>
                             <select class="form-select" name="modalidad" id="editar-modalidad">
                                 <option value="venta">Venta</option>
-                                <option value="alquilar">Alquilar</option>
+                                <option value="alquilado">Alquiler</option>
+                                <option value="alquilado">Arrendamiento</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -112,6 +129,7 @@
                             <select class="form-select" name="estado" id="editar-estado">
                                 <option value="disponible">Disponible</option>
                                 <option value="vendido">Vendido</option>
+                                <option value="alquilado">Alquilado</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -127,8 +145,8 @@
             </div>
         </div>
 
-        <!-- Bootstrap JS y Script para llenar el modal -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- JS de Bootstrap y script para llenar el modal -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <script>
             const editarModal = new bootstrap.Modal(document.getElementById('editarModal'));
 
@@ -140,12 +158,9 @@
                     document.getElementById('editar-precio').value = btn.dataset.precio;
                     document.getElementById('editar-modalidad').value = btn.dataset.modalidad;
                     document.getElementById('editar-estado').value = btn.dataset.estado;
-
-                    
                     editarModal.show();
                 });
             });
         </script>
-
     </body>
 </html>

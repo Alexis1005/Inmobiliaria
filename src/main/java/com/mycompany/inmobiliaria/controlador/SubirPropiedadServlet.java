@@ -170,7 +170,12 @@ public class SubirPropiedadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<TiposPropiedad> tipos = tiposPropiedadDAO.ListarTiposPropiedades();
+        List<TiposPropiedad> tipos = null;
+        try {
+            tipos = tiposPropiedadDAO.ListarTiposPropiedades();
+        } catch (SQLException ex) {
+            Logger.getLogger(SubirPropiedadServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         List<Agente> agentes = null;
         try {
             agentes = agentesDAO.listar();

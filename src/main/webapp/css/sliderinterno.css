@@ -262,6 +262,37 @@ nav.navbar {
         width: 90vw!important;
         border-radius: 12px!important;
     }
+    .subtituloContenedor{
+        padding: 5px!important;
+    }
+    .card-img-top{
+        height: 150px!important;
+    }
+    .card-title{
+        font-size: 16px!important;
+    }
+    .card-text{
+        font-size: 14px!important;
+        margin-bottom: 0!important;
+    }
+    .divIcono{
+        margin-bottom: 0!important;
+    }
+    /*
+     AHORA EL NAV DE FILTRADO
+    */
+    .logoR{
+        margin-top: 10px!important;
+        width: 90px!important;
+        height: 70px!important;
+    }
+    .textoF{
+        font-size: 18px!important; 
+        margin-left: 25px!important;
+    }
+    .menu-btn{
+        width: 50px!important; 
+    }
 
 }
 
@@ -291,4 +322,92 @@ nav.navbar {
     flex: 1 1 30%;        /* Ocupan ~30% del ancho con flexbox */
     max-width: 350px;
 }
+/*AGREGADO* 15/05*/
+    .caracteristicas-grid {
+        column-count: 1;
+    }
+
+    @media (min-width: 768px) {
+        .caracteristicas-grid {
+            column-count: 2;
+        }
+    }
+
+    .caracteristicas-grid li {
+        break-inside: avoid;
+        margin-bottom: 0.5rem;
+        list-style-type: disc;
+        margin-left: 1rem;
+    }
+
+
+    .imagen-ampliable {
+        cursor: zoom-in;
+        transition: transform 0.2s;
+    }
+
+    .imagen-ampliable:hover {
+        transform: scale(1.02);
+    }
+
+    .modal-img {
+        max-width: 95vw;
+        max-height: 95vh;
+        object-fit: contain;
+        border-radius: 10px;
+    }
+
+    .modal-backdrop.show {
+        opacity: 0.95 !important;
+        background-color: black !important;
+    }
+
+    .modal-content {
+        background: transparent;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+   
+  .modal .btn-dark {
+    background-color: rgba(0, 0, 0, 0.6);
+    border: none;
+    padding: 1px 1px;
+    border-radius: 5%;
+  }
+
+  .modal .btn-dark:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .zindex-1 {
+    z-index: 1056; /* mayor que carousel z-index */
+  }
+
+  /* Asegura que los botones queden fijos en el modal, no dentro del carrusel */
+  .custom-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1060;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 6px; /* antes 10px, ahora más chico */
+  border: none;
+  width: 36px; /* controla el ancho total */
+  height: 36px; /* controla el alto total */
+}
+
+.custom-control .carousel-control-prev-icon,
+.custom-control .carousel-control-next-icon {
+  width: 16px;  /* icono más chico */
+  height: 16px;
+}
+
+
+  .custom-control:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
 

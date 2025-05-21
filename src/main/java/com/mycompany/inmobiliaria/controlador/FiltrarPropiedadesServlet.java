@@ -21,7 +21,8 @@ import java.util.Map;
 
 @WebServlet("/filtrarPropiedades")
 public class FiltrarPropiedadesServlet extends HttpServlet {
-       private final PropiedadesCaracteristicasDAO pcDAO = new PropiedadesCaracteristicasDAO();
+
+    private final PropiedadesCaracteristicasDAO pcDAO = new PropiedadesCaracteristicasDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -37,16 +38,16 @@ public class FiltrarPropiedadesServlet extends HttpServlet {
         // Obtener propiedades filtradas
         List<Propiedades> propiedadesFiltradas = obtenerPropiedadesFiltradas(modalidad, tipoPropiedad);
 
-         // 2) Construyo el map id_propiedad → lista de detalles
+        // 2) Construyo el map id_propiedad → lista de detalles
         Map<Integer, List<PropiedadesCaracteristicas>> detallesMap = new HashMap<>();
         for (Propiedades p : propiedadesFiltradas) {
             try {
-                List<PropiedadesCaracteristicas> detalles = 
-                    pcDAO.listarPorPropiedad(p.getId_propiedad());
+                List<PropiedadesCaracteristicas> detalles
+                        = pcDAO.listarPorPropiedad(p.getId_propiedad());
                 detallesMap.put(p.getId_propiedad(), detalles);
             } catch (SQLException e) {
-                throw new ServletException("Error cargando detalles para propiedad " 
-                                           + p.getId_propiedad(), e);
+                throw new ServletException("Error cargando detalles para propiedad "
+                        + p.getId_propiedad(), e);
             }
         }
         // Pasar resultados a la JSP

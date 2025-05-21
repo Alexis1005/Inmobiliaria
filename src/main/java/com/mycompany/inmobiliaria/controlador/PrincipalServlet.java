@@ -26,7 +26,7 @@ public class PrincipalServlet extends HttpServlet {
     private PropiedadesDAO propiedadesDAO;
     private PropiedadesCaracteristicasDAO pcDAO;
     private TiposPropiedadDAO tiposDAO;
-
+//CAMBIADO 15/05
     @Override
     public void init() throws ServletException {
         propiedadesDAO = new PropiedadesDAO();

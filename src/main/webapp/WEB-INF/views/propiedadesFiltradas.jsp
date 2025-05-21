@@ -43,7 +43,7 @@
 
                             <div class="row mt-3 mb-0">
                                 <c:forEach var="caract" items="${caracteristicas}">
-                                    <div class="col-6 mb-3">
+                                    <div class="col-6 mb-3 divIcono">
                                         <div class="d-flex flex-column align-items-center">
                                             <!-- Seleccionamos el ícono según la característica -->
                                             <c:choose>
