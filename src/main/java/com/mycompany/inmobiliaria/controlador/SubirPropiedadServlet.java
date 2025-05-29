@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -97,9 +98,9 @@ public class SubirPropiedadServlet extends HttpServlet {
                         logger.log(Level.INFO, "Archivo guardado en: {0}", filePath);
 
                         String projectFilePath = projectImagePath + File.separator + fileName;
-                        Files.copy(Paths.get(filePath), Paths.get(projectFilePath));
+                        Files.copy(Paths.get(filePath), Paths.get(projectFilePath),
+                                StandardCopyOption.REPLACE_EXISTING);
                         logger.log(Level.INFO, "Archivo copiado al proyecto: {0}", projectFilePath);
-
                         String relativePath = "imagenes/" + fileName;
                         imagenesRutas.add(relativePath);
                     } else {

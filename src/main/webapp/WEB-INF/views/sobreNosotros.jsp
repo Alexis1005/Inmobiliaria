@@ -22,13 +22,13 @@
     </head>
     <body>
 
-        <nav class="nav nav-pills nav-fill navDetalle p-0 m-0" style="height: 100px; background-color: #5dade2;">
+        <nav class="nav nav-pills nav-fill navDetalle p-0 m-0" style="height: 100px; background-color: rgba(26, 175, 251, 0.8);">
             <div class="container h-100">
                 <div class="row w-100 align-items-center">
                     <!-- Columna izquierda: Logo -->
                     <div class="col-4 text-start">
                         <a class="navbar-brand m-0" href="${pageContext.request.contextPath}/principal">
-                            <img src="${pageContext.request.contextPath}/imagenes/logo.png" alt="Logo" title="Inicio" width="140px" height="110px"
+                            <img src="${pageContext.request.contextPath}/imagenes/logo.png" alt="Logo" width="140px" height="110px"
                                  class="d-inline-block align-text-center footer-logonav">
                         </a>
                     </div>
@@ -102,6 +102,24 @@
                         <p class="section-description">
                             Convertirnos en una inmobiliaria reconocida por nuestro compromiso, calidad y atención personalizada. Queremos ser parte de los proyectos y sueños de nuestros clientes, y contribuir activamente al crecimiento de nuestra comunidad.
                         </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid mb-5">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h4 class="mb-3 text-center">Nuestra Oficina</h4>
+                    <div style="width: 100%; height: 500px;">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3357.790046436679!2d-58.89026432491654!3d-32.69162815905291!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b044903f689cc5%3A0xe2a5249d1b8e8065!2sEscuela%20Secundaria%20N%C2%BA%2016%20%22Colegio%20de%20Urdinarrain%22!5e0!3m2!1ses!2sar!4v1748201875788!5m2!1ses!2sar" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
                     </div>
                 </div>
             </div>

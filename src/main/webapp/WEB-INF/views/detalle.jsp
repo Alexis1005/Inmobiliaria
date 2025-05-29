@@ -29,8 +29,8 @@
                         <c:forEach var="foto" items="${fotos}" varStatus="status">
                             <div class="carousel-item ${status.first ? 'active' : ''}">
                                 <img src="${pageContext.request.contextPath}/${foto.ruta_foto}" 
-     class="img-fluid w-100 rounded imagen-ampliable" 
-     alt="Foto de la propiedad" style="max-height:300px; object-fit:cover; background-color:#f8f9fa;">
+                                     class="img-fluid w-100 rounded imagen-ampliable" 
+                                     alt="Foto de la propiedad" style="max-height:300px; object-fit:cover; background-color:#f8f9fa;">
 
 
                             </div>
@@ -74,6 +74,8 @@
                 <div class="col-md-4 mt-5 mb-3 position-relative">
                     <h4 class="position-absolute top-0 start-50 translate-middle bg-white px-3 rounded text-success">Contacto</h4>
                     <form method="post" action="${pageContext.request.contextPath}/enviarContacto" class="form-custom border border-2 border-success p-4 w-100 rounded">
+                        <!-- Campo oculto para el ID de la propiedad -->
+                        <input type="hidden" name="id_propiedad" value="${propiedad.id_propiedad}" />
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Nombre completo</label>
                             <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -95,42 +97,42 @@
                 </div>
             </div>
         </div>
-<!-- Modal con carrusel completo -->
-<!-- Modal -->
-<div class="modal fade" id="modalCarrusel" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-centered">
-    <div class="modal-content bg-dark text-white position-relative">
+        <!-- Modal con carrusel completo -->
+        <!-- Modal -->
+        <div class="modal fade" id="modalCarrusel" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content bg-dark text-white position-relative">
 
-      <!-- Botones de navegación, colocados directamente en el .modal-content -->
-      <button class="carousel-control-prev custom-control" type="button" data-bs-target="#modalCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Anterior</span>
-      </button>
-      <button class="carousel-control-next custom-control" type="button" data-bs-target="#modalCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Siguiente</span>
-      </button>
+                    <!-- Botones de navegación, colocados directamente en el .modal-content -->
+                    <button class="carousel-control-prev custom-control" type="button" data-bs-target="#modalCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next custom-control" type="button" data-bs-target="#modalCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
 
-      <div class="modal-body p-0">
-        <!-- Carrusel -->
-        <div id="modalCarousel" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <c:forEach var="foto" items="${fotos}" varStatus="status">
-              <div class="carousel-item ${status.first ? 'active' : ''}">
-                <img src="${pageContext.request.contextPath}/${foto.ruta_foto}" class="d-block w-100"
-                     style="max-height: 85vh; object-fit: contain;" alt="Imagen ampliada">
-              </div>
-            </c:forEach>
-          </div>
+                    <div class="modal-body p-0">
+                        <!-- Carrusel -->
+                        <div id="modalCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <c:forEach var="foto" items="${fotos}" varStatus="status">
+                                    <div class="carousel-item ${status.first ? 'active' : ''}">
+                                        <img src="${pageContext.request.contextPath}/${foto.ruta_foto}" class="d-block w-100"
+                                             style="max-height: 85vh; object-fit: contain;" alt="Imagen ampliada">
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer border-0 bg-dark justify-content-center">
+                        <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-
-      <div class="modal-footer border-0 bg-dark justify-content-center">
-        <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 
@@ -139,31 +141,31 @@
 
         <!--     Ubicación -->
         <div class="w-100 px-3 px-md-5 my-4">
-    <h3 class="text-center text-md-start mb-3">Ubicación</h3>
-    <iframe class="w-100 rounded" src="https://www.google.com/maps?q=${propiedad.direccion}&output=embed"
-            height="400" style="border:0;" allowfullscreen loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"></iframe>
-</div>
+            <h3 class="text-center text-md-start mb-3">Ubicación</h3>
+            <iframe class="w-100 rounded" src="https://www.google.com/maps?q=${propiedad.direccion}&output=embed"
+                    height="400" style="border:0;" allowfullscreen loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
 
         <jsp:include page="footer.jsp"/>
     </body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script>
-    document.querySelectorAll('.imagen-ampliable').forEach((img, index) => {
-        img.addEventListener('click', () => {
-            const modal = new bootstrap.Modal(document.getElementById('modalCarrusel'));
-            modal.show();
+    <script>
+        document.querySelectorAll('.imagen-ampliable').forEach((img, index) => {
+            img.addEventListener('click', () => {
+                const modal = new bootstrap.Modal(document.getElementById('modalCarrusel'));
+                modal.show();
 
-            // Activar el slide correspondiente dentro del modal
-            const slides = document.querySelectorAll('#modalCarousel .carousel-item');
-            slides.forEach(slide => slide.classList.remove('active'));
-            if (slides[index]) {
-                slides[index].classList.add('active');
-            }
+                // Activar el slide correspondiente dentro del modal
+                const slides = document.querySelectorAll('#modalCarousel .carousel-item');
+                slides.forEach(slide => slide.classList.remove('active'));
+                if (slides[index]) {
+                    slides[index].classList.add('active');
+                }
+            });
         });
-    });
-</script>
+    </script>
 
 
 

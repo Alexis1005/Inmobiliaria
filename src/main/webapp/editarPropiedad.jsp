@@ -8,30 +8,31 @@
         <meta charset="UTF-8">
         <title>Editar Propiedades</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sliderinterno.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sobreNosotros.css">
         <style>
             .property-card {
                 border-radius: 10px;
                 box-shadow: 0 2px 6px rgba(0,0,0,0.1);
                 padding: 10px;
-                min-height: 400px;
-            }
-            .price {
-                color: green;
-                font-weight: bold;
             }
         </style>
     </head>
     <body class="bg-light">
 
-        <div class="container mt-4">
+        <jsp:include page="/WEB-INF/views/navDetalles.jsp"></jsp:include>
+            <div class="container mt-4">
 
-            <!-- Formulario de filtrado (GET a /editarPropiedad) -->
-            <form class="mb-4" action="editarPropiedad" method="get">
-                <div class="row g-2">
-                    <div class="col-md-5">
-                        <select id="tipoPropiedad" class="form-select" name="tipo">
-                            <option value="" disabled selected>Tipo de propiedad</option>
-                            <!-- Ejemplo: si tienes lista de TiposPropiedad en request -->
+                <!-- Formulario de filtrado (GET a /editarPropiedad) -->
+                <form class="mb-4" action="editarPropiedad" method="get">
+                    <div class="row g-2">
+                        <div class="col-md-5">
+                            <select id="tipoPropiedad" class="form-select" name="tipo">
+                                <option value="" disabled selected>Tipo de propiedad</option>
+                                <!-- Ejemplo: si tienes lista de TiposPropiedad en request -->
                             <c:forEach var="t" items="${tiposPropiedad}">
                                 <option value="${t.id_tipo}">${t.nombre}</option>
                             </c:forEach>
@@ -39,7 +40,7 @@
                     </div>
                     <div class="col-md-5">
                         <select class="form-select" name="modalidad">
-                            <option value="" disabled selected>MODALIDAD</option>
+                            <option value="" disabled selected>Modalidad</option>
                             <option value="venta">Venta</option>
                             <option value="alquiler">Alquiler</option>
                             <option value="arrendamiento">Arrendamiento</option>
@@ -56,15 +57,15 @@
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 <c:forEach var="prop" items="${listaPropiedades}">
                     <div class="col d-flex justify-content-center">
-                        <div class="card mb-4 property-card" style="width: 18rem;">
+                        <div class="card-body mb-4 property-card" style="width: 18rem;">
                             <c:if test="${not empty prop.imagen}">
                                 <img src="${pageContext.request.contextPath}/${prop.imagen}"
                                      class="card-img-top" style="height:200px;object-fit:cover" />
                             </c:if>
-                            <div class="card-body">
-                                <h5 class="card-title">${prop.direccion}</h5>
-                                <p class="card-text">${prop.descripcion}</p>
-                                <p class="card-text price">$${prop.precio}</p>
+                            <div class="card-body text-start">
+                                <h5 class="card-title"><strong>Dirección:</strong> ${prop.direccion}</h5>
+                                <p class="card-text"><strong>Descripción:</strong> ${prop.descripcion}</p>
+                                <p class="card-text"><strong>Precio:</strong> $${prop.precio}</p>
                                 <p class="card-text"><strong>Modalidad:</strong> ${prop.modalidad}</p>
                                 <p class="card-text"><strong>Estado:</strong> ${prop.estado}</p>
 
@@ -77,7 +78,7 @@
                                     </ul>
                                 </c:if>
 
-                                <button class="btn btn-primary editar-btn"
+                                <button class="btn btn-primary editar-btn w-100"
                                         data-id="${prop.id_propiedad}"
                                         data-direccion="${fn:escapeXml(prop.direccion)}"
                                         data-descripcion="${fn:escapeXml(prop.descripcion)}"
@@ -111,6 +112,16 @@
                         <div class="mb-3">
                             <label for="editar-descripcion" class="form-label">Descripción</label>
                             <textarea class="form-control" name="descripcion" id="editar-descripcion"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <!-- Mostrar características si existen -->
+                                <c:if test="${not empty detallesMap[prop.id_propiedad]}">
+                                    <ul class="list-unstyled">
+                                        <c:forEach var="det" items="${detallesMap[prop.id_propiedad]}">
+                                            <li><strong>${det.nombre}</strong>: ${det.detalle}</li>
+                                                </c:forEach>
+                                    </ul>
+                                </c:if>
                         </div>
                         <div class="mb-3">
                             <label for="editar-precio" class="form-label">Precio</label>

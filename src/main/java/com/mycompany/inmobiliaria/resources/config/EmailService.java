@@ -6,7 +6,7 @@ import java.util.Properties;
 
 public class EmailService {
 
-    public static void enviarCorreo(String nombre, String telefono, String correo, String mensaje) {
+    public static void enviarCorreo(String nombre, String telefono, String correo, String mensaje, int idPropiedad, String urlPropiedad) {
         // Configuración de las propiedades del servidor de correo
         String host = "smtp.gmail.com";
         final String user = "vespaalexis@gmail.com";  // Tu correo electrónico
@@ -35,7 +35,11 @@ public class EmailService {
             message.addRecipient(Message.RecipientType.CC, new InternetAddress(correo));
 
             message.setSubject("Nuevo mensaje de contacto");  // Asunto del correo
-            message.setText("Nombre: " + nombre + "\nTeléfono: " + telefono + "\nCorreo: " + correo + "\nMensaje: " + mensaje);  // Cuerpo del correo
+            message.setText("Nombre: " + nombre + "\n" +
+                    "Teléfono: " + telefono + "\n" + 
+                    "Correo: " + correo + "\n" +
+                    "Mensaje: " + mensaje + "\n" +
+                    "Haz click aquí para ver la propiedad: " + urlPropiedad);  // Cuerpo del correo
 
             // Enviar el correo
             Transport.send(message);

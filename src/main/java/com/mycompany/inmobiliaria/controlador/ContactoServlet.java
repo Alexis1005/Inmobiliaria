@@ -19,9 +19,22 @@ public class ContactoServlet extends HttpServlet {
         String telefono = request.getParameter("tel");
         String correo = request.getParameter("correo");
         String mensaje = request.getParameter("mensaje");
+        String idPropiedadStr = request.getParameter("id_propiedad");
+               
+        //convertir el id a entero
+        int idPropiedad;
+        try {
+            idPropiedad = Integer.parseInt(idPropiedadStr);
+        } catch (NumberFormatException e) {
+            //en caso de que IdPropiedadStr no sea un número valido
+            idPropiedad = -1;
+        }
+        
+        //generar URL para acceder a la propiedad enviada
+        String urlPropiedad = "http://localhost:8080/inmobiliaria/detallePropiedad?id=" + idPropiedad;
 
         // Llamar al método para enviar el correo
-        EmailService.enviarCorreo(nombre, telefono, correo, mensaje);
+        EmailService.enviarCorreo(nombre, telefono, correo, mensaje, idPropiedad, urlPropiedad);
 
         // Redirigir al usuario con un mensaje de éxito
         response.setContentType("text/html");

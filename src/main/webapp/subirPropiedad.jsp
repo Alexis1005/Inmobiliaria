@@ -24,18 +24,10 @@
     </head>
 
     <body>
-        <nav class="nav nav-pills nav-fill bg-success">
-            <a class="nav-link fs-4 m-2 border border-2 border-light rounded text-white"
-               href="adminVer.jsp">Ver propiedades</a>
-            <a class="nav-link fs-4 m-2 border border-2 border-light rounded text-white"
-               href="editarPropiedad">Editar propiedades</a>
-        </nav>
-
-
         <div class="container">
             <h2 class="text-center mt-4 text-success" >Agregando propiedad</h2>
             <hr class="bg-success mb-4">   
-                        
+
             <form action="${pageContext.request.contextPath}/subirPropiedad" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="descripcion" class="form-label fw-bold">Título de la propiedad</label>
@@ -108,7 +100,7 @@
                     <button type="submit" class="btn btn-success mt-3 mb-3" style="width: 80%;">Subir Propiedad</button>
                 </div>
             </form>
-                </div>
+        </div>
 
         <!-- Modal para agregar nueva característica -->
         <div class="modal fade" id="agregarCaracteristicaModal" tabindex="-1" aria-labelledby="agregarCaracteristicaModalLabel" aria-hidden="true">
@@ -290,5 +282,5 @@
                                 }
                             });
         </script>
-</body>
+    </body>
 </html>
