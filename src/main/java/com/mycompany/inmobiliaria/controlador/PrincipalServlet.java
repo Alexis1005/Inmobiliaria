@@ -1,8 +1,10 @@
 package com.mycompany.inmobiliaria.controlador;
 
+import com.mycompany.inmobiliaria.modelo.FotosPropiedad;
 import com.mycompany.inmobiliaria.modelo.Propiedades;
 import com.mycompany.inmobiliaria.modelo.PropiedadesCaracteristicas;
 import com.mycompany.inmobiliaria.modelo.TiposPropiedad;
+import com.mycompany.inmobiliaria.modelo.dao.FotosPropiedadDAO;
 import com.mycompany.inmobiliaria.modelo.dao.PropiedadesCaracteristicasDAO;
 import com.mycompany.inmobiliaria.modelo.dao.PropiedadesDAO;
 import com.mycompany.inmobiliaria.modelo.dao.TiposPropiedadDAO;
@@ -16,20 +18,19 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @WebServlet("/principal")
 public class PrincipalServlet extends HttpServlet {
 
-    private static final Logger logger = Logger.getLogger(PrincipalServlet.class.getName());
-    private PropiedadesDAO propiedadesDAO;
+   private PropiedadesDAO propiedadesDAO;
+    private FotosPropiedadDAO fotosDAO;
     private PropiedadesCaracteristicasDAO pcDAO;
     private TiposPropiedadDAO tiposDAO;
-//CAMBIADO 15/05
+
     @Override
     public void init() throws ServletException {
         propiedadesDAO = new PropiedadesDAO();
+        fotosDAO       = new FotosPropiedadDAO();
         pcDAO          = new PropiedadesCaracteristicasDAO();
         tiposDAO       = new TiposPropiedadDAO();
     }
@@ -52,31 +53,36 @@ public class PrincipalServlet extends HttpServlet {
 
             // 3) Obtener lista de propiedades
             List<Propiedades> propiedades = propiedadesDAO.listar(idTipo, modalidad, "disponible");
+            
+             // 4) Para cada propiedad, obtener lista de fotos y ponerlas en un mapa:
+            Map<Integer, List<FotosPropiedad>> fotosMap = new HashMap<>();
+            for (Propiedades p : propiedades) {
+                List<FotosPropiedad> fotos = fotosDAO.obtenerFotosPorPropiedad(p.getId_propiedad());
+                fotosMap.put(p.getId_propiedad(), fotos);
+            }
 
-            // 4) Construir detallesMap: id_propiedad → List<PropiedadesCaracteristicas>
+            // ) Construir detallesMap: id_propiedad → List<PropiedadesCaracteristicas>
             Map<Integer, List<PropiedadesCaracteristicas>> detallesMap = new HashMap<>();
             for (Propiedades p : propiedades) {
                 detallesMap.put(
                     p.getId_propiedad(),
                     pcDAO.listarPorPropiedad(p.getId_propiedad())
                 );
-                logger.info("Propiedad " + p.getId_propiedad() + " → " + detallesMap.get(p.getId_propiedad()));
             }
 
             // 5) Pasar atributos al JSP
             request.setAttribute("tiposPropiedad", tipos);
             request.setAttribute("propiedades", propiedades);
             request.setAttribute("detallesMap", detallesMap);
+            request.setAttribute("fotosMap", fotosMap);
 
             // 6) Forward a la vista
             request.getRequestDispatcher("/WEB-INF/views/principal.jsp")
                    .forward(request, response);
 
         } catch (NumberFormatException ex) {
-            logger.log(Level.SEVERE, "ID de tipo inválido", ex);
             throw new ServletException("El parámetro 'tipoPropiedad' debe ser un número", ex);
         } catch (SQLException ex) {
-            logger.log(Level.SEVERE, "Error al cargar detalles de propiedades", ex);
             throw new ServletException("Error de base de datos al obtener características", ex);
         }
     }

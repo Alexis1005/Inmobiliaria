@@ -1,7 +1,9 @@
 package com.mycompany.inmobiliaria.controlador;
 
+import com.mycompany.inmobiliaria.modelo.FotosPropiedad;
 import com.mycompany.inmobiliaria.modelo.Propiedades;
 import com.mycompany.inmobiliaria.modelo.PropiedadesCaracteristicas;
+import com.mycompany.inmobiliaria.modelo.dao.FotosPropiedadDAO;
 import com.mycompany.inmobiliaria.modelo.dao.PropiedadesCaracteristicasDAO;
 import com.mycompany.inmobiliaria.resources.config.Conexion;
 import java.io.IOException;
@@ -23,6 +25,8 @@ import java.util.Map;
 public class FiltrarPropiedadesServlet extends HttpServlet {
 
     private final PropiedadesCaracteristicasDAO pcDAO = new PropiedadesCaracteristicasDAO();
+        private final FotosPropiedadDAO fotosDAO = new FotosPropiedadDAO(); // Agregar DAO de fotos
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -30,10 +34,6 @@ public class FiltrarPropiedadesServlet extends HttpServlet {
         // Obtener parámetros del formulario
         String modalidad = request.getParameter("modalidad");
         String tipoPropiedad = request.getParameter("tipoPropiedad");
-
-        // Imprimir parámetros para depuración
-        System.out.println("Modalidad recibida: " + modalidad);
-        System.out.println("Tipo de Propiedad recibida: " + tipoPropiedad);
 
         // Obtener propiedades filtradas
         List<Propiedades> propiedadesFiltradas = obtenerPropiedadesFiltradas(modalidad, tipoPropiedad);
@@ -50,9 +50,21 @@ public class FiltrarPropiedadesServlet extends HttpServlet {
                         + p.getId_propiedad(), e);
             }
         }
+        // Construir el map id_propiedad → lista de fotos (NUEVO)
+        Map<Integer, List<FotosPropiedad>> fotosMap = new HashMap<>();
+        for (Propiedades p : propiedadesFiltradas) {
+            try {
+                List<FotosPropiedad> fotos = fotosDAO.obtenerFotosPorPropiedad(p.getId_propiedad());
+                fotosMap.put(p.getId_propiedad(), fotos);
+            } catch (SQLException e) {
+                throw new ServletException("Error cargando fotos para propiedad "
+                        + p.getId_propiedad(), e);
+            }
+        }
         // Pasar resultados a la JSP
         request.setAttribute("propiedadesFiltradas", propiedadesFiltradas);
         request.setAttribute("detallesMap", detallesMap);
+             request.setAttribute("fotosMap", fotosMap); // Agregar fotosMap
         request.setAttribute("modalidadFiltrada", modalidad);
         //Obtener el nombre del primer tipo de propiedad si existe
         String nombreTipo = (propiedadesFiltradas != null && !propiedadesFiltradas.isEmpty()) ? propiedadesFiltradas.get(0).getNombreTipo() : "";

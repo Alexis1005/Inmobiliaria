@@ -42,61 +42,70 @@ public class PropiedadesDAO {
     }
 
     public ArrayList<Propiedades> listar(Integer idTipo, String modalidad, String modality) {
-        ArrayList<Propiedades> lista = new ArrayList<>();
+    ArrayList<Propiedades> lista = new ArrayList<>();
 
-        String sql = "SELECT p.id_propiedad, p.id_tipo, p.id_agente, p.direccion, p.precio, "
-                + "p.descripcion, p.estado, p.modalidad, p.imagen "
-                + "FROM Propiedades p "
-                + "WHERE p.estado = 'disponible'";
+    String sql = "SELECT p.id_propiedad, p.id_tipo, p.id_agente, p.direccion, p.precio, "
+               + "p.descripcion, p.estado, p.modalidad, p.imagen "
+               + "FROM Propiedades p";
 
-        List<String> conditions = new ArrayList<>();
+    List<String> conditions = new ArrayList<>();
+    conditions.add("p.estado = 'disponible'"); // condición obligatoria
+
+    if (idTipo != null) {
+        conditions.add("p.id_tipo = ?");
+    }
+    if (modalidad != null && !modalidad.isEmpty()) {
+        conditions.add("p.modalidad = ?");
+    }
+
+    // Armar cláusula WHERE si hay condiciones
+    if (!conditions.isEmpty()) {
+        sql += " WHERE " + String.join(" AND ", conditions);
+    }
+
+    // Agregar ordenamiento
+    sql += " ORDER BY p.id_propiedad DESC";
+
+    try (Connection cn = Conexion.getConnection(); PreparedStatement ps = cn.prepareStatement(sql)) {
+
+        int paramIndex = 1;
         if (idTipo != null) {
-            conditions.add("p.id_tipo = ?");
+            ps.setInt(paramIndex++, idTipo);
         }
         if (modalidad != null && !modalidad.isEmpty()) {
-            conditions.add("p.modalidad = ?");
-        }
-        if (!conditions.isEmpty()) {
-            sql += " AND " + String.join(" AND ", conditions);
+            ps.setString(paramIndex++, modalidad);
         }
 
-        try (Connection cn = Conexion.getConnection(); PreparedStatement ps = cn.prepareStatement(sql)) {
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Propiedades obj = new Propiedades();
+                obj.setId_propiedad(rs.getInt("id_propiedad"));
+                obj.setId_tipo(rs.getInt("id_tipo"));
+                obj.setId_agente(rs.getInt("id_agente"));
+                obj.setDireccion(rs.getString("direccion"));
+                obj.setPrecio(rs.getDouble("precio"));
+                obj.setDescripcion(rs.getString("descripcion"));
+                obj.setEstado(rs.getString("estado"));
+                obj.setModalidad(rs.getString("modalidad"));
+                obj.setImagen(rs.getString("imagen"));
 
-            int paramIndex = 1;
-            if (idTipo != null) {
-                ps.setInt(paramIndex++, idTipo);
+                // Cargar características
+                List<String> caracteristicas = obtenerCaracteristicas(rs.getInt("id_propiedad"), cn);
+                obj.setCaracteristicas(caracteristicas);
+
+                lista.add(obj);
             }
-            if (modalidad != null && !modalidad.isEmpty()) {
-                ps.setString(paramIndex, modalidad);
-            }
-
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    Propiedades obj = new Propiedades();
-                    obj.setId_propiedad(rs.getInt("id_propiedad"));
-                    obj.setId_tipo(rs.getInt("id_tipo"));
-                    obj.setId_agente(rs.getInt("id_agente"));
-                    obj.setDireccion(rs.getString("direccion"));
-                    obj.setPrecio(rs.getDouble("precio"));
-                    obj.setDescripcion(rs.getString("descripcion"));
-                    obj.setEstado(rs.getString("estado"));
-                    obj.setModalidad(rs.getString("modalidad"));
-                    obj.setImagen(rs.getString("imagen")); // Usar el campo imagen de Propiedades
-
-                    // Cargar características
-                    List<String> caracteristicas = obtenerCaracteristicas(rs.getInt("id_propiedad"), cn);
-                    obj.setCaracteristicas(caracteristicas);
-
-                    lista.add(obj);
-                }
-            }
-            logger.log(Level.INFO, "Propiedades listadas: {0}", lista.size());
-        } catch (SQLException ex) {
-            logger.log(Level.SEVERE, "Error al listar propiedades: " + ex.getMessage(), ex);
-            throw new RuntimeException("Error al listar propiedades", ex);
         }
-        return lista;
+
+        logger.log(Level.INFO, "Propiedades listadas: {0}", lista.size());
+    } catch (SQLException ex) {
+        logger.log(Level.SEVERE, "Error al listar propiedades: " + ex.getMessage(), ex);
+        throw new RuntimeException("Error al listar propiedades", ex);
     }
+
+    return lista;
+}
+
 
     private List<String> obtenerCaracteristicas(int idPropiedad, Connection cn) throws SQLException {
         List<String> caracteristicas = new ArrayList<>();
@@ -263,7 +272,84 @@ public class PropiedadesDAO {
 
     }
     
-    //----------------------------
-    // Método para traer propiedad segun el filtrado
-    //----------------------------
+    public ArrayList<Propiedades> listarConFiltros(Integer idTipo, String modalidad) throws SQLException {
+    ArrayList<Propiedades> lista = new ArrayList<>();
+    
+    StringBuilder sql = new StringBuilder();
+    sql.append("SELECT p.id_propiedad, p.id_tipo, p.id_agente, p.direccion, p.precio, ");
+    sql.append("p.descripcion, p.estado, p.modalidad, p.imagen, p.caracteristicasGenerales, ");
+    sql.append("tp.nombre as nombre_tipo ");
+    sql.append("FROM Propiedades p ");
+    sql.append("LEFT JOIN TiposPropiedad tp ON p.id_tipo = tp.id_tipo ");
+    sql.append("WHERE 1=1 ");
+    
+    List<Object> parametros = new ArrayList<>();
+    
+    // Aplicar filtros dinámicamente
+    if (idTipo != null && idTipo > 0) {
+        sql.append("AND p.id_tipo = ? ");
+        parametros.add(idTipo);
+    }
+    
+    if (modalidad != null && !modalidad.trim().isEmpty()) {
+        sql.append("AND LOWER(p.modalidad) = LOWER(?) ");
+        parametros.add(modalidad.trim());
+    }
+    
+    // Ordenar por ID descendente para mostrar las más recientes primero
+    sql.append("ORDER BY p.id_propiedad DESC");
+    
+    try (Connection cn = Conexion.getConnection(); 
+         PreparedStatement ps = cn.prepareStatement(sql.toString())) {
+        
+        // Asignar parámetros
+        for (int i = 0; i < parametros.size(); i++) {
+            ps.setObject(i + 1, parametros.get(i));
+        }
+        
+        logger.log(Level.INFO, "Ejecutando consulta: " + sql.toString());
+        logger.log(Level.INFO, "Con parámetros: " + parametros.toString());
+        
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Propiedades obj = new Propiedades();
+                obj.setId_propiedad(rs.getInt("id_propiedad"));
+                obj.setId_tipo(rs.getInt("id_tipo"));
+                obj.setId_agente(rs.getInt("id_agente"));
+                obj.setDireccion(rs.getString("direccion"));
+                obj.setPrecio(rs.getDouble("precio"));
+                obj.setDescripcion(rs.getString("descripcion"));
+                obj.setEstado(rs.getString("estado"));
+                obj.setModalidad(rs.getString("modalidad"));
+                obj.setImagen(rs.getString("imagen"));
+                obj.setCaracteristicasGenerales(rs.getString("caracteristicasGenerales"));
+                
+                // Agregar el nombre del tipo si está disponible
+                String nombreTipo = rs.getString("nombre_tipo");
+                if (nombreTipo != null) {
+                    obj.setNombretipo(nombreTipo);
+                }
+                
+                // Cargar características si es necesario
+                try {
+                    List<String> caracteristicas = obtenerCaracteristicas(rs.getInt("id_propiedad"), cn);
+                    obj.setCaracteristicas(caracteristicas);
+                } catch (SQLException e) {
+                    logger.log(Level.WARNING, "Error al cargar características para propiedad " + 
+                              obj.getId_propiedad(), e);
+                }
+                
+                lista.add(obj);
+            }
+        }
+        
+        logger.log(Level.INFO, "Propiedades encontradas con filtros: " + lista.size());
+        
+    } catch (SQLException ex) {
+        logger.log(Level.SEVERE, "Error al listar propiedades con filtros: " + ex.getMessage(), ex);
+        throw new SQLException("Error al filtrar propiedades", ex);
+    }
+    
+    return lista;
+}
 }

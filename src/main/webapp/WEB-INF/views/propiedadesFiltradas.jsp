@@ -22,12 +22,22 @@
             <c:forEach var="propiedad" items="${propiedadesFiltradas}">
                 <div class="col">
                     <div class="card tarjeta shadow">
-                        <c:if test="${not empty propiedad.imagen}">
-                            <img src="${pageContext.request.contextPath}/${propiedad.imagen}"
-                                 class="card-img-top"
-                                 style="height:200px;object-fit:cover"
-                                 alt="Imagen de la propiedad"/>
-                        </c:if>
+                        <c:set var="listaFotos" value="${fotosMap[propiedad.id_propiedad]}"/>
+                                <c:choose>
+                                    <c:when test="${not empty listaFotos}">
+                                        <c:set var="primeraFoto" value="${listaFotos[0].ruta_foto}"/>
+                                        <img src="${pageContext.request.contextPath}/${primeraFoto}"
+                                             class="card-img-top"
+                                             style="height:200px;object-fit:cover"
+                                             alt="Imagen de la propiedad"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="${pageContext.request.contextPath}/imagenes/no-image-available.png"
+                                             class="card-img-top"
+                                             style="height:200px;object-fit:cover"
+                                             alt="Sin imagen disponible"/>
+                                    </c:otherwise>
+                                </c:choose>
                         <div class="card-body">
                             <h5 class="card-title text-start fw-semibold text-dark">
                                 ${propiedad.descripcion}

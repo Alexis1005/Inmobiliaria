@@ -1,6 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -11,6 +13,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sliderinterno.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sobreNosotros.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
         <title>Detalle propiedad</title>
     </head>
     <body>
@@ -31,8 +34,6 @@
                                 <img src="${pageContext.request.contextPath}/${foto.ruta_foto}" 
                                      class="img-fluid w-100 rounded imagen-ampliable" 
                                      alt="Foto de la propiedad" style="max-height:300px; object-fit:cover; background-color:#f8f9fa;">
-
-
                             </div>
                         </c:forEach>
                     </div>
@@ -66,11 +67,11 @@
                     <hr class="w-75">
                     <p>Descripción general de la ${tipoPropiedad.nombre}:</p>
                     <p>${propiedad.caracteristicasGenerales}</p>
-                    <h3>USD$ <strong>${propiedad.precio}</strong></h3>
+                    <h3>USD$ <strong><fmt:formatNumber value="${propiedad.precio}" type="number" maxFractionDigits="0"/></strong></h3>
                     <hr class="w-75">
                 </div>
 
-                <!--            <!-- Formulario de contacto (lado derecho) -->
+                <!-- Formulario de contacto (lado derecho) -->
                 <div class="col-md-4 mt-5 mb-3 position-relative">
                     <h4 class="position-absolute top-0 start-50 translate-middle bg-white px-3 rounded text-success">Contacto</h4>
                     <form method="post" action="${pageContext.request.contextPath}/enviarContacto" class="form-custom border border-2 border-success p-4 w-100 rounded">
@@ -133,12 +134,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-
         <!--     Ubicación -->
         <div class="w-100 px-3 px-md-5 my-4">
             <h3 class="text-center text-md-start mb-3">Ubicación</h3>
@@ -146,7 +141,6 @@
                     height="400" style="border:0;" allowfullscreen loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
-
         <jsp:include page="footer.jsp"/>
     </body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -166,7 +160,4 @@
             });
         });
     </script>
-
-
-
 </html>

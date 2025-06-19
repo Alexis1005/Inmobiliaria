@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -50,7 +51,7 @@
                 <!-- Buscador (Centrado en pantalla) -->
                 <div class="busqueda position-absolute start-50 translate-middle-x d-flex flex-column align-items-center w-100 p-0">
                     <h1 class="tituloUno mb-4 text-center">Encuentra tu lugar ideal</h1>
-                    <form id="filtroForm" class="d-flex justify-content-center w-100" action="${pageContext.request.contextPath}/filtrarPropiedades" method="get" target="_blank">
+                    <form id="filtroForm" class="d-flex justify-content-center w-100" action="${pageContext.request.contextPath}/filtrarPropiedades" method="get" target="">
                         <div class="d-flex flex-column flex-md-row align-items-center gap-1 selectores">
                             <!-- Modalidad -->
                             <div class="d-flex align-items-center justify-content-center" style="min-width: 200px">
@@ -94,7 +95,7 @@
                                 <a class="nav-link text-white fs-4 fw-bold" href="${pageContext.request.contextPath}/sobreNosotros">La Empresa</a>
                             </li>
                             <li class="nav-item mt-3 mb-3 bordecito">
-                                <a class="nav-link text-white fs-4 fw-bold" href="#">Contacto</a>
+                                <a class="nav-link text-white fs-4 fw-bold" href="#foot">Contacto</a>
                             </li>
                         </ul>
                     </div>
@@ -111,11 +112,14 @@
             </div>
         </div>
 
-        <div class="position-fixed bottom-0 end-0 p-2" style="z-index: 100;">
-            <div class="social-icons whatsapp-icon p-2 align-items-center" style="background-color: #25D366;">
+        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 100;">
+            <a href="https://wa.me/5493446647684" target="_blank" rel="noopener noreferrer"
+               class="d-flex justify-content-center align-items-center rounded-circle whatsapp-icon"
+               style="width: 40px; height: 40px; background-color: rgba(37, 211, 102,1); text-decoration: none; padding: 8px">
                 <i class="fab fa-whatsapp text-light fa-3x"></i>
-            </div>
+            </a>
         </div>
+
 
         <div class="container-fluid p-0 mb-4">
             <div class="text-center navDetalle subtituloContenedor text-white py-4 fs-4 mb-4">
@@ -126,12 +130,22 @@
                     <c:if test="${status.index < 15}">
                         <div class="col d-flex justify-content-center">
                             <div class="card tarjeta shadow">
-                                <c:if test="${not empty propiedad.imagen}">
-                                    <img src="${pageContext.request.contextPath}/${propiedad.imagen}"
-                                         class="card-img-top"
-                                         style="height:200px;object-fit:cover"
-                                         alt="Imagen de la propiedad"/>
-                                </c:if>
+                               <c:set var="listaFotos" value="${fotosMap[propiedad.id_propiedad]}"/>
+                                <c:choose>
+                                    <c:when test="${not empty listaFotos}">
+                                        <c:set var="primeraFoto" value="${listaFotos[0].ruta_foto}"/>
+                                        <img src="${pageContext.request.contextPath}/${primeraFoto}"
+                                             class="card-img-top"
+                                             style="height:200px;object-fit:cover"
+                                             alt="Imagen de la propiedad"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="${pageContext.request.contextPath}/imagenes/no-image-available.png"
+                                             class="card-img-top"
+                                             style="height:200px;object-fit:cover"
+                                             alt="Sin imagen disponible"/>
+                                    </c:otherwise>
+                                </c:choose>
                                 <div class="card-body">
                                     <h5 class="card-title text-start fw-semibold text-dark">
                                         ${propiedad.descripcion}
@@ -168,10 +182,28 @@
                                                     <span class="small text-muted mb-4">
                                                         <!-- Determinamos el valor según el tipo de propiedad -->
                                                         <c:choose>
-                                                            <c:when test="${fn:toLowerCase(propiedad.nombreTipo) == 'garaje'}">
+                                                            <c:when test="${fn:toLowerCase(propiedad.nombreTipo) == 'herramientas agrícolas'}">
+                                                                –
+                                                            </c:when>
+                                                            <c:when test="${fn:toLowerCase(propiedad.nombreTipo) == 'hacienda general'}">
                                                                 –
                                                             </c:when>
                                                             <c:when test="${fn:toLowerCase(propiedad.nombreTipo) == 'terreno'}">
+                                                                <!-- Para terrenos, mostramos solo 'superficie' y "–" para los demás -->
+                                                                <c:if test="${caract == 'superficie'}">
+                                                                    <c:set var="valor" value="–" />
+                                                                    <c:forEach var="det" items="${detalles}">
+                                                                        <c:if test="${fn:toLowerCase(fn:trim(det.nombre)) == 'superficie'}">
+                                                                            <c:set var="valor" value="${det.detalle}" />
+                                                                        </c:if>
+                                                                    </c:forEach>
+                                                                    <strong>Superficie</strong>: ${valor}
+                                                                </c:if>
+                                                                <c:if test="${caract != 'superficie'}">
+                                                                    –
+                                                                </c:if>
+                                                            </c:when>
+                                                            <c:when test="${fn:toLowerCase(propiedad.nombreTipo) == 'campo'}">
                                                                 <!-- Para terrenos, mostramos solo 'superficie' y "–" para los demás -->
                                                                 <c:if test="${caract == 'superficie'}">
                                                                     <c:set var="valor" value="–" />
@@ -207,8 +239,7 @@
                                     </div>
 
                                     <div class="d-flex flex-column align-items-end mt-1">
-                                        <p class="card-text" style="color:#2c3e50">
-                                            <strong>${propiedad.precio}</strong>
+                                        <p class="card-text" style="color:#2c3e50">USD$ <strong><fmt:formatNumber value="${propiedad.precio}" type="number" maxFractionDigits="0"/></strong></p>
                                         </p>
                                         <button class="btn detalleDos btn-custom text-light fw-bold"
                                                 onclick="window.location.href = '${pageContext.request.contextPath}/detallePropiedad?id=${propiedad.id_propiedad}'">

@@ -12,7 +12,7 @@ public class TiposPropiedadDAO {
 
     public ArrayList<TiposPropiedad> ListarTiposPropiedades() throws SQLException {
         ArrayList<TiposPropiedad> listaTipo = new ArrayList<>();
-        String sql = "SELECT * FROM tiposPropiedad";
+        String sql = "SELECT * FROM tiposPropiedad order by nombre asc";
         try (Connection cn = Conexion.getConnection();
              PreparedStatement ps = cn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {

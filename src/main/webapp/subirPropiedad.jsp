@@ -25,6 +25,9 @@
 
     <body>
         <div class="container">
+            <a class="navbar-brand mt-4" href="${pageContext.request.contextPath}/index.jsp">
+                <button type="button" class="btn btn-outline-success btn-lg mt-4">🏠 <strong>Inicio</strong></button>
+            </a>
             <h2 class="text-center mt-4 text-success" >Agregando propiedad</h2>
             <hr class="bg-success mb-4">   
 
@@ -113,12 +116,12 @@
                     <div class="modal-body">
                         <form id="agregarCaracteristicaForm">
                             <div class="mb-3">
-                                <label for="nuevaCaracteristicaNombre" class="form-label">Nombre de la Característica</label>
-                                <input type="text" class="form-control" id="nuevaCaracteristicaNombre" required>
+                                <label for="nuevaCaracteristicaNombre" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nuevaCaracteristicaNombre" placeholder="superficie, baños, dormitorios..." required>
                             </div>
                             <div class="mb-3">
-                                <label for="nuevaCaracteristicaDetalle" class="form-label">Detalle (ej. "2 baños", "100 m²")</label>
-                                <input type="text" class="form-control" id="nuevaCaracteristicaDetalle">
+                                <label for="nuevaCaracteristicaDetalle" class="form-label">Detalle</label>
+                                <input type="text" class="form-control" id="nuevaCaracteristicaDetalle" placeholder="10ha, 1, si, no...">
                             </div>
                         </form>
                     </div>

@@ -92,16 +92,13 @@ nav.navbar {
 .whatsapp-icon {
     opacity: 0.8;
     transition: all 0.3s;
-    border-radius: 50%;
-    height: 60px !important;
-    width: 60px !important;
 }
 
 .whatsapp-icon:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(37, 211, 102, 0.7);
-    opacity: 1;
+    transform: scale(1.2);
+    box-shadow: 0 0 15px rgba(37, 211, 102, 1);
     cursor: pointer;
+    opacity: 1;
 }
 
 .tarjeta {
@@ -226,11 +223,11 @@ nav.navbar {
         border: 2px solid white;
     }
     .whatsapp-icon {
-        width: 45px !important;
-        height: 45px !important;
+        width: 28px !important;
+        height: 28px !important;
     }
     .whatsapp-icon i {
-        font-size: 2.2rem;
+        font-size: 2em;
     }
     .hamburguesa {
         flex-direction: row;

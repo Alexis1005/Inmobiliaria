@@ -43,7 +43,7 @@
                         <a class="nav-link text-white fs-4 fw-bold" href="${pageContext.request.contextPath}/sobreNosotros">La Empresa</a>
                     </li>
                     <li class="nav-item mt-3 mb-3 bordecito">
-                        <a class="nav-link text-white fs-4 fw-bold" href="#">Contacto</a>
+                        <a class="nav-link text-white fs-4 fw-bold" href="#foot">Contacto</a>
                     </li>
                 </ul>
             </div>

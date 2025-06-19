@@ -137,7 +137,7 @@ public class SubirPropiedadServlet extends HttpServlet {
                     logger.log(Level.INFO, "Procesando caracteristica: idCaracteristica={0}, detalle={1}", new Object[]{id_caracteristica, detalle});
                     if (detalle != null && !detalle.trim().isEmpty()) {
                         PropiedadesCaracteristicas pc = new PropiedadesCaracteristicas(idPropiedad, id_caracteristica, detalle);
-                        pcDAO.agregar(pc);
+                        pcDAO.insertar(pc);
                         logger.log(Level.INFO, "Caracteristica guardada: {0}", pc);
                     }
                 }
