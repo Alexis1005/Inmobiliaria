@@ -19,6 +19,7 @@ public class ContactoServlet extends HttpServlet {
         String telefono = request.getParameter("tel");
         String correo = request.getParameter("correo");
         String mensaje = request.getParameter("mensaje");
+<<<<<<< HEAD
         String idPropiedadStr = request.getParameter("id_propiedad");
                
         //convertir el id a entero
@@ -35,6 +36,11 @@ public class ContactoServlet extends HttpServlet {
 
         // Llamar al método para enviar el correo
         EmailService.enviarCorreo(nombre, telefono, correo, mensaje, idPropiedad, urlPropiedad);
+=======
+
+        // Llamar al método para enviar el correo
+        EmailService.enviarCorreo(nombre, telefono, correo, mensaje);
+>>>>>>> a345f68 (ni idea)
 
         // Redirigir al usuario con un mensaje de éxito
         response.setContentType("text/html");
