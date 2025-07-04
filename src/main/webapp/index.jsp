@@ -22,7 +22,7 @@
                     <div class="text-center mb-5">
                         <h1 class="mb-3 fw-bold text-primary">Inmobiliaria Moreno Galeano</h1>
                         <h5 class="text-muted mb-3">Panel del Agente</h5>
-                        <p class="fs-5">Bienvenido, <strong class="text-primary"><%= sesion.getAttribute("usuario") %></strong></p>
+                        <p class="fs-5">Bienvenido, <strong class="text-primary">Juan Moreno</strong></p>
                     </div>
 
                     <!-- Botones del Dashboard -->

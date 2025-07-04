@@ -74,7 +74,7 @@
                     </div>
                     <div class="col-md-8 p-4">
                         <p class="section-description">
-                            En Inmobiliaria Moreno Galeano, estamos comprometidos con brindar un servicio cercano, transparente y confiable. Nuestro entusiasmo, dedicación y profesionalismo nos diferencian. Acompañamos a cada cliente de forma personalizada en todo el proceso para que vivan una experiencia positiva.
+                            En Inmobiliaria Moreno Galeano iniciamos nuestro camino en el año 2024, consolidándonos como una de las empresas más jóvenes del sector inmobiliario en nuestra ciudad. Nacimos con una fuerte vocación de servicio, impulsados por el deseo de acompañar a cada cliente en uno de los momentos más importantes de su vida: encontrar un lugar para vivir, invertir o concretar un proyecto personal. Cada operación inmobiliaria es, para nosotros, una oportunidad para construir confianza, aportar valor y formar parte de los sueños de quienes nos eligen.
                         </p>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                     </div>
                     <div class="col-md-8 p-4">
                         <p class="section-description">
-                            Brindar un servicio inmobiliario confiable, personalizado y transparente, enfocados en las necesidades de nuestros clientes. Nuestro objetivo es construir relaciones de confianza y respeto, simplificando cada etapa del proceso inmobiliario.
+                           Brindar un servicio inmobiliario transparente, cercano y centrado en las personas, adaptándonos a las necesidades específicas de cada cliente. Nuestra misión es simplificar cada etapa del proceso inmobiliario, construyendo relaciones sólidas basadas en el respeto, la honestidad y la confianza mutua.
                         </p>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                     </div>
                     <div class="col-md-8 p-4">
                         <p class="section-description">
-                            Convertirnos en una inmobiliaria reconocida por nuestro compromiso, calidad y atención personalizada. Queremos ser parte de los proyectos y sueños de nuestros clientes, y contribuir activamente al crecimiento de nuestra comunidad.
+                            Ser reconocidos como una inmobiliaria moderna, confiable y comprometida, destacada por la calidad humana de su equipo y por una atención verdaderamente personalizada. Aspiramos a crecer junto a nuestros clientes y contribuir activamente al desarrollo de nuestra comunidad, siendo parte de sus proyectos, sueños y logros.
                         </p>
                     </div>
                 </div>

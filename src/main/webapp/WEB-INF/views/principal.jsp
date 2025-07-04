@@ -31,10 +31,7 @@
                         <img src="${pageContext.request.contextPath}/imagenes/tren.jpg" class="d-block w-100 img-carousel" alt="tren">
                     </div>
                     <div class="carousel-item">
-                        <img src="${pageContext.request.contextPath}/imagenes/bayos.jpeg" class="d-block w-100 img-carousel" alt="bayos">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="${pageContext.request.contextPath}/imagenes/arenas.jpeg" class="d-block w-100 img-carousel" alt="arenas">
+                        <img src="${pageContext.request.contextPath}/imagenes/slider_1.jpg" class="d-block w-100 img-carousel" alt="estacion_urdi">
                     </div>
                 </div>
             </div>
@@ -267,7 +264,7 @@
                                                     });
                                                     // Selecciona el contenedor en lugar del icono
                                                     document.querySelector('.whatsapp-icon').addEventListener('click', function () {
-                                                        window.open('https://wa.me/5493515555555', '_blank');
+                                                        window.open('https://wa.me/5493446647684', '_blank');
                                                     });
                                                     // Script para el formulario de filtrado
                                                     document.addEventListener('DOMContentLoaded', function () {
