@@ -41,7 +41,7 @@ public class PropiedadesDAO {
         return idGenerado;
     }
 
-    public ArrayList<Propiedades> listar(Integer idTipo, String modalidad, String modality) {
+    public ArrayList<Propiedades> listar(Integer idTipo, String modalidad) {
     ArrayList<Propiedades> lista = new ArrayList<>();
 
     String sql = "SELECT p.id_propiedad, p.id_tipo, p.id_agente, p.direccion, p.precio, "
@@ -49,7 +49,6 @@ public class PropiedadesDAO {
                + "FROM Propiedades p";
 
     List<String> conditions = new ArrayList<>();
-    conditions.add("p.estado = 'disponible'"); // condición obligatoria
 
     if (idTipo != null) {
         conditions.add("p.id_tipo = ?");

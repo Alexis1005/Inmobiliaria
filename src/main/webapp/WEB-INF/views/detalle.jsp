@@ -53,7 +53,21 @@
         <div class="container mt-3">
             <div class="row g-2">
                 <div class="col-md-8">
-                    <h1>${propiedad.descripcion}</h1>
+                    <div class="d-flex align-items-center mb-2">
+                        <h1 class="me-3 mb-0">${propiedad.descripcion}</h1>
+                        <c:if test="${propiedad.estado != 'disponible'}">
+                            <c:choose>
+                                <c:when test="${propiedad.estado == 'vendido'}">
+                                    <span class="badge bg-danger text-light text-uppercase fs-4">${propiedad.estado}</span>
+                                </c:when>
+                                <c:when test="${propiedad.estado == 'alquilado' || propiedad.estado == 'arrendado'}">
+                                    <span class="badge bg-warning text-light text-uppercase fs-4">${propiedad.estado}</span>
+                                </c:when>
+                            </c:choose>
+                        </c:if>
+
+                    </div>
+
                     <div class="row g-2">
                         <h3>Información Básica</h3>
                         <ul class="lista-custom caracteristicas-grid">

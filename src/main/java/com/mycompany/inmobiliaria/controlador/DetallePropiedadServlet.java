@@ -62,7 +62,7 @@ public class DetallePropiedadServlet extends HttpServlet {
 // 3) Obtener lista de propiedades
             int idTipo = propiedad.getId_tipo();
             String modalidad = propiedad.getModalidad();
-            List<Propiedades> propiedades = propiedadesDAO.listar(idTipo, modalidad, "disponible");
+            List<Propiedades> propiedades = propiedadesDAO.listar(idTipo, modalidad);
             // Obtener características específicas de la propiedad
 
 // 4) Construir detallesMap: id_propiedad → List<PropiedadesCaracteristicas>

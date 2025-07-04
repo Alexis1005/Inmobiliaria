@@ -52,7 +52,7 @@ public class PrincipalServlet extends HttpServlet {
             String modalidad = request.getParameter("modalidad");
 
             // 3) Obtener lista de propiedades
-            List<Propiedades> propiedades = propiedadesDAO.listar(idTipo, modalidad, "disponible");
+            List<Propiedades> propiedades = propiedadesDAO.listar(idTipo, modalidad);
             
              // 4) Para cada propiedad, obtener lista de fotos y ponerlas en un mapa:
             Map<Integer, List<FotosPropiedad>> fotosMap = new HashMap<>();

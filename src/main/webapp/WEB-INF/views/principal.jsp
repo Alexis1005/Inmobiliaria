@@ -25,7 +25,6 @@
                 <div class="carousel-inner p-0">
                     <div class="carousel-item active">
                         <img src="${pageContext.request.contextPath}/imagenes/estacion.jpg" class="d-block w-100 img-carousel" alt="estacion">
-
                     </div>
                     <div class="carousel-item">
                         <img src="${pageContext.request.contextPath}/imagenes/tren.jpg" class="d-block w-100 img-carousel" alt="tren">
@@ -127,7 +126,7 @@
                     <c:if test="${status.index < 15}">
                         <div class="col d-flex justify-content-center">
                             <div class="card tarjeta shadow">
-                               <c:set var="listaFotos" value="${fotosMap[propiedad.id_propiedad]}"/>
+                                <c:set var="listaFotos" value="${fotosMap[propiedad.id_propiedad]}"/>
                                 <c:choose>
                                     <c:when test="${not empty listaFotos}">
                                         <c:set var="primeraFoto" value="${listaFotos[0].ruta_foto}"/>
@@ -135,7 +134,13 @@
                                              class="card-img-top"
                                              style="height:200px;object-fit:cover"
                                              alt="Imagen de la propiedad"/>
+                                    <c:if test="${propiedad.estado != 'disponible'}">
+                                        <div class="estado-overlay text-uppercase">
+                                            ${propiedad.estado}
+                                        </div>
+                                    </c:if>
                                     </c:when>
+
                                     <c:otherwise>
                                         <img src="${pageContext.request.contextPath}/imagenes/no-image-available.png"
                                              class="card-img-top"
@@ -151,6 +156,7 @@
                                         ${propiedad.direccion}
                                     </p>
                                     <hr class="my-2" style="color:#ff7300"/>
+                                    
                                     <c:set var="detalles" value="${detallesMap[propiedad.id_propiedad]}"/>
                                     <!-- Definimos las características a mostrar -->
                                     <c:set var="caracteristicasStr" value="ambientes,superficie,baños,dormitorios" />
