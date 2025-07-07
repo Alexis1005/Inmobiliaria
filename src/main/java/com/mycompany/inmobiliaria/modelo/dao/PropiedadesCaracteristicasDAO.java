@@ -2,7 +2,6 @@ package com.mycompany.inmobiliaria.modelo.dao;
 
 import com.mycompany.inmobiliaria.modelo.PropiedadesCaracteristicas;
 import com.mycompany.inmobiliaria.resources.config.Conexion;
-import static com.mysql.cj.conf.PropertyKey.logger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -89,7 +88,7 @@ public class PropiedadesCaracteristicasDAO {
 
     // Método para eliminar una relación propiedad-característica
     public void eliminar(int id_propiedad, int id_caracteristica) throws SQLException {
-        String sql = "DELETE FROM propiedadescaracteristicas WHERE id_propiedad = ? AND id_caracteristica = ?";
+        String sql = "DELETE FROM PropiedadesCaracteristicas WHERE id_propiedad = ? AND id_caracteristica = ?";
         try (PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setInt(1, id_propiedad);
             ps.setInt(2, id_caracteristica);
@@ -99,7 +98,7 @@ public class PropiedadesCaracteristicasDAO {
 
     // Método para buscar una relación propiedad-característica por IDs
     public PropiedadesCaracteristicas buscarPorIds(int id_propiedad, int id_caracteristica) throws SQLException {
-        String sql = "SELECT * FROM propiedadescaracteristicas WHERE id_propiedad = ? AND id_caracteristica = ?";
+        String sql = "SELECT * FROM PropiedadesCaracteristicas WHERE id_propiedad = ? AND id_caracteristica = ?";
         try (PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setInt(1, id_propiedad);
             ps.setInt(2, id_caracteristica);
@@ -119,14 +118,14 @@ public class PropiedadesCaracteristicasDAO {
             throws SQLException {
         // 1. Eliminar características existentes
         try (Connection conn = Conexion.getConnection(); PreparedStatement stmt = conn.prepareStatement(
-                "DELETE FROM propiedades_caracteristicas WHERE id_propiedad = ?")) {
+                "DELETE FROM PropiedadesCaracteristicas WHERE id_propiedad = ?")) {
             stmt.setInt(1, idPropiedad);
             stmt.executeUpdate();
         }
 
         // 2. Insertar nuevas características
         try (Connection conn = Conexion.getConnection(); PreparedStatement stmt = conn.prepareStatement(
-                "INSERT INTO propiedades_caracteristicas (id_propiedad, nombre, detalle) VALUES (?, ?, ?)")) {
+                "INSERT INTO PropiedadesCaracteristicas (id_propiedad, nombre, detalle) VALUES (?, ?, ?)")) {
             for (PropiedadesCaracteristicas pc : caracteristicas) {
                 stmt.setInt(1, idPropiedad);
                 stmt.setString(2, pc.getNombre());
@@ -138,7 +137,7 @@ public class PropiedadesCaracteristicasDAO {
     }
 
     public boolean existe(int idPropiedad, int idCaracteristica) throws SQLException {
-        String sql = "SELECT COUNT(*) FROM propiedadescaracteristicas WHERE id_propiedad = ? AND id_caracteristica = ?";
+        String sql = "SELECT COUNT(*) FROM PropiedadesCaracteristicas WHERE id_propiedad = ? AND id_caracteristica = ?";
         try (Connection conn = Conexion.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, idPropiedad);
             stmt.setInt(2, idCaracteristica);
@@ -153,7 +152,7 @@ public class PropiedadesCaracteristicasDAO {
         return false;
     }
         public void actualizar(PropiedadesCaracteristicas pc) throws SQLException {
-        String sql = "UPDATE propiedadescaracteristicas SET detalle = ? WHERE id_propiedad = ? AND id_caracteristica = ?";
+        String sql = "UPDATE PropiedadesCaracteristicas SET detalle = ? WHERE id_propiedad = ? AND id_caracteristica = ?";
         try (Connection conn = Conexion.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, pc.getDetalle());

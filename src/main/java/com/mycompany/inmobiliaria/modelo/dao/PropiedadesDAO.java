@@ -206,7 +206,7 @@ public class PropiedadesDAO {
     // Método para obtener una propiedad por ID (necesario para la edición)
     public Propiedades obtenerPropiedadPorId(int id_propiedad) throws SQLException {
         Propiedades propiedad = null;
-        String sql = "SELECT * FROM propiedades WHERE id_propiedad = ?";
+        String sql = "SELECT * FROM Propiedades WHERE id_propiedad = ?";
         try (Connection cn = Conexion.getConnection(); PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setInt(1, id_propiedad);
             try (ResultSet rs = ps.executeQuery()) {
@@ -233,7 +233,7 @@ public class PropiedadesDAO {
     public List<Propiedades> obtenerTodasLasPropiedades() throws SQLException {
         List<Propiedades> lista = new ArrayList<>();
 
-        String sql = "SELECT * FROM propiedades";
+        String sql = "SELECT * FROM Propiedades";
 
         try (Connection conn = Conexion.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
 
@@ -257,7 +257,7 @@ public class PropiedadesDAO {
     }
 
     public void actualizarPropiedad(int id, String direccion, String descripcion, double precio) throws SQLException {
-        String sql = "UPDATE propiedades SET direccion = ?, descripcion = ?, precio = ? WHERE id_propiedad = ?";
+        String sql = "UPDATE Propiedades SET direccion = ?, descripcion = ?, precio = ? WHERE id_propiedad = ?";
 
         try (Connection conn = Conexion.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 

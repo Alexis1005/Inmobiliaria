@@ -15,7 +15,7 @@ public class FotosPropiedadDAO {
     private static final Logger logger = Logger.getLogger(FotosPropiedadDAO.class.getName());
 
     public void insertar(FotosPropiedad foto) throws SQLException {
-    String sql = "INSERT INTO fotospropiedad (id_propiedad, ruta_foto) VALUES (?, ?)";
+    String sql = "INSERT INTO FotosPropiedad (id_propiedad, ruta_foto) VALUES (?, ?)";
     try (Connection conn = Conexion.getConnection();
          PreparedStatement stmt = conn.prepareStatement(sql)) {
         
@@ -30,7 +30,7 @@ public class FotosPropiedadDAO {
 
     public ArrayList<FotosPropiedad> obtenerFotosPorPropiedad(int idPropiedad) throws SQLException {
         ArrayList<FotosPropiedad> fotos = new ArrayList<>();
-        String sql = "SELECT id_foto, id_propiedad, ruta_foto FROM fotospropiedad WHERE id_propiedad = ?";
+        String sql = "SELECT id_foto, id_propiedad, ruta_foto FROM FotosPropiedad WHERE id_propiedad = ?";
         try (Connection conn = Conexion.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, idPropiedad);
@@ -51,7 +51,7 @@ public class FotosPropiedadDAO {
     }
 
     public void eliminarPorPropiedad(int idPropiedad) throws SQLException {
-        String sql = "DELETE FROM fotospropiedad WHERE id_propiedad = ?";
+        String sql = "DELETE FROM FotosPropiedad WHERE id_propiedad = ?";
         try (Connection conn = Conexion.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, idPropiedad);
@@ -64,7 +64,7 @@ public class FotosPropiedadDAO {
     }
 
     public void eliminarFotoPorId(int idFoto) throws SQLException {
-        String sql = "DELETE FROM fotospropiedad WHERE id_foto = ?";
+        String sql = "DELETE FROM FotosPropiedad WHERE id_foto = ?";
         try (Connection conn = Conexion.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, idFoto);
