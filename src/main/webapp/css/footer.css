@@ -48,6 +48,7 @@
     transform: translateX(-50%); /* lo centra horizontalmente */
     width: 100%;
     margin-bottom: 15px;
+    z-index: 999;
 }
 
 /* Reducir tamaño de los íconos */
