@@ -1,5 +1,18 @@
+.tituloSobreNosotros {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: whitesmoke;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+.subtituloSobreNosotros{
+    font-family: 'Lato', sans-serif;
+    color: whitesmoke;
+}
+
 .section-title {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Playfair Display', serif;
     font-size: 1.8rem;
     font-weight: 600;
     color: #1f3c2e;
