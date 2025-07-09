@@ -205,6 +205,10 @@
                                 }
                             });
 
+                            function normalizarTexto(texto) {
+                                return texto.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/s$/, '');
+                            }
+
                             // Agregar nueva característica
                             function agregarCaracteristica() {
                                 var nombre = document.getElementById('nuevaCaracteristicaNombre').value;
@@ -216,6 +220,17 @@
                                     return;
                                 }
 
+                                const nombreNormalizado = normalizarTexto(nombre);
+
+                                // Recolectar características ya cargadas en pantalla
+                                const inputsExistentes = document.querySelectorAll('#caracteristicasContainer label');
+                                for (const label of inputsExistentes) {
+                                    const nombreExistente = normalizarTexto(label.innerText);
+                                    if (nombreExistente === nombreNormalizado) {
+                                        alert(`Ya existe una característica similar, revise las existentes`);
+                                        return;
+                                    }
+                                }
                                 console.log('Enviando datos:', {nombre: nombre, detalle: detalle, tipoId: tipoId});
 
                                 fetch('${pageContext.request.contextPath}/agregarCaracteristica', {
