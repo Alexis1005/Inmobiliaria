@@ -12,6 +12,7 @@
         <link href="${pageContext.request.contextPath}/css/sobreNosotros.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/footer.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/sliderinterno.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lato&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
         <style>
@@ -22,7 +23,7 @@
     </head>
     <body>
 
-        <nav class="nav nav-pills nav-fill navDetalle p-0 m-0" style="height: 100px; background-color: rgba(26, 175, 251, 0.8);">
+        <nav class="nav nav-pills nav-fill navDetalle p-0 m-0" style="height: auto; background-color: #5dade2;">
             <div class="container h-100">
                 <div class="row w-100 align-items-center">
                     <!-- Columna izquierda: Logo -->
@@ -34,101 +35,91 @@
                     </div>
 
                     <!-- Columna central: Título -->
-                    <div class="col-4 text-center textoNav">
-                        <h2 class="m-0" style="color: whitesmoke;">
+                    <div class="col-4 text-center">
+                        <h2 class="m-0 tituloSobreNosotros">
                             Sobre nosotros
                         </h2>
                         <br>
-                        <p class="textoNav" style="color: white;">Cococé quienes somos y que nos mueve</p>
-                    </div>
-                </div>
-
-                <!-- Menú desplegable posicionado con clases utilitarias -->
-                <div class="dropdown position-absolute top-0 end-0 mt-3 me-3" style="z-index: 1000;">
-                    <button class="navbar-toggler menu-btn" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarNav" style="color: white!important;">
-                        <i class="fa-solid fa-bars fa-2x hambur" style="color: whitesmoke!important;"></i>
-                    </button>
-
-                    <div class="collapse navbar-collapse position-absolute top-100 end-0 p-3 menu-content" id="navbarNav">
-                        <ul class="navbar-nav hamburguesa text-center mx-3">
-                            <li class="nav-item my-3 bordecito">
-                                <a class="nav-link text-white fs-4 fw-bold" href="#">Inicio</a>
-                            </li>
-                            <li class="nav-item my-3 bordecito">
-                                <a class="nav-link text-white fs-4 fw-bold" href="${pageContext.request.contextPath}/sobreNosotros">La Empresa</a>
-                            </li>
-                            <li class="nav-item mt-3 mb-3 bordecito">
-                                <a class="nav-link text-white fs-4 fw-bold" href="#">Contacto</a>
-                            </li>
-                        </ul>
+                        <p class="subtituloSobreNosotros" style="color: white">Quiénes somos y qué nos mueve</p>
                     </div>
                 </div>
             </div>
         </nav>
-        <div class="container py-5 ">
-            <div class="card shadow mb-4">
-                <div class="row g-0">
-                    <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
-                        <h3 class="section-title">La Empresa</h3>
-                    </div>
-                    <div class="col-md-8 p-4">
-                        <p class="section-description">
-                            En Inmobiliaria Moreno Galeano iniciamos nuestro camino en el año 2024, consolidándonos como una de las empresas más jóvenes del sector inmobiliario en nuestra ciudad. Nacimos con una fuerte vocación de servicio, impulsados por el deseo de acompañar a cada cliente en uno de los momentos más importantes de su vida: encontrar un lugar para vivir, invertir o concretar un proyecto personal. Cada operación inmobiliaria es, para nosotros, una oportunidad para construir confianza, aportar valor y formar parte de los sueños de quienes nos eligen.
-                        </p>
-                    </div>
+        <div class="card shadow mb-4">
+            <div class="row g-0">
+                <!-- Título a la izquierda -->
+                <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h3 class="section-title">La Empresa</h3>
                 </div>
-            </div>
 
-            <div class="card shadow mb-4">
-                <div class="row g-0">
-                    <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
-                        <h3 class="section-title">Misión</h3>
-                    </div>
-                    <div class="col-md-8 p-4">
-                        <p class="section-description">
-                           Brindar un servicio inmobiliario transparente, cercano y centrado en las personas, adaptándonos a las necesidades específicas de cada cliente. Nuestra misión es simplificar cada etapa del proceso inmobiliario, construyendo relaciones sólidas basadas en el respeto, la honestidad y la confianza mutua.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card shadow mb-4">
-                <div class="row g-0">
-                    <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
-                        <h3 class="section-title">Visión</h3>
-                    </div>
-                    <div class="col-md-8 p-4">
-                        <p class="section-description">
-                            Ser reconocidos como una inmobiliaria moderna, confiable y comprometida, destacada por la calidad humana de su equipo y por una atención verdaderamente personalizada. Aspiramos a crecer junto a nuestros clientes y contribuir activamente al desarrollo de nuestra comunidad, siendo parte de sus proyectos, sueños y logros.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid mb-5">
-            <div class="card shadow">
-                <div class="card-body">
-                    <h4 class="mb-3 text-center">Nuestra Oficina</h4>
-                    <div style="width: 100%; height: 500px;">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3357.790046436679!2d-58.89026432491654!3d-32.69162815905291!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b044903f689cc5%3A0xe2a5249d1b8e8065!2sEscuela%20Secundaria%20N%C2%BA%2016%20%22Colegio%20de%20Urdinarrain%22!5e0!3m2!1ses!2sar!4v1748201875788!5m2!1ses!2sar" 
-                            width="100%" 
-                            height="100%" 
-                            style="border:0;" 
-                            allowfullscreen="" 
-                            loading="lazy" 
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+                <!-- Contenido con imagen -->
+                <div class="col-md-8 p-4">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p class="section-description">
+                                En Inmobiliaria Moreno Galeano iniciamos nuestro camino en el año 2024, consolidándonos como una de las empresas más jóvenes del sector inmobiliario en nuestra ciudad. Nacimos con una fuerte vocación de servicio, impulsados por el deseo de acompañar a cada cliente en uno de los momentos más importantes de su vida: encontrar un lugar para vivir, invertir o concretar un proyecto personal. Cada operación inmobiliaria es, para nosotros, una oportunidad para construir confianza, aportar valor y formar parte de los sueños de quienes nos eligen.
+                            </p>
+                        </div>
+                        <div class="col-md-4 d-flex flex-column align-items-center justify-content-center">
+                            <img src="${pageContext.request.contextPath}/imagenes/agente.webp" alt="Juan Carlos Moreno Galeano" class="rounded shadow" style="width: 180px; height: 220px; object-fit: cover;">
+                            <small class="mt-2 fw-bold text-center">Juan Carlos Moreno Galeano</small>
+                            <small class="mt-2 fw-bold text-center text-muted">Martillero público y corredor inmobiliario</small>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <jsp:include page="footer.jsp" />
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
-                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
-        crossorigin="anonymous"></script>
-    </body>
+        <div class="card shadow mb-4">
+            <div class="row g-0">
+                <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h3 class="section-title">Misión</h3>
+                </div>
+                <div class="col-md-8 p-4">
+                    <p class="section-description">
+                        Brindar un servicio inmobiliario transparente, cercano y centrado en las personas, adaptándonos a las necesidades específicas de cada cliente. Nuestra misión es simplificar cada etapa del proceso inmobiliario, construyendo relaciones sólidas basadas en el respeto, la honestidad y la confianza mutua.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow mb-4">
+            <div class="row g-0">
+                <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h3 class="section-title">Visión</h3>
+                </div>
+                <div class="col-md-8 p-4">
+                    <p class="section-description">
+                        Ser reconocidos como una inmobiliaria moderna, confiable y comprometida, destacada por la calidad humana de su equipo y por una atención verdaderamente personalizada. Aspiramos a crecer junto a nuestros clientes y contribuir activamente al desarrollo de nuestra comunidad, siendo parte de sus proyectos, sueños y logros.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid mb-5">
+        <div class="card shadow">
+            <div class="card-body">
+                <h4 class="mb-3 text-center">Nuestra Oficina</h4>
+                <div style="width: 100%; height: 500px;">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3357.790046436679!2d-58.89026432491654!3d-32.69162815905291!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b044903f689cc5%3A0xe2a5249d1b8e8065!2sEscuela%20Secundaria%20N%C2%BA%2016%20%22Colegio%20de%20Urdinarrain%22!5e0!3m2!1ses!2sar!4v1748201875788!5m2!1ses!2sar" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <jsp:include page="footer.jsp" />
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+    crossorigin="anonymous"></script>
+</body>
 </html>
