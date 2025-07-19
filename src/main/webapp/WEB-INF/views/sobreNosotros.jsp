@@ -61,7 +61,7 @@
                             </p>
                         </div>
                         <div class="col-md-4 d-flex flex-column align-items-center justify-content-center">
-                            <img src="${pageContext.request.contextPath}/imagenes/agente.webp" alt="Juan Carlos Moreno Galeano" class="rounded shadow" style="width: 180px; height: 220px; object-fit: cover;">
+                            <img src="${pageContext.request.contextPath}/imagenes/sbn.jpg" alt="Juan Carlos Moreno Galeano" class="rounded shadow" style="width: 180px; height: 220px; object-fit: cover;">
                             <small class="mt-2 fw-bold text-center">Juan Carlos Moreno Galeano</small>
                             <small class="mt-2 fw-bold text-center text-muted">Martillero público y corredor inmobiliario</small>
                         </div>
@@ -103,7 +103,7 @@
                 <h4 class="mb-3 text-center">Nuestra Oficina</h4>
                 <div style="width: 100%; height: 500px;">
                     <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3357.790046436679!2d-58.89026432491654!3d-32.69162815905291!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b044903f689cc5%3A0xe2a5249d1b8e8065!2sEscuela%20Secundaria%20N%C2%BA%2016%20%22Colegio%20de%20Urdinarrain%22!5e0!3m2!1ses!2sar!4v1748201875788!5m2!1ses!2sar" 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26863.09437045055!2d-58.92562842469012!3d-32.68905570895351!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b045f45d04e705%3A0xb7c6ebb169f4cb72!2s23%20de%20Septiembre%20146%2C%20E2826%20Urdinarrain%2C%20Entre%20R%C3%ADos!5e0!3m2!1ses-419!2sar!4v1752890001993!5m2!1ses-419!2sar" 
                         width="100%" 
                         height="100%" 
                         style="border:0;" 
