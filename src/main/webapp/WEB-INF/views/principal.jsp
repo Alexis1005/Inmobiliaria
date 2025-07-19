@@ -32,6 +32,9 @@
                     <div class="carousel-item">
                         <img src="${pageContext.request.contextPath}/imagenes/slider_1.jpg" class="d-block w-100 img-carousel" alt="estacion_urdi">
                     </div>
+                    <div class="carousel-item">
+                        <img src="${pageContext.request.contextPath}/imagenes/oficce.jpg" class="d-block w-100 img-carousel" alt="estacion_urdi">
+                    </div>
                 </div>
             </div>
 
