@@ -37,12 +37,20 @@ import java.util.logging.Logger;
 public class EditarPropiedadServlet extends HttpServlet {
 
     private static final Logger logger = Logger.getLogger(EditarPropiedadServlet.class.getName());
-    private static final String UPLOAD_DIR = "C:/Users/PC/Documents/NetBeansProjects/inmobiliaria/img_propiedades_externas/";
+    private String UPLOAD_DIR;
+
     private PropiedadesDAO propiedadesDAO = new PropiedadesDAO();
     private FotosPropiedadDAO fotosDAO = new FotosPropiedadDAO();
     private PropiedadesCaracteristicasDAO pcDAO = new PropiedadesCaracteristicasDAO();
     private TiposPropiedadDAO tiposPropiedadDAO = new TiposPropiedadDAO();
     private AgenteDAO agenteDAO = new AgenteDAO();
+
+    @Override
+    public void init() throws ServletException {
+        String appPath = getServletContext().getRealPath("");
+        UPLOAD_DIR = appPath + File.separator + "imagenes";
+        new File(UPLOAD_DIR).mkdirs();
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -89,63 +97,63 @@ public class EditarPropiedadServlet extends HttpServlet {
     }
 
     private void listarPropiedadesConFiltros(HttpServletRequest request, HttpServletResponse response,
-        String tipoParam, String modalidadParam) throws ServletException, IOException {
-    try {
-        List<Propiedades> propiedades;
+            String tipoParam, String modalidadParam) throws ServletException, IOException {
+        try {
+            List<Propiedades> propiedades;
 
-        // Aplicar filtros si están presentes
-        if ((tipoParam != null && !tipoParam.isEmpty()) || (modalidadParam != null && !modalidadParam.isEmpty())) {
-            Integer idTipo = null;
-            if (tipoParam != null && !tipoParam.isEmpty()) {
-                try {
-                    idTipo = Integer.parseInt(tipoParam);
-                } catch (NumberFormatException e) {
-                    logger.log(Level.WARNING, "Tipo de propiedad inválido: " + tipoParam);
+            // Aplicar filtros si están presentes
+            if ((tipoParam != null && !tipoParam.isEmpty()) || (modalidadParam != null && !modalidadParam.isEmpty())) {
+                Integer idTipo = null;
+                if (tipoParam != null && !tipoParam.isEmpty()) {
+                    try {
+                        idTipo = Integer.parseInt(tipoParam);
+                    } catch (NumberFormatException e) {
+                        logger.log(Level.WARNING, "Tipo de propiedad inválido: " + tipoParam);
+                    }
                 }
+                propiedades = propiedadesDAO.listarConFiltros(idTipo, modalidadParam);
+            } else {
+                propiedades = propiedadesDAO.obtenerTodasLasPropiedades();
             }
-            propiedades = propiedadesDAO.listarConFiltros(idTipo, modalidadParam);
-        } else {
-            propiedades = propiedadesDAO.obtenerTodasLasPropiedades();
+
+            // **AGREGAR ESTA PARTE - IGUAL QUE EN EL SERVLET PRINCIPAL**
+            // Para cada propiedad, obtener lista de fotos y ponerlas en un mapa:
+            Map<Integer, List<FotosPropiedad>> fotosMap = new HashMap<>();
+            for (Propiedades p : propiedades) {
+                List<FotosPropiedad> fotos = fotosDAO.obtenerFotosPorPropiedad(p.getId_propiedad());
+                fotosMap.put(p.getId_propiedad(), fotos);
+            }
+
+            // También puedes agregar el mapa de características si lo necesitas
+            Map<Integer, List<PropiedadesCaracteristicas>> detallesMap = new HashMap<>();
+            for (Propiedades p : propiedades) {
+                detallesMap.put(
+                        p.getId_propiedad(),
+                        pcDAO.listarPorPropiedad(p.getId_propiedad())
+                );
+            }
+
+            List<TiposPropiedad> tipos = tiposPropiedadDAO.ListarTiposPropiedades();
+            List<Agente> agentes = agenteDAO.listar();
+
+            request.setAttribute("listaPropiedades", propiedades);
+            request.setAttribute("tiposPropiedad", tipos);
+            request.setAttribute("agentes", agentes);
+            request.setAttribute("tipoSeleccionado", tipoParam);
+            request.setAttribute("modalidadSeleccionada", modalidadParam);
+
+            // **AGREGAR ESTOS ATRIBUTOS - IGUAL QUE EN EL SERVLET PRINCIPAL**
+            request.setAttribute("fotosMap", fotosMap);
+            request.setAttribute("detallesMap", detallesMap);
+
+            request.getRequestDispatcher("WEB-INF/views/editarPropiedad.jsp").forward(request, response);
+
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error al obtener propiedades", e);
+            request.setAttribute("errorMessage", "Error al cargar las propiedades: " + e.getMessage());
+            request.getRequestDispatcher("/error.jsp").forward(request, response);
         }
-
-        // **AGREGAR ESTA PARTE - IGUAL QUE EN EL SERVLET PRINCIPAL**
-        // Para cada propiedad, obtener lista de fotos y ponerlas en un mapa:
-        Map<Integer, List<FotosPropiedad>> fotosMap = new HashMap<>();
-        for (Propiedades p : propiedades) {
-            List<FotosPropiedad> fotos = fotosDAO.obtenerFotosPorPropiedad(p.getId_propiedad());
-            fotosMap.put(p.getId_propiedad(), fotos);
-        }
-
-        // También puedes agregar el mapa de características si lo necesitas
-        Map<Integer, List<PropiedadesCaracteristicas>> detallesMap = new HashMap<>();
-        for (Propiedades p : propiedades) {
-            detallesMap.put(
-                p.getId_propiedad(),
-                pcDAO.listarPorPropiedad(p.getId_propiedad())
-            );
-        }
-
-        List<TiposPropiedad> tipos = tiposPropiedadDAO.ListarTiposPropiedades();
-        List<Agente> agentes = agenteDAO.listar();
-
-        request.setAttribute("listaPropiedades", propiedades);
-        request.setAttribute("tiposPropiedad", tipos);
-        request.setAttribute("agentes", agentes);
-        request.setAttribute("tipoSeleccionado", tipoParam);
-        request.setAttribute("modalidadSeleccionada", modalidadParam);
-        
-        // **AGREGAR ESTOS ATRIBUTOS - IGUAL QUE EN EL SERVLET PRINCIPAL**
-        request.setAttribute("fotosMap", fotosMap);
-        request.setAttribute("detallesMap", detallesMap);
-
-        request.getRequestDispatcher("WEB-INF/views/editarPropiedad.jsp").forward(request, response);
-
-    } catch (SQLException e) {
-        logger.log(Level.SEVERE, "Error al obtener propiedades", e);
-        request.setAttribute("errorMessage", "Error al cargar las propiedades: " + e.getMessage());
-        request.getRequestDispatcher("/error.jsp").forward(request, response);
     }
-}
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -221,39 +229,32 @@ public class EditarPropiedadServlet extends HttpServlet {
 
     private void procesarNuevasImagenes(HttpServletRequest request, int idPropiedad) throws ServletException, IOException {
         List<String> imagenesRutas = new ArrayList<>();
-        String appPath = request.getServletContext().getRealPath("");
-        String projectImagePath = appPath + File.separator + "imagenes"; // Asegúrate de que este sea el directorio correcto
-        File projectImageDir = new File(projectImagePath);
+
+        File projectImageDir = new File(UPLOAD_DIR);
         if (!projectImageDir.exists()) {
             projectImageDir.mkdirs();
-            logger.info("Directorio de imágenes creado: " + projectImagePath);
+            logger.info("Directorio de imágenes creado: " + UPLOAD_DIR);
         }
 
         boolean reemplazarTodas = "on".equals(request.getParameter("reemplazarTodas"));
 
         for (Part part : request.getParts()) {
             if ("imagen".equals(part.getName()) && part.getSize() > 0) {
-                String fileName = extractFileName(part);
-                if (fileName != null && !fileName.isEmpty()) {
-                    String uniqueFileName = System.currentTimeMillis() + "_" + fileName.replaceAll("\\s+", "_");
+                // Obtiene el nombre original del fichero y lo sanea
+                String submitted = part.getSubmittedFileName();
+                String fileName = Paths.get(submitted).getFileName().toString();
+                String uniqueFileName = System.currentTimeMillis() + "_" + fileName.replaceAll("\\s+", "_");
 
-                    String filePath = UPLOAD_DIR + File.separator + uniqueFileName;
-                    part.write(filePath);
-                    logger.info("Archivo guardado en: " + filePath);
+                // Guarda directamente en UPLOAD_DIR (inicializado en init())
+                String filePath = UPLOAD_DIR + File.separator + uniqueFileName;
+                part.write(filePath);
+                logger.info("Archivo guardado en: " + filePath);
 
-                    String projectFilePath = projectImagePath + File.separator + uniqueFileName;
-                    try {
-                        Files.copy(Paths.get(filePath), Paths.get(projectFilePath));
-                        logger.info("Archivo copiado al proyecto: " + projectFilePath);
-                    } catch (Exception e) {
-                        logger.log(Level.WARNING, "No se pudo copiar archivo al proyecto: " + projectFilePath, e);
-                    }
-
-                    String relativePath = "imagenes/" + uniqueFileName;
-                    imagenesRutas.add(relativePath);
-                }
+                // Añade la ruta relativa para la base de datos / vistas
+                imagenesRutas.add("imagenes/" + uniqueFileName);
             }
         }
+
 // procesar nuevas imagenes si las hay
         if (!imagenesRutas.isEmpty()) {
             try {
@@ -275,7 +276,6 @@ public class EditarPropiedadServlet extends HttpServlet {
                 propiedadesDAO.actualizarImagen(idPropiedad, imagenesRutas.get(0));
                 logger.info("Nuevas fotos agregadas: " + imagenesRutas.size());
             } catch (SQLException e) {
-                logger.log(Level.SEVERE, "Error al procesar imágenes", e);
                 throw new ServletException("Error al procesar imágenes", e);
             }
         }

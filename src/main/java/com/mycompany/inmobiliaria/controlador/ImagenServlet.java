@@ -11,8 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/imagenes/*")
 public class ImagenServlet extends HttpServlet {
-    private static final String RUTA_IMAGENES = "C:/Users/PC/Documents/NetBeansProjects/inmobiliaria/img_propiedades_externas/";
-
+    private static final String RUTA_IMAGENES = "/imagenes/"; 
+    
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String imagen = request.getPathInfo(); // Obtiene el nombre del archivo
         if (imagen == null || imagen.equals("/")) {
@@ -20,7 +20,8 @@ public class ImagenServlet extends HttpServlet {
             return;
         }
 
-        File archivo = new File(RUTA_IMAGENES, imagen);
+        String rutaReal = getServletContext().getRealPath(RUTA_IMAGENES);
+        File archivo = new File(rutaReal, imagen);
         if (!archivo.exists()) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND, "Imagen no encontrada");
             return;

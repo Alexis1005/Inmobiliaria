@@ -17,9 +17,12 @@
         <title>Detalle propiedad</title>
     </head>
     <body>
+        <a class="navbar-brand mt-3 mx-3" href="${pageContext.request.contextPath}/principal">
+            <button type="button" class="btn btn-outline-success btn-lg mt-3">🏠 <strong>Inicio</strong></button>
+        </a>
         <!--    <!-- Carrusel de imágenes -->
         <div class="container d-flex align-items-center justify-content-center">
-            <div class="section section-custom text-center w-100">
+            <div class="section section-custom text-center w-100 m-0">
                 <div id="carouselExampleIndicators" class="carousel slide my-2 shadow-lg w-75 m-auto" data-bs-ride="carousel">
                     <div class="carousel-indicators">
                         <c:forEach var="foto" items="${fotos}" varStatus="status">
@@ -33,7 +36,7 @@
                             <div class="carousel-item ${status.first ? 'active' : ''}">
                                 <img src="${pageContext.request.contextPath}/${foto.ruta_foto}" 
                                      class="img-fluid w-100 rounded imagen-ampliable" 
-                                     alt="Foto de la propiedad" style="max-height:300px; object-fit:cover; background-color:#f8f9fa;">
+                                     alt="Foto de la propiedad" style="max-height:400px; object-fit:cover; background-color:#f8f9fa;">
                             </div>
                         </c:forEach>
                     </div>
@@ -81,7 +84,7 @@
                     <hr class="w-75">
                     <p>Descripción general de la ${tipoPropiedad.nombre}:</p>
                     <p>${propiedad.caracteristicasGenerales}</p>
-                    <h3>USD$ <strong><fmt:formatNumber value="${propiedad.precio}" type="number" maxFractionDigits="0"/></strong></h3>
+                    <h3>USD <strong><fmt:formatNumber value="${propiedad.precio}" type="number" maxFractionDigits="0"/></strong></h3>
                     <hr class="w-75">
                 </div>
 
