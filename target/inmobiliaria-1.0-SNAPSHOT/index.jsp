@@ -1,5 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
+<%// Obtener el nombre del servidor para detectar subdominio
+    String serverName = request.getServerName();
+    
+    // Si NO es subdominio admin, redirigir al servlet principal (público)
+    if (!serverName.startsWith("admin.")) {
+        response.sendRedirect(request.getContextPath() + "/principal");
+        return;
+    }
+    
+    // Si llegó aquí, es subdominio admin - verificar sesión
     HttpSession sesion = request.getSession(false);
     if (sesion == null || sesion.getAttribute("usuario") == null) {
         response.sendRedirect("login.jsp");

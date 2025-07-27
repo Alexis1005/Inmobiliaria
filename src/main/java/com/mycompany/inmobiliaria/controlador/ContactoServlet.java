@@ -1,4 +1,5 @@
 package com.mycompany.inmobiliaria.controlador;
+
 import com.mycompany.inmobiliaria.resources.config.EmailService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -6,8 +7,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-
 
 @WebServlet("/enviarContacto")
 public class ContactoServlet extends HttpServlet {
@@ -20,7 +19,7 @@ public class ContactoServlet extends HttpServlet {
         String correo = request.getParameter("correo");
         String mensaje = request.getParameter("mensaje");
         String idPropiedadStr = request.getParameter("id_propiedad");
-               
+
         //convertir el id a entero
         int idPropiedad;
         try {
@@ -29,18 +28,16 @@ public class ContactoServlet extends HttpServlet {
             //en caso de que IdPropiedadStr no sea un número valido
             idPropiedad = -1;
         }
-        
+
         //generar URL para acceder a la propiedad enviada
         String urlPropiedad = "http://localhost:8080/inmobiliaria/detallePropiedad?id=" + idPropiedad;
 
         // Llamar al método para enviar el correo
         EmailService.enviarCorreo(nombre, telefono, correo, mensaje, idPropiedad, urlPropiedad);
 
-        // Redirigir al usuario con un mensaje de éxito
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h3>Gracias por contactarnos, " + nombre + ". Te responderemos pronto.</h3>");
-        out.println("</body></html>");
+        // Redirigir a la página de detalle con mensaje de éxito como parámetro
+        String mensajeFinal = "Gracias por contactarnos, " + nombre + ". Te responderemos pronto.";
+        response.sendRedirect("detallePropiedad?id=" + idPropiedad + "&mensaje=" + java.net.URLEncoder.encode(mensajeFinal, "UTF-8"));
+
     }
 }

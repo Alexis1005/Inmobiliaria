@@ -12,7 +12,7 @@ public class TiposPropiedadDAO {
 
     public ArrayList<TiposPropiedad> ListarTiposPropiedades() throws SQLException {
         ArrayList<TiposPropiedad> listaTipo = new ArrayList<>();
-        String sql = "SELECT * FROM tiposPropiedad order by nombre asc";
+        String sql = "SELECT * FROM TiposPropiedad order by nombre asc";
         try (Connection cn = Conexion.getConnection();
              PreparedStatement ps = cn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
@@ -29,7 +29,7 @@ public class TiposPropiedadDAO {
     }
 
     public int registrar(TiposPropiedad obj) throws SQLException {
-        String sql = "INSERT INTO tiposPropiedad (nombre) VALUES (?)";
+        String sql = "INSERT INTO TiposPropiedad (nombre) VALUES (?)";
         try (Connection cn = Conexion.getConnection();
              PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setString(1, obj.getNombre());

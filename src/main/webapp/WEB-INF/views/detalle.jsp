@@ -92,6 +92,17 @@
                 <div class="col-md-4 mt-5 mb-3 position-relative">
                     <h4 class="position-absolute top-0 start-50 translate-middle bg-white px-3 rounded text-success">Contacto</h4>
                     <form method="post" action="${pageContext.request.contextPath}/enviarContacto" class="form-custom border border-2 border-success p-4 w-100 rounded">
+                        <c:if test="${not empty param.mensaje}">
+                            <div class="alert alert-success alert-dismissible fade show mt-3 mx-3 d-flex align-items-center" role="alert">
+                                <i class="bi bi-check-circle-fill me-2 fs-4"></i>
+                                <div>
+                                    ${param.mensaje}
+                                </div>
+                                <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                            </div>
+                        </c:if>
+
+
                         <!-- Campo oculto para el ID de la propiedad -->
                         <input type="hidden" name="id_propiedad" value="${propiedad.id_propiedad}" />
                         <div class="mb-3">
