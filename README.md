@@ -97,85 +97,44 @@
 
 ## 📱 Capturas de Pantalla
 
+### 🔍 Sistema de Búsqueda y Filtros
 <div align="center">
-  <table>
-    <tr>
-      <td align="center">
-        <img src="https://via.placeholder.com/400x250/007396/FFFFFF?text=Login+System" alt="Login">
-        <br>
-        <em>🔐 Sistema de Autenticación</em>
-      </td>
-      <td align="center">
-        <img src="https://via.placeholder.com/400x250/563D7C/FFFFFF?text=Dashboard" alt="Dashboard">
-        <br>
-        <em>📊 Dashboard Principal</em>
-      </td>
-    </tr>
-    <tr>
-      <td align="center">
-        <img src="https://via.placeholder.com/400x250/ED8B00/FFFFFF?text=Propiedades" alt="Propiedades">
-        <br>
-        <em>🏠 Gestión de Propiedades</em>
-      </td>
-      <td align="center">
-        <img src="https://via.placeholder.com/400x250/005C84/FFFFFF?text=Reportes" alt="Reportes">
-        <br>
-        <em>📈 Reportes y Estadísticas</em>
-      </td>
-    </tr>
-  </table>
+  <img width="100%" style="max-width: 1000px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" 
+       alt="Filtros y Búsqueda" 
+       src="https://github.com/user-attachments/assets/c0219ac1-ccb9-4716-9e85-0ec5993ab11c" />
+  <p><em>🔍 Interfaz avanzada de filtros para que los clientes encuentren propiedades por tipo y modalidad</em></p>
 </div>
 
+---
 
-## 📚 Estructura del Proyecto
+### 🏠 Gestión de Propiedades 
+<div align="center">
+  <img width="100%" style="max-width: 1000px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" 
+       alt="Gestión de Propiedades" 
+       src="https://github.com/user-attachments/assets/eefc852d-56b6-4033-9d38-238cee8989db" />
+  <p><em>🏠 Sistema completo CRUD con filtros, búsqueda y gestión de imágenes</em></p>
+</div>
 
-```
-inmobiliaria/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── com/
-│   │   │       └── inmobiliaria/
-│   │   │           ├── controllers/     # Servlets
-│   │   │           │   ├── PropiedadController.java
-│   │   │           │   ├── ClienteController.java
-│   │   │           │   └── UsuarioController.java
-│   │   │           ├── models/          # POJOs/Entities
-│   │   │           │   ├── Propiedad.java
-│   │   │           │   ├── Cliente.java
-│   │   │           │   └── Usuario.java
-│   │   │           ├── dao/             # Data Access Objects
-│   │   │           │   ├── PropiedadDAO.java
-│   │   │           │   ├── ClienteDAO.java
-│   │   │           │   └── UsuarioDAO.java
-│   │   │           ├── utils/           # Utilidades
-│   │   │           │   ├── DatabaseConnection.java
-│   │   │           │   ├── PasswordUtils.java
-│   │   │           │   └── FileUploadUtils.java
-│   │   │           └── filters/         # Filtros de seguridad
-│   │   │               └── AuthenticationFilter.java
-│   │   ├── resources/
-│   │   │   ├── db.properties           # Configuración BD
-│   │   │   └── log4j.properties        # Configuración logs
-│   │   └── webapp/
-│   │       ├── WEB-INF/
-│   │       │   ├── web.xml             # Configuración web
-│   │       │   └── lib/                # Librerías JAR
-│   │       ├── assets/                 # Recursos estáticos
-│   │       │   ├── css/
-│   │       │   ├── js/
-│   │       │   └── images/
-│   │       ├── jsp/                    # Páginas JSP
-│   │       │   ├── admin/
-│   │       │   ├── cliente/
-│   │       │   └── propiedades/
-│   │       └── uploads/                # Archivos subidos
-├── database/
-│   ├── schema.sql                      # Estructura BD
-│   └── sample_data.sql                 # Datos de prueba
-├── pom.xml                            # Configuración Maven
-└── README.md
-```
+---
+
+### 📊 Dashboard y Panel de Control
+<div align="center">
+  <img width="100%" style="max-width: 1000px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" 
+       alt="Dashboard Principal" 
+       src="https://github.com/user-attachments/assets/27ff9a08-278c-4a93-8865-4e5a49778962" />
+  <p><em>📊 Dashboard con acceso rápido a todas las funcionalidades</em></p>
+</div>
+
+---
+
+### 🔐 Sistema de Autenticación
+<div align="center">
+  <img style="max-width: 450px; width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" 
+       alt="Sistema de Login" 
+       src="https://github.com/user-attachments/assets/49912164-3d6a-4928-822b-16585e593dfb" />
+  <p><em>🔐 Login seguro con validación</em></p>
+</div>
+
 
 ## 📊 Características Técnicas
 
@@ -187,7 +146,6 @@ inmobiliaria/
 
 ### Seguridad
 - **Session Management**: Control de sesiones seguro
-- **Input Validation**: Validación server-side completa
 - **File Upload Security**: Validación de tipos y tamaños
 
 ### Escalabilidad
